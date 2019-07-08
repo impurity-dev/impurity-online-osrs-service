@@ -17,7 +17,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  */
 @Api(value = "Osrs API endpoints", tags = {"Osrs"})
 @CrossOrigin(origins = {"https://tmk2003.github.io", "http://localhost:4200"}, maxAge = 3600)
-@RequestMapping("/osrs/v1")
+@RequestMapping("/v1")
 @RestController
 public class OsrsController {
 
