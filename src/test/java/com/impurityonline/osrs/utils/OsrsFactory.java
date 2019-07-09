@@ -160,6 +160,40 @@ public class OsrsFactory {
                 "-1,-1";
     }
 
+    public static OsrsItem getValidOsrsItem(Long id) {
+        OsrsItemPrice current = new OsrsItemPrice();
+        current.setPrice("");
+        current.setTrend("");
+        OsrsItemTrend today = new OsrsItemTrend();
+        current.setPrice("");
+        current.setTrend("");
+        OsrsItemTrend day30 = new OsrsItemTrend();
+        current.setPrice("");
+        current.setTrend("");
+        OsrsItemTrend day90 = new OsrsItemTrend();
+        current.setPrice("");
+        current.setTrend("");
+        OsrsItemTrend day180 = new OsrsItemTrend();
+        current.setPrice("");
+        current.setTrend("");
+
+        OsrsItem item = new OsrsItem();
+        item.setCurrent(current);
+        item.setDescription("");
+        item.setIcon("");
+        item.setIconLarge("");
+        item.setId(id.toString());
+        item.setMembers(true);
+        item.setToday(today);
+        item.setDay30(day30);
+        item.setDay90(day90);
+        item.setDay180(day180);
+        item.setType("");
+        item.setTypeIcon("");
+
+        return item;
+    }
+
     public static OsrsPlayer getValidOsrsPlayer(String name, String type) {
         return buildPlayer(name, type, getValidOsrsPlayerClientResponse());
     }
