@@ -11,5 +11,5 @@ public class OsrsItemPrice {
     @JsonProperty("trend")
     private String trend;
     @JsonProperty("price")
-    private String price;
+    private Long price;
 }

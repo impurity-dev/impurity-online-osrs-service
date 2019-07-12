@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles(UNIT_TEST)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class RestTemplateClientExceptionTests extends AbstractTest {
+public class RestClientExceptionTests extends AbstractTest {
 
     @Test
     @DisplayName("The rest template client exception stores message properly")

@@ -1,12 +1,14 @@
 package com.impurityonline.osrs.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 /**
  * @author impurity
  */
 @Data
+@ApiModel(value="Api Error", description="Response for an error that has arisen")
 public class OsrsItem {
     @JsonProperty("name")
     private String name;
@@ -27,7 +29,7 @@ public class OsrsItem {
     @JsonProperty("current")
     private OsrsItemPrice current;
     @JsonProperty("today")
-    private OsrsItemTrend today;
+    private OsrsItemPrice today;
     @JsonProperty("day30")
     private OsrsItemTrend day30;
     @JsonProperty("day90")
