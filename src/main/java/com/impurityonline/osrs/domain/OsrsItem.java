@@ -1,19 +1,18 @@
 package com.impurityonline.osrs.domain;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 /**
  * @author impurity
  */
 @Data
-@ApiModel(value="Api Error", description="Response for an error that has arisen")
 public class OsrsItem {
     @JsonProperty("name")
     private String name;
     @JsonProperty("id")
-    private String id;
+    private Long id;
     @JsonProperty("description")
     private String description;
     @JsonProperty("type")
@@ -22,7 +21,8 @@ public class OsrsItem {
     private String typeIcon;
     @JsonProperty("icon")
     private String icon;
-    @JsonProperty("icon_large")
+    @JsonProperty("iconLarge")
+    @JsonAlias("icon_large")
     private String iconLarge;
     @JsonProperty("members")
     private Boolean members;
