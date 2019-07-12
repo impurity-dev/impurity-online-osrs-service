@@ -1,7 +1,7 @@
 package com.impurityonline.osrs.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.impurityonline.osrs.domain.OsrsItemPrice;
+import com.impurityonline.osrs.domain.ItemPrice;
 import lombok.Data;
 
 /**
@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class OsrsPricesResponse {
     @JsonProperty("current")
-    private OsrsItemPrice current;
+    private ItemPrice current;
     @JsonProperty("today")
-    private OsrsItemPrice today;
+    private ItemPrice today;
 }

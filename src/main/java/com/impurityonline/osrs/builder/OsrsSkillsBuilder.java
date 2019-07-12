@@ -1,7 +1,7 @@
 package com.impurityonline.osrs.builder;
 
-import com.impurityonline.osrs.domain.OsrsSkill;
-import com.impurityonline.osrs.domain.OsrsSkills;
+import com.impurityonline.osrs.domain.Skill;
+import com.impurityonline.osrs.domain.Skills;
 import com.impurityonline.osrs.enums.OsrsHiScore;
 import lombok.NonNull;
 
@@ -22,15 +22,15 @@ public class OsrsSkillsBuilder {
      * @param hiscores the collection of values still delimited by commas
      * @return The osrs skills with proper mapping
      */
-    public static OsrsSkills buildSkills(@NonNull final String[] hiscores) {
+    public static Skills buildSkills(@NonNull final String[] hiscores) {
         if (hiscores.length != OsrsPlayerBuilder.HISCORE_TOTAL) {
             throw new IllegalArgumentException("Invalid hiscores length");
         }
-        OsrsSkill[] skills = buildSkillsFromStringArray(
+        Skill[] skills = buildSkillsFromStringArray(
                 copyOfRange(hiscores, 0, OsrsHiScore.CONSTRUCTION.ordinal())
         );
         int i = -1;
-        OsrsSkills osrsSkills = new OsrsSkills();
+        Skills osrsSkills = new Skills();
         osrsSkills.setOverall(skills[++i]);
         osrsSkills.setAttack(skills[++i]);
         osrsSkills.setDefence(skills[++i]);
@@ -64,8 +64,8 @@ public class OsrsSkillsBuilder {
      * @param skillValues the collection of values still delimited by commas
      * @return The collection of skills
      */
-    private static OsrsSkill[] buildSkillsFromStringArray(final String[] skillValues) {
-        OsrsSkill[] skills = new OsrsSkill[SKILLS_TOTAL];
+    private static Skill[] buildSkillsFromStringArray(final String[] skillValues) {
+        Skill[] skills = new Skill[SKILLS_TOTAL];
         for (int i = 0; i < skills.length; i++) {
             skills[i] = buildSkillFromString(skillValues[i]);
         }
@@ -78,12 +78,12 @@ public class OsrsSkillsBuilder {
      * @param skillValue - Skill string with comma delimiter
      * @return The Osrs skill object that was created based off the parameter
      */
-    private static OsrsSkill buildSkillFromString(final String skillValue) {
+    private static Skill buildSkillFromString(final String skillValue) {
         String[] skillValues = skillValue.split(DELIMITER);
         if (skillValues.length != SKILL_VALUE_TOTAL) {
             throw new IllegalArgumentException("Invalid skillValue length");
         }
-        OsrsSkill skill = new OsrsSkill();
+        Skill skill = new Skill();
         skill.setRank(Long.parseLong(skillValues[0]));
         skill.setLevel(Long.parseLong(skillValues[1]));
         skill.setExperience(Long.parseLong(skillValues[2]));

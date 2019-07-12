@@ -1,6 +1,6 @@
 package com.impurityonline.osrs.controller;
 
-import com.impurityonline.osrs.domain.OsrsPlayer;
+import com.impurityonline.osrs.domain.Player;
 import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
 import com.impurityonline.osrs.exception.OsrsPlayerNotFoundException;
 import com.impurityonline.osrs.response.OsrsPlayerResponse;
@@ -45,11 +45,11 @@ public class PlayerControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs player, return 200 and player")
     public void osrs_player_return_200() throws Exception {
-        OsrsPlayer osrsPlayer = getValidOsrsPlayer("apples", "bananas");
+        Player player = getValidOsrsPlayer("apples", "bananas");
         OsrsPlayerResponse osrsPlayerResponse = new OsrsPlayerResponse();
-        osrsPlayerResponse.setPlayer(osrsPlayer);
+        osrsPlayerResponse.setPlayer(player);
 
-        when(playerService.getPlayer(MOCK_PLAYER_NAME)).thenReturn(osrsPlayer);
+        when(playerService.getPlayer(MOCK_PLAYER_NAME)).thenReturn(player);
         mockMvc.perform(get("/v1/players/" + MOCK_PLAYER_NAME)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

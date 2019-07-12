@@ -1,7 +1,7 @@
 package com.impurityonline.osrs.client.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.impurityonline.osrs.domain.OsrsItem;
+import com.impurityonline.osrs.domain.Item;
 import lombok.Data;
 
 /**
@@ -10,5 +10,5 @@ import lombok.Data;
 @Data
 public class OsrsApiItemResponse {
     @JsonProperty("item")
-    private OsrsItem item;
+    private Item item;
 }

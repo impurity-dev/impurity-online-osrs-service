@@ -7,15 +7,15 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class OsrsPlayer {
+public class Player {
     @JsonProperty("name")
     private String name;
     @JsonProperty("type")
     private String type;
     @JsonProperty("skills")
-    private OsrsSkills skills;
+    private Skills skills;
     @JsonProperty("scrolls")
-    private OsrsScrolls scrolls;
+    private Scrolls scrolls;
     @JsonProperty("miniGames")
-    private OsrsMiniGames miniGames;
+    private MiniGames miniGames;
 }

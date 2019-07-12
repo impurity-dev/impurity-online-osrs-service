@@ -7,9 +7,9 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class OsrsItemTrend {
-    @JsonProperty("trend")
-    private String trend;
-    @JsonProperty("change")
-    private String change;
+public class Scroll {
+    @JsonProperty("rank")
+    private Long rank;
+    @JsonProperty("score")
+    private Long score;
 }

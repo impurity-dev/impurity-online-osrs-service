@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles(UNIT_TEST)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class OsrsMiniGameBuilderTests extends AbstractTest {
+public class MiniGameBuilderTests extends AbstractTest {
 
     @Test
     @DisplayName("When minigames hiscore is null, throw null pointer")

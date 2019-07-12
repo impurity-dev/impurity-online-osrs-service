@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles(UNIT_TEST)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class OsrsItemNotFoundExceptionTests extends AbstractTest {
+public class ItemNotFoundExceptionTests extends AbstractTest {
 
     @Test
     @DisplayName("The osrs item not found exception stores message properly")

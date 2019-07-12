@@ -1,6 +1,6 @@
 package com.impurityonline.osrs.builder;
 
-import com.impurityonline.osrs.domain.OsrsPlayer;
+import com.impurityonline.osrs.domain.Player;
 import lombok.NonNull;
 
 import static com.impurityonline.osrs.builder.OsrsMiniGameBuilder.buildMiniGames;
@@ -16,13 +16,13 @@ public class OsrsPlayerBuilder {
 
     private OsrsPlayerBuilder() {}
 
-    public static OsrsPlayer buildPlayer(
+    public static Player buildPlayer(
             @NonNull final String name,
             @NonNull final String type,
             @NonNull final String playerHiScores
     ) {
         String[] scores = buildScores(playerHiScores);
-        OsrsPlayer player = new OsrsPlayer();
+        Player player = new Player();
         player.setName(name);
         player.setType(type);
         player.setSkills(buildSkills(scores));

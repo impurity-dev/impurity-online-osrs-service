@@ -1,7 +1,7 @@
 package com.impurityonline.osrs.service.impl;
 
 import com.impurityonline.osrs.client.OsrsClient;
-import com.impurityonline.osrs.domain.OsrsPlayer;
+import com.impurityonline.osrs.domain.Player;
 import com.impurityonline.osrs.exception.OsrsPlayerNotFoundException;
 import com.impurityonline.osrs.service.PlayerService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class PlayerServiceImpl implements PlayerService {
     private OsrsClient osrsClient;
 
     @Override
-    public OsrsPlayer getPlayer(String playerName) {
+    public Player getPlayer(String playerName) {
         ResponseEntity<String> responseEntity = osrsClient.getPlayer(playerName);
 
         String osrsApiResponse = Optional

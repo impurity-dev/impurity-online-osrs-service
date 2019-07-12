@@ -8,7 +8,7 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class OsrsItem {
+public class Item {
     @JsonProperty("name")
     private String name;
     @JsonProperty("id")
@@ -27,13 +27,13 @@ public class OsrsItem {
     @JsonProperty("members")
     private Boolean members;
     @JsonProperty("current")
-    private OsrsItemPrice current;
+    private ItemPrice current;
     @JsonProperty("today")
-    private OsrsItemPrice today;
+    private ItemPrice today;
     @JsonProperty("day30")
-    private OsrsItemTrend day30;
+    private ItemTrend day30;
     @JsonProperty("day90")
-    private OsrsItemTrend day90;
+    private ItemTrend day90;
     @JsonProperty("day180")
-    private OsrsItemTrend day180;
+    private ItemTrend day180;
 }

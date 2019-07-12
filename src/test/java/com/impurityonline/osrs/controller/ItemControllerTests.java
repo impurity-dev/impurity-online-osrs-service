@@ -1,13 +1,8 @@
 package com.impurityonline.osrs.controller;
 
-import com.impurityonline.osrs.domain.OsrsItem;
-import com.impurityonline.osrs.domain.OsrsPlayer;
+import com.impurityonline.osrs.domain.Item;
 import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
-import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
 import com.impurityonline.osrs.exception.OsrsItemNotFoundException;
-import com.impurityonline.osrs.exception.OsrsPlayerNotFoundException;
-import com.impurityonline.osrs.response.OsrsItemResponse;
-import com.impurityonline.osrs.response.OsrsPlayerResponse;
 import com.impurityonline.osrs.service.ItemService;
 import com.impurityonline.osrs.utils.AbstractTest;
 import org.junit.jupiter.api.DisplayName;
@@ -25,7 +20,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static com.impurityonline.osrs.constant.Profiles.UNIT_TEST;
 import static com.impurityonline.osrs.utils.OsrsFactory.getValidOsrsItem;
-import static com.impurityonline.osrs.utils.OsrsFactory.getValidOsrsPlayer;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -50,16 +44,14 @@ public class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs player, return 200 and player")
     public void osrs_player_return_200() throws Exception {
-        OsrsItem osrsItem = getValidOsrsItem(MOCK_ITEM_ID);
-        OsrsItemResponse osrsItemResponse = new OsrsItemResponse();
-        osrsItemResponse.setItem(osrsItem);
+        Item item = getValidOsrsItem(MOCK_ITEM_ID);
 
-        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(osrsItem);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json(
-                        mapToJson(osrsItemResponse)
+                        mapToJson(item)
                 ));
     }
 

@@ -27,17 +27,6 @@ import static org.springframework.http.MediaType.TEXT_HTML;
 @Component
 public class OsrsClient extends RestClient {
 
-    /**
-     * Create an Osrs client
-     * The client has supported mediatypes: application/json, text/plain, text/html
-     * This is required since the
-     */
-    public OsrsClient() {
-        MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
-        mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(APPLICATION_JSON, TEXT_HTML));
-        getRestTemplate().setMessageConverters(Arrays.asList(mappingJackson2HttpMessageConverter));
-    }
-
     @Override
     protected HttpHeaders getHeaders() {
         return new HttpHeaders();
