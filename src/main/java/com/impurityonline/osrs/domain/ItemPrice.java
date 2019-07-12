@@ -11,5 +11,5 @@ public class ItemPrice {
     @JsonProperty("trend")
     private String trend;
     @JsonProperty("price")
-    private Long price;
+    private String price;
 }

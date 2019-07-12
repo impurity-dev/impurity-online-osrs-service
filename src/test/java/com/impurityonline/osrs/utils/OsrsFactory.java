@@ -162,19 +162,19 @@ public class OsrsFactory {
 
     public static Item getValidOsrsItem(Long id) {
         ItemPrice current = new ItemPrice();
-        current.setPrice(1L);
+        current.setPrice("123");
         current.setTrend("");
         ItemPrice today = new ItemPrice();
-        current.setPrice(1L);
+        current.setPrice("123");
         current.setTrend("");
         ItemTrend day30 = new ItemTrend();
-        current.setPrice(1L);
+        current.setPrice("123");
         current.setTrend("");
         ItemTrend day90 = new ItemTrend();
-        current.setPrice(1L);
+        current.setPrice("123");
         current.setTrend("");
         ItemTrend day180 = new ItemTrend();
-        current.setPrice(1L);
+        current.setPrice("123");
         current.setTrend("");
 
         Item item = new Item();
@@ -200,7 +200,7 @@ public class OsrsFactory {
 
     public static OsrsApiItemResponse getValidOsrsApiItemResponse() {
         ItemPrice price = new ItemPrice();
-        price.setPrice(123L);
+        price.setPrice("123");
         price.setTrend("321");
 
         ItemTrend trend = new ItemTrend();
