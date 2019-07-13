@@ -162,34 +162,35 @@ public class OsrsFactory {
 
     public static Item getValidOsrsItem(Long id) {
         ItemPrice current = new ItemPrice();
-        current.setPrice("123");
-        current.setTrend("");
+        current.setPrice("price");
+        current.setTrend("trend");
         ItemPrice today = new ItemPrice();
-        current.setPrice("123");
-        current.setTrend("");
+        current.setPrice("price");
+        current.setTrend("trend");
         ItemTrend day30 = new ItemTrend();
-        current.setPrice("123");
-        current.setTrend("");
+        current.setPrice("price");
+        current.setTrend("trend");
         ItemTrend day90 = new ItemTrend();
-        current.setPrice("123");
-        current.setTrend("");
+        current.setPrice("price");
+        current.setTrend("trend");
         ItemTrend day180 = new ItemTrend();
-        current.setPrice("123");
-        current.setTrend("");
+        current.setPrice("price");
+        current.setTrend("trend");
 
         Item item = new Item();
+        item.setName("name");
         item.setCurrent(current);
-        item.setDescription("");
-        item.setIcon("");
-        item.setIconLarge("");
+        item.setDescription("desc");
+        item.setIcon("ico");
+        item.setIconLarge("ico-large");
         item.setId(1L);
         item.setMembers(true);
         item.setToday(today);
         item.setDay30(day30);
         item.setDay90(day90);
         item.setDay180(day180);
-        item.setType("");
-        item.setTypeIcon("");
+        item.setType("type");
+        item.setTypeIcon("type-ico");
 
         return item;
     }

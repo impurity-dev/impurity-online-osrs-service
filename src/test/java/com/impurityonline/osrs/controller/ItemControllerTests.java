@@ -42,8 +42,8 @@ public class ItemControllerTests extends AbstractTest {
     private final Long MOCK_ITEM_ID = 123L;
 
     @Test
-    @DisplayName("When getting a osrs player, return 200 and player")
-    public void osrs_player_return_200() throws Exception {
+    @DisplayName("When getting a osrs item, return 200 and item")
+    public void osrs_item_return_200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
 
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
@@ -57,7 +57,7 @@ public class ItemControllerTests extends AbstractTest {
 
     @Test
     @DisplayName("When getting a osrs item and is not found, return 404")
-    public void no_osrs_player_return_404() throws Exception {
+    public void no_osrs_item_return_404() throws Exception {
         when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -66,9 +66,69 @@ public class ItemControllerTests extends AbstractTest {
 
     @Test
     @DisplayName("When getting a osrs item and it cannot be created, return 500")
-    public void osrs_player_return_500() throws Exception {
+    public void osrs_item_return_500() throws Exception {
         when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item name, return 200 and name")
+    public void osrs_itemName_return_200() throws Exception {
+        Item item = getValidOsrsItem(MOCK_ITEM_ID);
+
+        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/names")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(item.getName()));
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item name and is not found, return 404")
+    public void no_osrs_itemName_return_404() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/names")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item name and it cannot be created, return 500")
+    public void osrs_itemName_return_500() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/names")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item description, return 200 and description")
+    public void osrs_itemDescription_return_200() throws Exception {
+        Item item = getValidOsrsItem(MOCK_ITEM_ID);
+
+        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/descriptions")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(item.getDescription()));
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item description and is not found, return 404")
+    public void no_osrs_itemDescription_return_404() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/descriptions")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item description and it cannot be created, return 500")
+    public void osrs_itemDescription_return_500() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/descriptions")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
     }

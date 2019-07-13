@@ -53,14 +53,14 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/name",
+            value = "/{itemId}/names",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
     public String getItemName(
             @PathVariable("itemId") Long itemId
     ) {
-        return getItem(itemId).getName();
+        return itemService.getItem(itemId).getName();
     }
 
     @ApiOperation(value = "Returns Osrs item description")
@@ -70,14 +70,14 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/description",
+            value = "/{itemId}/descriptions",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
     public String getItemDescription(
             @PathVariable("itemId") Long itemId
     ) {
-        return getItem(itemId).getDescription();
+        return itemService.getItem(itemId).getDescription();
     }
 
     @ApiOperation(value = "Returns Osrs item type")
@@ -87,14 +87,14 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/type",
+            value = "/{itemId}/types",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
     public String getItemType(
             @PathVariable("itemId") Long itemId
     ) {
-        return getItem(itemId).getType();
+        return itemService.getItem(itemId).getType();
     }
 
     @ApiOperation(value = "Returns Osrs item type icon")
@@ -104,14 +104,14 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/type-icon",
+            value = "/{itemId}/type-icons",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
     public String getItemTypeIcon(
             @PathVariable("itemId") Long itemId
     ) {
-        return getItem(itemId).getTypeIcon();
+        return itemService.getItem(itemId).getTypeIcon();
     }
 
     @ApiOperation(value = "Returns Osrs item icon")
@@ -121,14 +121,14 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/icon",
+            value = "/{itemId}/icons",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
     public String getItemIcon(
             @PathVariable("itemId") Long itemId
     ) {
-        return getItem(itemId).getIcon();
+        return itemService.getItem(itemId).getIcon();
     }
 
     @ApiOperation(value = "Returns Osrs item large icon")
@@ -138,14 +138,14 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/icon-large",
+            value = "/{itemId}/icon-larges",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
     public String getItemIconLarge(
             @PathVariable("itemId") Long itemId
     ) {
-        return getItem(itemId).getIconLarge();
+        return itemService.getItem(itemId).getIconLarge();
     }
 
     @ApiOperation(value = "Returns Osrs item member status")
@@ -155,14 +155,14 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/member",
+            value = "/{itemId}/members",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
     public Boolean getItemMembers(
             @PathVariable("itemId") Long itemId
     ) {
-        return getItem(itemId).getMembers();
+        return itemService.getItem(itemId).getMembers();
     }
 
     @ApiOperation(value = "Returns Osrs item prices")
@@ -179,7 +179,7 @@ public class ItemController {
     public OsrsPricesResponse getItemPrices(
             @PathVariable("itemId") Long itemId
     ) {
-        Item item = getItem(itemId);
+        Item item = itemService.getItem(itemId);
         OsrsPricesResponse osrsPricesResponse = new OsrsPricesResponse();
         osrsPricesResponse.setCurrent(item.getCurrent());
         osrsPricesResponse.setToday(item.getToday());
@@ -200,7 +200,7 @@ public class ItemController {
     public ItemPrice getItemCurrentPrice(
             @PathVariable("itemId") Long itemId
     ) {
-        return getItem(itemId).getCurrent();
+        return itemService.getItem(itemId).getCurrent();
     }
 
     @ApiOperation(value = "Returns Osrs item today price")
@@ -217,7 +217,7 @@ public class ItemController {
     public ItemPrice getItemTodayPrice(
             @PathVariable("itemId") Long itemId
     ) {
-        return getItem(itemId).getToday();
+        return itemService.getItem(itemId).getToday();
     }
 
     @ApiOperation(value = "Returns Osrs item trends")
@@ -234,7 +234,7 @@ public class ItemController {
     public OsrsTrendsResponse getItemTrends(
             @PathVariable("itemId") Long itemId
     ) {
-        Item item = getItem(itemId);
+        Item item = itemService.getItem(itemId);
         ItemTrend day30 = item.getDay30();
         ItemTrend day90 = item.getDay90();
         ItemTrend day180 = item.getDay180();
@@ -259,7 +259,7 @@ public class ItemController {
     public ItemTrend getItemTrendDay30(
             @PathVariable("itemId") Long itemId
     ) {
-        return getItem(itemId).getDay30();
+        return itemService.getItem(itemId).getDay30();
     }
 
     @ApiOperation(value = "Returns Osrs item day 90 trends")
@@ -276,7 +276,7 @@ public class ItemController {
     public ItemTrend getItemTrendDay90(
             @PathVariable("itemId") Long itemId
     ) {
-        return getItem(itemId).getDay90();
+        return itemService.getItem(itemId).getDay90();
     }
 
     @ApiOperation(value = "Returns Osrs item day 180 trends")
@@ -293,6 +293,6 @@ public class ItemController {
     public ItemTrend getItemTrendDay180(
             @PathVariable("itemId") Long itemId
     ) {
-        return getItem(itemId).getDay180();
+        return itemService.getItem(itemId).getDay180();
     }
 }
