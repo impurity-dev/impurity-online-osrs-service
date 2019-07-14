@@ -1,11 +1,9 @@
 package com.impurityonline.osrs.controller;
 
+import com.impurityonline.osrs.controller.response.item.*;
 import com.impurityonline.osrs.domain.item.Item;
 import com.impurityonline.osrs.domain.item.ItemPrice;
 import com.impurityonline.osrs.domain.item.ItemTrend;
-import com.impurityonline.osrs.controller.response.IconsResponse;
-import com.impurityonline.osrs.controller.response.PricesResponse;
-import com.impurityonline.osrs.controller.response.TrendsResponse;
 import com.impurityonline.osrs.service.ItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +20,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 /**
  * @author impurity
  */
-@Api(value = "Osrs API endpoints", tags = {"Osrs"})
+@Api(value = "Osrs Item endpoints", tags = {"Item"})
 @RequestMapping("/v1/items")
 @RestController
 public class ItemController {
@@ -41,10 +39,13 @@ public class ItemController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public Item getItem(
+    public ItemResponse getItem(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId);
+
+        ItemResponse itemResponse = new ItemResponse();
+        itemResponse.setItem(itemService.getItem(itemId));
+        return itemResponse;
     }
 
     @ApiOperation(value = "Returns Osrs item name")
@@ -98,6 +99,23 @@ public class ItemController {
         return itemService.getItem(itemId).getType();
     }
 
+    @ApiOperation(value = "Returns Osrs item member status")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The osrs item member status was found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item member status was not found"),
+            @ApiResponse(code = 503, message = "The osrs api is unavailable")
+    })
+    @GetMapping(
+            value = "/{itemId}/members",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    public Boolean getItemMembers(
+            @PathVariable("itemId") Long itemId
+    ) {
+        return itemService.getItem(itemId).getMembers();
+    }
+
     @ApiOperation(value = "Returns Osrs item icons")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "The osrs item icons were found and successfully returned"),
@@ -109,15 +127,15 @@ public class ItemController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public IconsResponse getItemIcon(
+    public ItemIconsResponse getItemIcons(
             @PathVariable("itemId") Long itemId
     ) {
         Item item = itemService.getItem(itemId);
-        IconsResponse iconsResponse = new IconsResponse();
-        iconsResponse.setTypeIcon(item.getIcons().getTypeIcon());
-        iconsResponse.setSmallIcon(item.getIcons().getSmallIcon());
-        iconsResponse.setLargeIcon(item.getIcons().getLargeIcon());
-        return iconsResponse;
+        ItemIconsResponse itemIconsResponse = new ItemIconsResponse();
+        itemIconsResponse.setTypeIcon(item.getIcons().getTypeIcon());
+        itemIconsResponse.setSmallIcon(item.getIcons().getSmallIcon());
+        itemIconsResponse.setLargeIcon(item.getIcons().getLargeIcon());
+        return itemIconsResponse;
     }
 
     @ApiOperation(value = "Returns Osrs item type icon")
@@ -171,23 +189,6 @@ public class ItemController {
         return itemService.getItem(itemId).getIcons().getLargeIcon();
     }
 
-    @ApiOperation(value = "Returns Osrs item member status")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "The osrs item member status was found and successfully returned"),
-            @ApiResponse(code = 404, message = "The osrs item member status was not found"),
-            @ApiResponse(code = 503, message = "The osrs api is unavailable")
-    })
-    @GetMapping(
-            value = "/{itemId}/members",
-            consumes = APPLICATION_JSON_VALUE,
-            produces = APPLICATION_JSON_VALUE
-    )
-    public Boolean getItemMembers(
-            @PathVariable("itemId") Long itemId
-    ) {
-        return itemService.getItem(itemId).getMembers();
-    }
-
     @ApiOperation(value = "Returns Osrs item prices")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "The osrs item prices were found and successfully returned"),
@@ -199,14 +200,14 @@ public class ItemController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public PricesResponse getItemPrices(
+    public ItemPricesResponse getItemPrices(
             @PathVariable("itemId") Long itemId
     ) {
         Item item = itemService.getItem(itemId);
-        PricesResponse pricesResponse = new PricesResponse();
-        pricesResponse.setCurrent(item.getPrices().getCurrent());
-        pricesResponse.setToday(item.getPrices().getToday());
-        return pricesResponse;
+        ItemPricesResponse itemPricesResponse = new ItemPricesResponse();
+        itemPricesResponse.setCurrent(item.getPrices().getCurrent());
+        itemPricesResponse.setToday(item.getPrices().getToday());
+        return itemPricesResponse;
     }
 
     @ApiOperation(value = "Returns Osrs item current price")
@@ -220,10 +221,46 @@ public class ItemController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public ItemPrice getItemCurrentPrice(
+    public ItemPriceResponse getItemCurrentPrices(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getPrices().getCurrent();
+        ItemPriceResponse itemPriceResponse = new ItemPriceResponse();
+        itemPriceResponse.setPrice(itemService.getItem(itemId).getPrices().getCurrent());
+        return itemPriceResponse;
+    }
+
+    @ApiOperation(value = "Returns Osrs item current prices price")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The osrs item current prices price was found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item current prices price was not found"),
+            @ApiResponse(code = 503, message = "The osrs api is unavailable")
+    })
+    @GetMapping(
+            value = "/{itemId}/prices/current-prices/price",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    public String getItemCurrentPricesPrice(
+            @PathVariable("itemId") Long itemId
+    ) {
+        return itemService.getItem(itemId).getPrices().getCurrent().getPrice();
+    }
+
+    @ApiOperation(value = "Returns Osrs item current prices trend")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The osrs item current prices trend was found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item current prices trend was not found"),
+            @ApiResponse(code = 503, message = "The osrs api is unavailable")
+    })
+    @GetMapping(
+            value = "/{itemId}/prices/current-prices/trend",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    public String getItemCurrentPricesTrend(
+            @PathVariable("itemId") Long itemId
+    ) {
+        return itemService.getItem(itemId).getPrices().getCurrent().getTrend();
     }
 
     @ApiOperation(value = "Returns Osrs item today price")
@@ -237,10 +274,46 @@ public class ItemController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public ItemPrice getItemTodayPrice(
+    public ItemPriceResponse getItemTodayPrices(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getPrices().getToday();
+        ItemPriceResponse itemPriceResponse = new ItemPriceResponse();
+        itemPriceResponse.setPrice(itemService.getItem(itemId).getPrices().getToday());
+        return itemPriceResponse;
+    }
+
+    @ApiOperation(value = "Returns Osrs item today prices price")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The osrs item today prices price was found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item today prices price was not found"),
+            @ApiResponse(code = 503, message = "The osrs api is unavailable")
+    })
+    @GetMapping(
+            value = "/{itemId}/prices/today-prices/prices",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    public String getItemTodayPricesPrice(
+            @PathVariable("itemId") Long itemId
+    ) {
+        return itemService.getItem(itemId).getPrices().getToday().getPrice();
+    }
+
+    @ApiOperation(value = "Returns Osrs item today prices trend")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The osrs item today prices trend was found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item today prices trend was not found"),
+            @ApiResponse(code = 503, message = "The osrs api is unavailable")
+    })
+    @GetMapping(
+            value = "/{itemId}/prices/today-prices/trends",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    public String getItemTodayPricesTrend(
+            @PathVariable("itemId") Long itemId
+    ) {
+        return itemService.getItem(itemId).getPrices().getToday().getTrend();
     }
 
     @ApiOperation(value = "Returns Osrs item trends")
@@ -254,18 +327,18 @@ public class ItemController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public TrendsResponse getItemTrends(
+    public ItemTrendsResponse getItemTrends(
             @PathVariable("itemId") Long itemId
     ) {
         Item item = itemService.getItem(itemId);
         ItemTrend day30 = item.getTrends().getDay30();
         ItemTrend day90 = item.getTrends().getDay90();
         ItemTrend day180 = item.getTrends().getDay180();
-        TrendsResponse trendsResponse = new TrendsResponse();
-        trendsResponse.setDay30(day30);
-        trendsResponse.setDay90(day90);
-        trendsResponse.setDay180(day180);
-        return trendsResponse;
+        ItemTrendsResponse itemTrendsResponse = new ItemTrendsResponse();
+        itemTrendsResponse.setDay30(day30);
+        itemTrendsResponse.setDay90(day90);
+        itemTrendsResponse.setDay180(day180);
+        return itemTrendsResponse;
     }
 
     @ApiOperation(value = "Returns Osrs item day 30 trends")
@@ -279,10 +352,46 @@ public class ItemController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public ItemTrend getItemTrendDay30(
+    public ItemTrendResponse getItemTrendDay30(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getTrends().getDay30();
+        ItemTrendResponse itemTrendResponse = new ItemTrendResponse();
+        itemTrendResponse.setTrend(itemService.getItem(itemId).getTrends().getDay30());
+        return itemTrendResponse;
+    }
+
+    @ApiOperation(value = "Returns Osrs item day 30 trends trend")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The osrs item day 30 trends trend was found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item day 30 trends trend was not found"),
+            @ApiResponse(code = 503, message = "The osrs api is unavailable")
+    })
+    @GetMapping(
+            value = "/{itemId}/trends/30-days/trends",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    public String getItemTrendDay30Trend(
+            @PathVariable("itemId") Long itemId
+    ) {
+        return itemService.getItem(itemId).getTrends().getDay30().getTrend();
+    }
+
+    @ApiOperation(value = "Returns Osrs item day 30 trends change")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The osrs item day 30 trends change was found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item day 30 trends change was not found"),
+            @ApiResponse(code = 503, message = "The osrs api is unavailable")
+    })
+    @GetMapping(
+            value = "/{itemId}/trends/30-days/changes",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    public String getItemTrendDay30Change(
+            @PathVariable("itemId") Long itemId
+    ) {
+        return itemService.getItem(itemId).getTrends().getDay30().getChange();
     }
 
     @ApiOperation(value = "Returns Osrs item day 90 trends")
@@ -296,10 +405,46 @@ public class ItemController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public ItemTrend getItemTrendDay90(
+    public ItemTrendResponse getItemTrendDay90(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getTrends().getDay90();
+        ItemTrendResponse itemTrendResponse = new ItemTrendResponse();
+        itemTrendResponse.setTrend(itemService.getItem(itemId).getTrends().getDay90());
+        return itemTrendResponse;
+    }
+
+    @ApiOperation(value = "Returns Osrs item day 90 trends trend")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The osrs item day 90 trends trend was found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item day 90 trends trend was not found"),
+            @ApiResponse(code = 503, message = "The osrs api is unavailable")
+    })
+    @GetMapping(
+            value = "/{itemId}/trends/90-days/trends",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    public String getItemTrendDay90Trend(
+            @PathVariable("itemId") Long itemId
+    ) {
+        return itemService.getItem(itemId).getTrends().getDay90().getTrend();
+    }
+
+    @ApiOperation(value = "Returns Osrs item day 90 trends change")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The osrs item day 90 trends change was found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item day 90 trends change was not found"),
+            @ApiResponse(code = 503, message = "The osrs api is unavailable")
+    })
+    @GetMapping(
+            value = "/{itemId}/trends/90-days/changes",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    public String getItemTrendDay90Change(
+            @PathVariable("itemId") Long itemId
+    ) {
+        return itemService.getItem(itemId).getTrends().getDay90().getChange();
     }
 
     @ApiOperation(value = "Returns Osrs item day 180 trends")
@@ -313,9 +458,45 @@ public class ItemController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public ItemTrend getItemTrendDay180(
+    public ItemTrendResponse getItemTrendDay180(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getTrends().getDay180();
+        ItemTrendResponse itemTrendResponse = new ItemTrendResponse();
+        itemTrendResponse.setTrend(itemService.getItem(itemId).getTrends().getDay180());
+        return itemTrendResponse;
+    }
+
+    @ApiOperation(value = "Returns Osrs item day 180 trends trend")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The osrs item day 180 trends trend was found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item day 180 trends trend was not found"),
+            @ApiResponse(code = 503, message = "The osrs api is unavailable")
+    })
+    @GetMapping(
+            value = "/{itemId}/trends/180-days/trends",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    public String getItemTrendDay180Trend(
+            @PathVariable("itemId") Long itemId
+    ) {
+        return itemService.getItem(itemId).getTrends().getDay180().getTrend();
+    }
+
+    @ApiOperation(value = "Returns Osrs item day 180 trends change")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The osrs item day 180 trends change was found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item day 180 trends change was not found"),
+            @ApiResponse(code = 503, message = "The osrs api is unavailable")
+    })
+    @GetMapping(
+            value = "/{itemId}/trends/180-days/changes",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    public String getItemTrendDay180Change(
+            @PathVariable("itemId") Long itemId
+    ) {
+        return itemService.getItem(itemId).getTrends().getDay180().getChange();
     }
 }

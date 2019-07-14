@@ -1,11 +1,9 @@
 package com.impurityonline.osrs.controller;
 
+import com.impurityonline.osrs.controller.response.item.*;
 import com.impurityonline.osrs.domain.item.Item;
 import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
 import com.impurityonline.osrs.exception.ItemNotFoundException;
-import com.impurityonline.osrs.controller.response.IconsResponse;
-import com.impurityonline.osrs.controller.response.PricesResponse;
-import com.impurityonline.osrs.controller.response.TrendsResponse;
 import com.impurityonline.osrs.service.ItemService;
 import com.impurityonline.osrs.utils.AbstractTest;
 import org.junit.jupiter.api.DisplayName;
@@ -48,11 +46,13 @@ class ItemControllerTests extends AbstractTest {
     @DisplayName("When getting a osrs item, return 200 and item")
     void item_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        ItemResponse itemResponse = new ItemResponse();
+        itemResponse.setItem(getValidOsrsItem(MOCK_ITEM_ID));
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapToJson(item)));
+                .andExpect(content().json(mapToJson(itemResponse)));
     }
 
     @Test
@@ -164,15 +164,15 @@ class ItemControllerTests extends AbstractTest {
     @DisplayName("When getting a osrs item icons, return 200 and icons")
     void itemIcon_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
-        IconsResponse iconsResponse = new IconsResponse();
-        iconsResponse.setLargeIcon(item.getIcons().getLargeIcon());
-        iconsResponse.setSmallIcon(item.getIcons().getSmallIcon());
-        iconsResponse.setTypeIcon(item.getIcons().getTypeIcon());
+        ItemIconsResponse itemIconsResponse = new ItemIconsResponse();
+        itemIconsResponse.setLargeIcon(item.getIcons().getLargeIcon());
+        itemIconsResponse.setSmallIcon(item.getIcons().getSmallIcon());
+        itemIconsResponse.setTypeIcon(item.getIcons().getTypeIcon());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapToJson(iconsResponse)));
+                .andExpect(content().json(mapToJson(itemIconsResponse)));
     }
 
     @Test
@@ -313,14 +313,14 @@ class ItemControllerTests extends AbstractTest {
     @DisplayName("When getting a osrs item prices, return 200 and prices")
     void itemPrices_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
-        PricesResponse pricesResponse = new PricesResponse();
-        pricesResponse.setCurrent(item.getPrices().getCurrent());
-        pricesResponse.setToday(item.getPrices().getToday());
+        ItemPricesResponse itemPricesResponse = new ItemPricesResponse();
+        itemPricesResponse.setCurrent(item.getPrices().getCurrent());
+        itemPricesResponse.setToday(item.getPrices().getToday());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapToJson(pricesResponse)));
+                .andExpect(content().json(mapToJson(itemPricesResponse)));
     }
 
     @Test
@@ -345,11 +345,13 @@ class ItemControllerTests extends AbstractTest {
     @DisplayName("When getting a osrs item current price, return 200 and current price")
     void itemCurrentPrice_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        ItemPriceResponse itemPriceResponse = new ItemPriceResponse();
+        itemPriceResponse.setPrice(item.getPrices().getCurrent());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/current-prices")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapToJson(item.getPrices().getCurrent())));
+                .andExpect(content().json(mapToJson(itemPriceResponse)));
     }
 
     @Test
@@ -374,11 +376,13 @@ class ItemControllerTests extends AbstractTest {
     @DisplayName("When getting a osrs item current price, return 200 and current price")
     void itemTodayPrice_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        ItemPriceResponse itemPriceResponse = new ItemPriceResponse();
+        itemPriceResponse.setPrice(item.getPrices().getToday());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/today-prices")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapToJson(item.getPrices().getToday())));
+                .andExpect(content().json(mapToJson(itemPriceResponse)));
     }
 
     @Test
@@ -403,15 +407,15 @@ class ItemControllerTests extends AbstractTest {
     @DisplayName("When getting a osrs item trends, return 200 and current trends")
     void itemTrends_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
-        TrendsResponse trendsResponse = new TrendsResponse();
-        trendsResponse.setDay30(item.getTrends().getDay30());
-        trendsResponse.setDay90(item.getTrends().getDay90());
-        trendsResponse.setDay180(item.getTrends().getDay180());
+        ItemTrendsResponse itemTrendsResponse = new ItemTrendsResponse();
+        itemTrendsResponse.setDay30(item.getTrends().getDay30());
+        itemTrendsResponse.setDay90(item.getTrends().getDay90());
+        itemTrendsResponse.setDay180(item.getTrends().getDay180());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapToJson(trendsResponse)));
+                .andExpect(content().json(mapToJson(itemTrendsResponse)));
     }
 
     @Test
@@ -436,11 +440,13 @@ class ItemControllerTests extends AbstractTest {
     @DisplayName("When getting a osrs item 30 day trend, return 200 and current 30 day trend")
     void itemDay30Trend_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        ItemTrendResponse itemTrendResponse = new ItemTrendResponse();
+        itemTrendResponse.setTrend(item.getTrends().getDay30());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/30-days")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapToJson(item.getTrends().getDay30())));
+                .andExpect(content().json(mapToJson(itemTrendResponse)));
     }
 
     @Test
@@ -465,11 +471,13 @@ class ItemControllerTests extends AbstractTest {
     @DisplayName("When getting a osrs item 90 day trend, return 200 and current 90 day trend")
     void itemDay90Trend_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        ItemTrendResponse itemTrendResponse = new ItemTrendResponse();
+        itemTrendResponse.setTrend(item.getTrends().getDay90());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/90-days")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapToJson(item.getTrends().getDay90())));
+                .andExpect(content().json(mapToJson(itemTrendResponse)));
     }
 
     @Test
@@ -494,11 +502,13 @@ class ItemControllerTests extends AbstractTest {
     @DisplayName("When getting a osrs item 180 day trend, return 200 and current 180 day trend")
     void itemDay180Trend_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        ItemTrendResponse itemTrendResponse = new ItemTrendResponse();
+        itemTrendResponse.setTrend(item.getTrends().getDay180());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/180-days")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapToJson(item.getTrends().getDay180())));
+                .andExpect(content().json(mapToJson(itemTrendResponse)));
     }
 
     @Test
