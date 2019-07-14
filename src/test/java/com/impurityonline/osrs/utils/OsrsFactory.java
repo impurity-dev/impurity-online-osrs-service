@@ -168,14 +168,14 @@ public class OsrsFactory {
         current.setPrice("price");
         current.setTrend("trend");
         ItemTrend day30 = new ItemTrend();
-        current.setPrice("price");
-        current.setTrend("trend");
+        day30.setChange("change");
+        day30.setTrend("trend");
         ItemTrend day90 = new ItemTrend();
-        current.setPrice("price");
-        current.setTrend("trend");
+        day90.setChange("change");
+        day90.setTrend("trend");
         ItemTrend day180 = new ItemTrend();
-        current.setPrice("price");
-        current.setTrend("trend");
+        day180.setChange("change");
+        day180.setTrend("trend");
 
         Item item = new Item();
         item.setName("name");
@@ -183,7 +183,7 @@ public class OsrsFactory {
         item.setDescription("desc");
         item.setIcon("ico");
         item.setIconLarge("ico-large");
-        item.setId(1L);
+        item.setId(id);
         item.setMembers(true);
         item.setToday(today);
         item.setDay30(day30);

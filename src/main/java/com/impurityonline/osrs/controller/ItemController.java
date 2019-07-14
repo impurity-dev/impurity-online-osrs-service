@@ -3,6 +3,7 @@ package com.impurityonline.osrs.controller;
 import com.impurityonline.osrs.domain.Item;
 import com.impurityonline.osrs.domain.ItemPrice;
 import com.impurityonline.osrs.domain.ItemTrend;
+import com.impurityonline.osrs.response.OsrsIconsResponse;
 import com.impurityonline.osrs.response.OsrsPricesResponse;
 import com.impurityonline.osrs.response.OsrsTrendsResponse;
 import com.impurityonline.osrs.service.ItemService;
@@ -66,7 +67,7 @@ public class ItemController {
     @ApiOperation(value = "Returns Osrs item description")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "The osrs item description was found and successfully returned"),
-            @ApiResponse(code = 404, message = "The osrs item description name was not found"),
+            @ApiResponse(code = 404, message = "The osrs item description was not found"),
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
@@ -83,7 +84,7 @@ public class ItemController {
     @ApiOperation(value = "Returns Osrs item type")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "The osrs item type was found and successfully returned"),
-            @ApiResponse(code = 404, message = "The osrs item type name was not found"),
+            @ApiResponse(code = 404, message = "The osrs item type was not found"),
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
@@ -97,14 +98,36 @@ public class ItemController {
         return itemService.getItem(itemId).getType();
     }
 
-    @ApiOperation(value = "Returns Osrs item type icon")
+    @ApiOperation(value = "Returns Osrs item icons")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "The osrs item type icon was found and successfully returned"),
-            @ApiResponse(code = 404, message = "The osrs item type icon name was not found"),
+            @ApiResponse(code = 200, message = "The osrs item icons were found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item icons were not found"),
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/type-icons",
+            value = "/{itemId}/icons",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    public OsrsIconsResponse getItemIcon(
+            @PathVariable("itemId") Long itemId
+    ) {
+        Item item = itemService.getItem(itemId);
+        OsrsIconsResponse osrsIconsResponse = new OsrsIconsResponse();
+        osrsIconsResponse.setTypeIcon(item.getTypeIcon());
+        osrsIconsResponse.setSmallIcon(item.getIcon());
+        osrsIconsResponse.setLargeIcon(item.getIconLarge());
+        return osrsIconsResponse;
+    }
+
+    @ApiOperation(value = "Returns Osrs item type icon")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "The osrs item type icon was found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item type icon was not found"),
+            @ApiResponse(code = 503, message = "The osrs api is unavailable")
+    })
+    @GetMapping(
+            value = "/{itemId}/icons/type-icons",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
@@ -114,18 +137,18 @@ public class ItemController {
         return itemService.getItem(itemId).getTypeIcon();
     }
 
-    @ApiOperation(value = "Returns Osrs item icon")
+    @ApiOperation(value = "Returns Osrs item small icon")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "The osrs item icon was found and successfully returned"),
-            @ApiResponse(code = 404, message = "The osrs item icon name was not found"),
+            @ApiResponse(code = 200, message = "The osrs item small icon was found and successfully returned"),
+            @ApiResponse(code = 404, message = "The osrs item small icon name was not found"),
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/icons",
+            value = "/{itemId}/icons/small-icons",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public String getItemIcon(
+    public String getItemSmallIcon(
             @PathVariable("itemId") Long itemId
     ) {
         return itemService.getItem(itemId).getIcon();
@@ -138,11 +161,11 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/icon-larges",
+            value = "/{itemId}/icons/large-icons",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public String getItemIconLarge(
+    public String getItemLargeIcon(
             @PathVariable("itemId") Long itemId
     ) {
         return itemService.getItem(itemId).getIconLarge();
@@ -193,7 +216,7 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/prices/currents",
+            value = "/{itemId}/prices/current-prices",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
@@ -210,7 +233,7 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/prices/todays",
+            value = "/{itemId}/prices/today-prices",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
@@ -252,7 +275,7 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/trends/days/30",
+            value = "/{itemId}/trends/30-days",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
@@ -269,7 +292,7 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/trends/days/90",
+            value = "/{itemId}/trends/90-days",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
@@ -286,7 +309,7 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/trends/days/180",
+            value = "/{itemId}/trends/180-days",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )

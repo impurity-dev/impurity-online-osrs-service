@@ -20,43 +20,43 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles(UNIT_TEST)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class PlayerBuilderTests extends AbstractTest {
+class PlayerBuilderTests extends AbstractTest {
 
     @Test
     @DisplayName("When player built, name is correct")
-    public void osrsPlayer_name() {
+    void osrsPlayer_name() {
         String name = "apples";
         assertEquals(name, buildPlayer(name, "", getValidOsrsPlayerClientResponse()).getName());
     }
 
     @Test
     @DisplayName("When player built, type is correct")
-    public void osrsPlayer_type() {
+    void osrsPlayer_type() {
         String type = "apples";
         assertEquals(type, buildPlayer("", type, getValidOsrsPlayerClientResponse()).getType());
     }
 
     @Test
     @DisplayName("When player hi scores null, throw null pointer")
-    public void osrsPlayer_null_playerHiScores() {
+    void osrsPlayer_null_playerHiScores() {
         assertThrows(NullPointerException.class, () -> buildPlayer("", "", null));
     }
 
     @Test
     @DisplayName("When player type null, throw null pointer")
-    public void osrsPlayer_null_type() {
+    void osrsPlayer_null_type() {
         assertThrows(NullPointerException.class, () -> buildPlayer("", null, null));
     }
 
     @Test
     @DisplayName("When player name null, throw null pointer")
-    public void osrsPlayer_null_name() {
+    void osrsPlayer_null_name() {
         assertThrows(NullPointerException.class, () -> buildPlayer(null, "", ""));
     }
 
     @Test
     @DisplayName("When player hiscores invalid, throw illegal argument")
-    public void osrsPlayer_hiscores_invalidLength() {
+    void osrsPlayer_hiscores_invalidLength() {
         assertThrows(IllegalArgumentException.class, () -> buildPlayer("", "", "123\n123\n123"));
     }
 

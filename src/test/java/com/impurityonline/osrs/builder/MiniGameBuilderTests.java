@@ -19,23 +19,23 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles(UNIT_TEST)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class MiniGameBuilderTests extends AbstractTest {
+class MiniGameBuilderTests extends AbstractTest {
 
     @Test
     @DisplayName("When minigames hiscore is null, throw null pointer")
-    public void osrsMiniGames_null_hiscores() {
+    void osrsMiniGames_null_hiscores() {
         assertThrows(NullPointerException.class, () -> buildMiniGames(null));
     }
 
     @Test
     @DisplayName("When minigames hiscore is invalid, throw illegal argument")
-    public void osrsMiniGames_invalid_hiscores() {
+    void osrsMiniGames_invalid_hiscores() {
         assertThrows(IllegalArgumentException.class, () -> buildMiniGames(new String[0]));
     }
 
     @Test
     @DisplayName("When minigames hiscore is invalid, throw illegal argument")
-    public void osrsMiniGames_invalid_minigame() {
+    void osrsMiniGames_invalid_minigame() {
         assertThrows(IllegalArgumentException.class, () -> buildMiniGames(getInvalidMinigameHiscores().split("\\n")));
     }
 }

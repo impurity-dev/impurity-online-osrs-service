@@ -18,23 +18,23 @@ import static org.springframework.http.HttpStatus.OK;
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles(UNIT_TEST)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ApiErrorTests extends AbstractTest {
+class ApiErrorTests extends AbstractTest {
 
     @Test
     @DisplayName("When building with null status, throw null pointer")
-    public void status_param() {
+    void status_param() {
         assertThrows(NullPointerException.class, () -> new ApiError(null, "", new Exception()));
     }
 
     @Test
     @DisplayName("When building with null message, throw null pointer")
-    public void message_param() {
+    void message_param() {
         assertThrows(NullPointerException.class, () -> new ApiError(OK, null, new Exception()));
     }
 
     @Test
     @DisplayName("When building with null throwable, throw null pointer")
-    public void throwable_param() {
+    void throwable_param() {
         assertThrows(NullPointerException.class, () -> new ApiError(OK, "", null));
     }
 }

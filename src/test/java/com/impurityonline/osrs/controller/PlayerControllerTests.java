@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ActiveProfiles(UNIT_TEST)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class PlayerControllerTests extends AbstractTest {
+class PlayerControllerTests extends AbstractTest {
 
     @MockBean
     private PlayerService playerService;
@@ -44,7 +44,7 @@ public class PlayerControllerTests extends AbstractTest {
 
     @Test
     @DisplayName("When getting a osrs player, return 200 and player")
-    public void osrs_player_return_200() throws Exception {
+    void osrs_player_return_200() throws Exception {
         Player player = getValidOsrsPlayer("apples", "bananas");
         OsrsPlayerResponse osrsPlayerResponse = new OsrsPlayerResponse();
         osrsPlayerResponse.setPlayer(player);
@@ -60,7 +60,7 @@ public class PlayerControllerTests extends AbstractTest {
 
     @Test
     @DisplayName("When getting a osrs player and is not found, return 404")
-    public void no_osrs_player_return_404() throws Exception {
+    void no_osrs_player_return_404() throws Exception {
         when(playerService.getPlayer(MOCK_PLAYER_NAME)).thenThrow(OsrsPlayerNotFoundException.class);
         mockMvc.perform(get("/v1/players/" + MOCK_PLAYER_NAME)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -69,7 +69,7 @@ public class PlayerControllerTests extends AbstractTest {
 
     @Test
     @DisplayName("When getting a osrs player and it cannot be created, return 500")
-    public void osrs_player_return_500() throws Exception {
+    void osrs_player_return_500() throws Exception {
         when(playerService.getPlayer(MOCK_PLAYER_NAME)).thenThrow(OsrsClientPlayerHttpRequestException.class);
         mockMvc.perform(get("/v1/players/" + MOCK_PLAYER_NAME)
                 .contentType(MediaType.APPLICATION_JSON))

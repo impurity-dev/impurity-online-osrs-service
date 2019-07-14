@@ -37,26 +37,26 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles(UNIT_TEST)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class OsrsClientTests extends AbstractTest {
+class OsrsClientTests extends AbstractTest {
 
     @Autowired
     private OsrsClient osrsClient;
     private MockRestServiceServer mockServer;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         mockServer = MockRestServiceServer.createServer(osrsClient.getRestTemplate());
     }
 
     @Test
     @DisplayName("When the osrs client player has null playerName, throw null pointer")
-    public void osrsClient_player_null_playerName() {
+    void osrsClient_player_null_playerName() {
         assertThrows(NullPointerException.class, () -> osrsClient.getPlayer(null));
     }
 
     @Test
     @DisplayName("When the osrs client gets player, return response")
-    public void osrsClient_with_OK_osrsApiPlayerResponse() {
+    void osrsClient_with_OK_osrsApiPlayerResponse() {
         String playerName = "123";
         String osrsApiPlayerResponse = getValidOsrsPlayerClientResponse();
         mockServer.expect(once(), requestTo(buildPlayerURL(playerName).toUriString()))
@@ -70,7 +70,7 @@ public class OsrsClientTests extends AbstractTest {
 
     @Test
     @DisplayName("When the steam client library has client error, throw OsrsClientPlayerHttpRequestException")
-    public void osrsClient_with_CLIENTERROR_osrsApiPlayerResponse() {
+    void osrsClient_with_CLIENTERROR_osrsApiPlayerResponse() {
         String playerName = "123";
         String osrsApiPlayerResponse = getValidOsrsPlayerClientResponse();
         mockServer.expect(once(), requestTo(buildPlayerURL(playerName).toUriString()))
@@ -84,7 +84,7 @@ public class OsrsClientTests extends AbstractTest {
 
     @Test
     @DisplayName("When the steam client library has server error, throw RestTemplateServerException")
-    public void osrsClient_with_SERVERERROR_osrsApiPlayerResponse() {
+    void osrsClient_with_SERVERERROR_osrsApiPlayerResponse() {
         String playerName = "123";
         String osrsApiPlayerResponse = getValidOsrsPlayerClientResponse();
         mockServer.expect(once(), requestTo(buildPlayerURL(playerName).toUriString()))
@@ -97,13 +97,13 @@ public class OsrsClientTests extends AbstractTest {
     }
     @Test
     @DisplayName("When the osrs client item has null itemid, throw null pointer")
-    public void osrsClient_item_null_itemId() {
+    void osrsClient_item_null_itemId() {
         assertThrows(NullPointerException.class, () -> osrsClient.getItem(null));
     }
 
     @Test
     @DisplayName("When the osrs client gets itemid, return response")
-    public void osrsClient_with_OK_osrsApiItemResponse() throws JsonProcessingException {
+    void osrsClient_with_OK_osrsApiItemResponse() throws JsonProcessingException {
         Long itemId = 123L;
         OsrsApiItemResponse osrsApiPlayerResponse = getValidOsrsApiItemResponse();
         mockServer.expect(once(), requestTo(buildGrandExchangeURL(itemId).toUriString()))
@@ -117,7 +117,7 @@ public class OsrsClientTests extends AbstractTest {
 
     @Test
     @DisplayName("When the osrs client item has client error, throw OsrsClientItemHttpRequestException")
-    public void osrsClient_with_CLIENTERROR_osrsApiItemResponse() throws JsonProcessingException {
+    void osrsClient_with_CLIENTERROR_osrsApiItemResponse() throws JsonProcessingException {
         Long itemId = 123L;
         OsrsApiItemResponse osrsApiPlayerResponse = getValidOsrsApiItemResponse();
         mockServer.expect(once(), requestTo(buildGrandExchangeURL(itemId).toUriString()))
@@ -131,7 +131,7 @@ public class OsrsClientTests extends AbstractTest {
 
     @Test
     @DisplayName("When the steam client library has server error, throw RestTemplateServerException")
-    public void osrsClient_with_SERVERERROR_osrsApiItemResponse() throws JsonProcessingException {
+    void osrsClient_with_SERVERERROR_osrsApiItemResponse() throws JsonProcessingException {
         Long itemId = 123L;
         OsrsApiItemResponse osrsApiPlayerResponse = getValidOsrsApiItemResponse();
         mockServer.expect(once(), requestTo(buildGrandExchangeURL(itemId).toUriString()))
