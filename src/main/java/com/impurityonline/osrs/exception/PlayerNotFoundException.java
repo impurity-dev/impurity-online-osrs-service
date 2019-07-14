@@ -3,15 +3,15 @@ package com.impurityonline.osrs.exception;
 /**
  * @author impurity
  */
-public class OsrsItemNotFoundException extends RuntimeException {
-    private static final long serialVersionUID = 3513739686319721275L;
+public class PlayerNotFoundException extends RuntimeException {
+    private static final long serialVersionUID = -5675972332879532275L;
 
     /**
      * Generic Osrs Exception
      *
      * @param message Explanatory message
      */
-    public OsrsItemNotFoundException(String message) {
+    public PlayerNotFoundException(String message) {
         super(message);
     }
 }

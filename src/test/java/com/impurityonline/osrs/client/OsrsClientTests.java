@@ -19,8 +19,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.client.MockRestServiceServer;
 
-import static com.impurityonline.osrs.builder.OsrsUrlBuilder.buildGrandExchangeURL;
-import static com.impurityonline.osrs.builder.OsrsUrlBuilder.buildPlayerURL;
+import static com.impurityonline.osrs.builder.UrlBuilder.buildGrandExchangeURL;
+import static com.impurityonline.osrs.builder.UrlBuilder.buildPlayerURL;
 import static com.impurityonline.osrs.constant.Profiles.UNIT_TEST;
 import static com.impurityonline.osrs.utils.OsrsFactory.getValidOsrsApiItemResponse;
 import static com.impurityonline.osrs.utils.OsrsFactory.getValidOsrsPlayerClientResponse;

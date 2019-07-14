@@ -3,9 +3,9 @@ package com.impurityonline.osrs.controller;
 import com.impurityonline.osrs.domain.Item;
 import com.impurityonline.osrs.domain.ItemPrice;
 import com.impurityonline.osrs.domain.ItemTrend;
-import com.impurityonline.osrs.response.OsrsIconsResponse;
-import com.impurityonline.osrs.response.OsrsPricesResponse;
-import com.impurityonline.osrs.response.OsrsTrendsResponse;
+import com.impurityonline.osrs.response.IconsResponse;
+import com.impurityonline.osrs.response.PricesResponse;
+import com.impurityonline.osrs.response.TrendsResponse;
 import com.impurityonline.osrs.service.ItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -109,15 +109,15 @@ public class ItemController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public OsrsIconsResponse getItemIcon(
+    public IconsResponse getItemIcon(
             @PathVariable("itemId") Long itemId
     ) {
         Item item = itemService.getItem(itemId);
-        OsrsIconsResponse osrsIconsResponse = new OsrsIconsResponse();
-        osrsIconsResponse.setTypeIcon(item.getTypeIcon());
-        osrsIconsResponse.setSmallIcon(item.getIcon());
-        osrsIconsResponse.setLargeIcon(item.getIconLarge());
-        return osrsIconsResponse;
+        IconsResponse iconsResponse = new IconsResponse();
+        iconsResponse.setTypeIcon(item.getTypeIcon());
+        iconsResponse.setSmallIcon(item.getIcon());
+        iconsResponse.setLargeIcon(item.getIconLarge());
+        return iconsResponse;
     }
 
     @ApiOperation(value = "Returns Osrs item type icon")
@@ -199,14 +199,14 @@ public class ItemController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public OsrsPricesResponse getItemPrices(
+    public PricesResponse getItemPrices(
             @PathVariable("itemId") Long itemId
     ) {
         Item item = itemService.getItem(itemId);
-        OsrsPricesResponse osrsPricesResponse = new OsrsPricesResponse();
-        osrsPricesResponse.setCurrent(item.getCurrent());
-        osrsPricesResponse.setToday(item.getToday());
-        return osrsPricesResponse;
+        PricesResponse pricesResponse = new PricesResponse();
+        pricesResponse.setCurrent(item.getCurrent());
+        pricesResponse.setToday(item.getToday());
+        return pricesResponse;
     }
 
     @ApiOperation(value = "Returns Osrs item current price")
@@ -254,18 +254,18 @@ public class ItemController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public OsrsTrendsResponse getItemTrends(
+    public TrendsResponse getItemTrends(
             @PathVariable("itemId") Long itemId
     ) {
         Item item = itemService.getItem(itemId);
         ItemTrend day30 = item.getDay30();
         ItemTrend day90 = item.getDay90();
         ItemTrend day180 = item.getDay180();
-        OsrsTrendsResponse osrsTrendsResponse = new OsrsTrendsResponse();
-        osrsTrendsResponse.setDay30(day30);
-        osrsTrendsResponse.setDay90(day90);
-        osrsTrendsResponse.setDay180(day180);
-        return osrsTrendsResponse;
+        TrendsResponse trendsResponse = new TrendsResponse();
+        trendsResponse.setDay30(day30);
+        trendsResponse.setDay90(day90);
+        trendsResponse.setDay180(day180);
+        return trendsResponse;
     }
 
     @ApiOperation(value = "Returns Osrs item day 30 trends")

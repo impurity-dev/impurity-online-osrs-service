@@ -2,10 +2,10 @@ package com.impurityonline.osrs.controller;
 
 import com.impurityonline.osrs.domain.Item;
 import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
-import com.impurityonline.osrs.exception.OsrsItemNotFoundException;
-import com.impurityonline.osrs.response.OsrsIconsResponse;
-import com.impurityonline.osrs.response.OsrsPricesResponse;
-import com.impurityonline.osrs.response.OsrsTrendsResponse;
+import com.impurityonline.osrs.exception.ItemNotFoundException;
+import com.impurityonline.osrs.response.IconsResponse;
+import com.impurityonline.osrs.response.PricesResponse;
+import com.impurityonline.osrs.response.TrendsResponse;
 import com.impurityonline.osrs.service.ItemService;
 import com.impurityonline.osrs.utils.AbstractTest;
 import org.junit.jupiter.api.DisplayName;
@@ -58,7 +58,7 @@ class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs item and is not found, return 404")
     void no_item_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -87,7 +87,7 @@ class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs item name and is not found, return 404")
     void no_itemName_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/names")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -116,7 +116,7 @@ class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs item description and is not found, return 404")
     void no_itemDescription_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/descriptions")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -145,7 +145,7 @@ class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs item type and is not found, return 404")
     void no_itemType_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/types")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -164,21 +164,21 @@ class ItemControllerTests extends AbstractTest {
     @DisplayName("When getting a osrs item icons, return 200 and icons")
     void itemIcon_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
-        OsrsIconsResponse osrsIconsResponse = new OsrsIconsResponse();
-        osrsIconsResponse.setLargeIcon(item.getIconLarge());
-        osrsIconsResponse.setSmallIcon(item.getIcon());
-        osrsIconsResponse.setTypeIcon(item.getTypeIcon());
+        IconsResponse iconsResponse = new IconsResponse();
+        iconsResponse.setLargeIcon(item.getIconLarge());
+        iconsResponse.setSmallIcon(item.getIcon());
+        iconsResponse.setTypeIcon(item.getTypeIcon());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapToJson(osrsIconsResponse)));
+                .andExpect(content().json(mapToJson(iconsResponse)));
     }
 
     @Test
     @DisplayName("When getting a osrs item icons and is not found, return 404")
     void no_itemIcon_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -207,7 +207,7 @@ class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs item type icon and is not found, return 404")
     void no_itemTypeIcon_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons/type-icons")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -236,7 +236,7 @@ class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs item small icon and is not found, return 404")
     void no_itemSmallIcon_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons/small-icons")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -265,7 +265,7 @@ class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs item large icon and is not found, return 404")
     void no_itemLargeIcon_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons/large-icons")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -294,7 +294,7 @@ class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs item is member and is not found, return 404")
     void no_itemIsMember_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/members")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -313,20 +313,20 @@ class ItemControllerTests extends AbstractTest {
     @DisplayName("When getting a osrs item prices, return 200 and prices")
     void itemPrices_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
-        OsrsPricesResponse osrsPricesResponse = new OsrsPricesResponse();
-        osrsPricesResponse.setCurrent(item.getCurrent());
-        osrsPricesResponse.setToday(item.getToday());
+        PricesResponse pricesResponse = new PricesResponse();
+        pricesResponse.setCurrent(item.getCurrent());
+        pricesResponse.setToday(item.getToday());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapToJson(osrsPricesResponse)));
+                .andExpect(content().json(mapToJson(pricesResponse)));
     }
 
     @Test
     @DisplayName("When getting a osrs item prices and is not found, return 404")
     void no_itemPrices_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -355,7 +355,7 @@ class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs item current price and is not found, return 404")
     void no_itemCurrentPrice_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/current-prices")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -384,7 +384,7 @@ class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs item current price and is not found, return 404")
     void no_itemTodayPrice_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/today-prices")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -403,21 +403,21 @@ class ItemControllerTests extends AbstractTest {
     @DisplayName("When getting a osrs item trends, return 200 and current trends")
     void itemTrends_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
-        OsrsTrendsResponse osrsTrendsResponse = new OsrsTrendsResponse();
-        osrsTrendsResponse.setDay30(item.getDay30());
-        osrsTrendsResponse.setDay90(item.getDay90());
-        osrsTrendsResponse.setDay180(item.getDay180());
+        TrendsResponse trendsResponse = new TrendsResponse();
+        trendsResponse.setDay30(item.getDay30());
+        trendsResponse.setDay90(item.getDay90());
+        trendsResponse.setDay180(item.getDay180());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapToJson(osrsTrendsResponse)));
+                .andExpect(content().json(mapToJson(trendsResponse)));
     }
 
     @Test
     @DisplayName("When getting a osrs item trends and is not found, return 404")
     void no_itemTrends_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -446,7 +446,7 @@ class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs item 30 day trend and is not found, return 404")
     void no_itemDay30Trend_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/30-days")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -475,7 +475,7 @@ class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs item 90 day trend and is not found, return 404")
     void no_itemDay90Trend_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/90-days")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -504,7 +504,7 @@ class ItemControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs item 180 day trend and is not found, return 404")
     void no_itemDay180Trend_return404() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsItemNotFoundException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/180-days")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());

@@ -3,7 +3,7 @@ package com.impurityonline.osrs.service.impl;
 import com.impurityonline.osrs.client.OsrsClient;
 import com.impurityonline.osrs.client.response.OsrsApiItemResponse;
 import com.impurityonline.osrs.domain.Item;
-import com.impurityonline.osrs.exception.OsrsItemNotFoundException;
+import com.impurityonline.osrs.exception.ItemNotFoundException;
 import com.impurityonline.osrs.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +28,10 @@ public class ItemServiceImpl implements ItemService {
 
         OsrsApiItemResponse osrsApiItemResponse = Optional
                 .ofNullable(responseEntity.getBody())
-                .orElseThrow(() -> new OsrsItemNotFoundException("No item body found"));
+                .orElseThrow(() -> new ItemNotFoundException("No item body found"));
 
         return Optional
                 .ofNullable(osrsApiItemResponse.getItem())
-                .orElseThrow(() -> new OsrsItemNotFoundException("No item found"));
+                .orElseThrow(() -> new ItemNotFoundException("No item found"));
     }
 }

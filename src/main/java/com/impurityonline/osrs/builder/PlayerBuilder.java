@@ -3,18 +3,18 @@ package com.impurityonline.osrs.builder;
 import com.impurityonline.osrs.domain.Player;
 import lombok.NonNull;
 
-import static com.impurityonline.osrs.builder.OsrsMiniGameBuilder.buildMiniGames;
-import static com.impurityonline.osrs.builder.OsrsScrollsBuilder.buildScrolls;
-import static com.impurityonline.osrs.builder.OsrsSkillsBuilder.buildSkills;
+import static com.impurityonline.osrs.builder.MiniGameBuilder.buildMiniGames;
+import static com.impurityonline.osrs.builder.ScrollsBuilder.buildScrolls;
+import static com.impurityonline.osrs.builder.SkillsBuilder.buildSkills;
 
 /**
  * @author impurity
  */
-public class OsrsPlayerBuilder {
+public class PlayerBuilder {
     private static final String DELIMITER = "\\n";
     public static final int HISCORE_TOTAL = 34;
 
-    private OsrsPlayerBuilder() {}
+    private PlayerBuilder() {}
 
     public static Player buildPlayer(
             @NonNull final String name,

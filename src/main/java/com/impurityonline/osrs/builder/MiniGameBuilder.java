@@ -8,12 +8,12 @@ import lombok.NonNull;
 /**
  * @author impurity
  */
-public class OsrsMiniGameBuilder {
+public class MiniGameBuilder {
     private static final String DELIMITER = ",";
     private static final int MINIGAMES_TOTAL = 3;
     private static final int MINIGAME_VALUE_TOTAL = 2;
 
-    private OsrsMiniGameBuilder() {}
+    private MiniGameBuilder() {}
 
     /**
      * Create all scrolls based off hiscores
@@ -22,7 +22,7 @@ public class OsrsMiniGameBuilder {
      * @return The osrs scrolls with proper mapping
      */
     public static MiniGames buildMiniGames(@NonNull final String[] hiscores) {
-        if (hiscores.length != OsrsPlayerBuilder.HISCORE_TOTAL) {
+        if (hiscores.length != PlayerBuilder.HISCORE_TOTAL) {
             throw new IllegalArgumentException("Invalid hiscores length");
         }
         MiniGame[] miniGames = buildMiniGamesFromStringArray(

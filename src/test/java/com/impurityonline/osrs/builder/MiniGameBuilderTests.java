@@ -10,7 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static com.impurityonline.osrs.constant.Profiles.UNIT_TEST;
 import static com.impurityonline.osrs.utils.OsrsFactory.getInvalidMinigameHiscores;
-import static com.impurityonline.osrs.builder.OsrsMiniGameBuilder.buildMiniGames;
+import static com.impurityonline.osrs.builder.MiniGameBuilder.buildMiniGames;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**

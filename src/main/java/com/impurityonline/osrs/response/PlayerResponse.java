@@ -8,7 +8,7 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class OsrsPlayerResponse {
+public class PlayerResponse {
     @JsonProperty("player")
     private Player player;
 }

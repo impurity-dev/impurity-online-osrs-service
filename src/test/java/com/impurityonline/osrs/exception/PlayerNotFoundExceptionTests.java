@@ -23,7 +23,7 @@ class PlayerNotFoundExceptionTests extends AbstractTest {
     @DisplayName("The osrs player not found exception stores message properly")
     void captures_message() {
         String testMessage = "apples";
-        assertEquals(new OsrsPlayerNotFoundException(testMessage).getMessage(), testMessage);
+        assertEquals(new PlayerNotFoundException(testMessage).getMessage(), testMessage);
     }
 }
 

@@ -10,12 +10,12 @@ import static java.util.Arrays.copyOfRange;
 /**
  * @author impurity
  */
-public class OsrsSkillsBuilder {
+public class SkillsBuilder {
     private static final String DELIMITER = ",";
     private static final int SKILLS_TOTAL = 24;
     private static final int SKILL_VALUE_TOTAL = 3;
 
-    private OsrsSkillsBuilder() {}
+    private SkillsBuilder() {}
     /**
      * Create all skills based off hiscores
      *
@@ -23,7 +23,7 @@ public class OsrsSkillsBuilder {
      * @return The osrs skills with proper mapping
      */
     public static Skills buildSkills(@NonNull final String[] hiscores) {
-        if (hiscores.length != OsrsPlayerBuilder.HISCORE_TOTAL) {
+        if (hiscores.length != PlayerBuilder.HISCORE_TOTAL) {
             throw new IllegalArgumentException("Invalid hiscores length");
         }
         Skill[] skills = buildSkillsFromStringArray(

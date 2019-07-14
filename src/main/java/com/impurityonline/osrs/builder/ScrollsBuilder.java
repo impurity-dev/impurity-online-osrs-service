@@ -8,12 +8,12 @@ import lombok.NonNull;
 /**
  * @author impurity
  */
-public class OsrsScrollsBuilder {
+public class ScrollsBuilder {
     private static final String DELIMITER = ",";
     private static final int SCROLLS_TOTAL = 6;
     private static final int SCROLL_VALUE_TOTAL = 2;
 
-    private OsrsScrollsBuilder() {}
+    private ScrollsBuilder() {}
 
     /**
      * Create all scrolls based off hiscores
@@ -22,7 +22,7 @@ public class OsrsScrollsBuilder {
      * @return The osrs scrolls with proper mapping
      */
     public static Scrolls buildScrolls(@NonNull final String[] hiscores) {
-        if (hiscores.length != OsrsPlayerBuilder.HISCORE_TOTAL) {
+        if (hiscores.length != PlayerBuilder.HISCORE_TOTAL) {
             throw new IllegalArgumentException("Invalid hiscores length");
         }
         Scroll[] scrolls = buildScrollsFromStringArray(

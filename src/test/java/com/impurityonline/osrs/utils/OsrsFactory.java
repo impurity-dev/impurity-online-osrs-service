@@ -6,7 +6,7 @@ import com.impurityonline.osrs.domain.ItemPrice;
 import com.impurityonline.osrs.domain.ItemTrend;
 import com.impurityonline.osrs.domain.Player;
 
-import static com.impurityonline.osrs.builder.OsrsPlayerBuilder.buildPlayer;
+import static com.impurityonline.osrs.builder.PlayerBuilder.buildPlayer;
 
 /**
  * @author impurity

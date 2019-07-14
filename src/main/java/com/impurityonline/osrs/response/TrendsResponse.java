@@ -8,7 +8,7 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class OsrsTrendsResponse {
+public class TrendsResponse {
     @JsonProperty("day30")
     private ItemTrend day30;
     @JsonProperty("day90")

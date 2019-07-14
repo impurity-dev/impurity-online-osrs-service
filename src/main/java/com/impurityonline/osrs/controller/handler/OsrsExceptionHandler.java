@@ -3,8 +3,8 @@ package com.impurityonline.osrs.controller.handler;
 import com.impurityonline.osrs.domain.ApiError;
 import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
 import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
-import com.impurityonline.osrs.exception.OsrsItemNotFoundException;
-import com.impurityonline.osrs.exception.OsrsPlayerNotFoundException;
+import com.impurityonline.osrs.exception.ItemNotFoundException;
+import com.impurityonline.osrs.exception.PlayerNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -23,15 +23,15 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class OsrsExceptionHandler extends ResponseEntityExceptionHandler {
-    @ExceptionHandler(OsrsPlayerNotFoundException.class)
-    protected ResponseEntity<ApiError> handledOsrsPlayerNotFoundException(final OsrsPlayerNotFoundException ex) {
+    @ExceptionHandler(PlayerNotFoundException.class)
+    protected ResponseEntity<ApiError> handledOsrsPlayerNotFoundException(final PlayerNotFoundException ex) {
         log.info("The Osrs player from the Osrs API could not be found: {}", ex.getMessage());
         ApiError apiError = new ApiError(NOT_FOUND, "Could not find osrs player.", ex);
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
     
-    @ExceptionHandler(OsrsItemNotFoundException.class)
-    protected ResponseEntity<ApiError> handledOsrsItemNotFoundException(final OsrsItemNotFoundException ex) {
+    @ExceptionHandler(ItemNotFoundException.class)
+    protected ResponseEntity<ApiError> handledOsrsItemNotFoundException(final ItemNotFoundException ex) {
         log.info("The Osrs player from the Osrs API could not be found: {}", ex.getMessage());
         ApiError apiError = new ApiError(NOT_FOUND, "Could not find osrs item.", ex);
         return new ResponseEntity<>(apiError, apiError.getStatus());

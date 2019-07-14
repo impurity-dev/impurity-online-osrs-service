@@ -8,7 +8,7 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class OsrsPricesResponse {
+public class PricesResponse {
     @JsonProperty("current")
     private ItemPrice current;
     @JsonProperty("today")

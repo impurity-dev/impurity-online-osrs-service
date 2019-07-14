@@ -8,7 +8,7 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class OsrsIconsResponse {
+public class IconsResponse {
     @JsonProperty("typeIcon")
     private String typeIcon;
     @JsonProperty("smallIcon")

@@ -10,7 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static com.impurityonline.osrs.constant.Profiles.UNIT_TEST;
 import static com.impurityonline.osrs.utils.OsrsFactory.getValidOsrsPlayerClientResponse;
-import static com.impurityonline.osrs.builder.OsrsPlayerBuilder.buildPlayer;
+import static com.impurityonline.osrs.builder.PlayerBuilder.buildPlayer;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
