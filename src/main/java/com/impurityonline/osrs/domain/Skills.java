@@ -7,53 +7,53 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class OsrsSkills {
+public class Skills {
     @JsonProperty("overall")
-    private OsrsSkill overall;
+    private Skill overall;
     @JsonProperty("attack")
-    private OsrsSkill attack;
+    private Skill attack;
     @JsonProperty("defence")
-    private OsrsSkill defence;
+    private Skill defence;
     @JsonProperty("strength")
-    private OsrsSkill strength;
+    private Skill strength;
     @JsonProperty("hitpoints")
-    private OsrsSkill hitpoints;
+    private Skill hitpoints;
     @JsonProperty("ranged")
-    private OsrsSkill ranged;
+    private Skill ranged;
     @JsonProperty("prayer")
-    private OsrsSkill prayer;
+    private Skill prayer;
     @JsonProperty("magic")
-    private OsrsSkill magic;
+    private Skill magic;
     @JsonProperty("cooking")
-    private OsrsSkill cooking;
+    private Skill cooking;
     @JsonProperty("woodcutting")
-    private OsrsSkill woodcutting;
+    private Skill woodcutting;
     @JsonProperty("fletching")
-    private OsrsSkill fletching;
+    private Skill fletching;
     @JsonProperty("fishing")
-    private OsrsSkill fishing;
+    private Skill fishing;
     @JsonProperty("firemaking")
-    private OsrsSkill firemaking;
+    private Skill firemaking;
     @JsonProperty("crafting")
-    private OsrsSkill crafting;
+    private Skill crafting;
     @JsonProperty("smithing")
-    private OsrsSkill smithing;
+    private Skill smithing;
     @JsonProperty("mining")
-    private OsrsSkill mining;
+    private Skill mining;
     @JsonProperty("herblore")
-    private OsrsSkill herblore;
+    private Skill herblore;
     @JsonProperty("agility")
-    private OsrsSkill agility;
+    private Skill agility;
     @JsonProperty("thieving")
-    private OsrsSkill thieving;
+    private Skill thieving;
     @JsonProperty("slayer")
-    private OsrsSkill slayer;
+    private Skill slayer;
     @JsonProperty("farming")
-    private OsrsSkill farming;
+    private Skill farming;
     @JsonProperty("runecrafting")
-    private OsrsSkill runecrafting;
+    private Skill runecrafting;
     @JsonProperty("hunter")
-    private OsrsSkill hunter;
+    private Skill hunter;
     @JsonProperty("construction")
-    private OsrsSkill construction;
+    private Skill construction;
 }

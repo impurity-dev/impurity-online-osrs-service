@@ -7,11 +7,9 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class OsrsSkill {
+public class MiniGame {
     @JsonProperty("rank")
     private Long rank;
-    @JsonProperty("level")
-    private Long level;
-    @JsonProperty("experience")
-    private Long experience;
+    @JsonProperty("score")
+    private Long score;
 }

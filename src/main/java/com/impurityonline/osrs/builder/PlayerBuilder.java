@@ -1,28 +1,28 @@
 package com.impurityonline.osrs.builder;
 
-import com.impurityonline.osrs.domain.OsrsPlayer;
+import com.impurityonline.osrs.domain.Player;
 import lombok.NonNull;
 
-import static com.impurityonline.osrs.builder.OsrsMiniGameBuilder.buildMiniGames;
-import static com.impurityonline.osrs.builder.OsrsScrollsBuilder.buildScrolls;
-import static com.impurityonline.osrs.builder.OsrsSkillsBuilder.buildSkills;
+import static com.impurityonline.osrs.builder.MiniGameBuilder.buildMiniGames;
+import static com.impurityonline.osrs.builder.ScrollsBuilder.buildScrolls;
+import static com.impurityonline.osrs.builder.SkillsBuilder.buildSkills;
 
 /**
  * @author impurity
  */
-public class OsrsPlayerBuilder {
+public class PlayerBuilder {
     private static final String DELIMITER = "\\n";
     public static final int HISCORE_TOTAL = 34;
 
-    private OsrsPlayerBuilder() {}
+    private PlayerBuilder() {}
 
-    public static OsrsPlayer buildPlayer(
+    public static Player buildPlayer(
             @NonNull final String name,
             @NonNull final String type,
             @NonNull final String playerHiScores
     ) {
         String[] scores = buildScores(playerHiScores);
-        OsrsPlayer player = new OsrsPlayer();
+        Player player = new Player();
         player.setName(name);
         player.setType(type);
         player.setSkills(buildSkills(scores));

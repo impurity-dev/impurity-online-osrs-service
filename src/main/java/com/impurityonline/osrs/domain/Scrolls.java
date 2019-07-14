@@ -7,17 +7,17 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class OsrsScrolls {
+public class Scrolls {
     @JsonProperty("clueScrolls")
-    private OsrsScroll clueScrolls;
+    private Scroll clueScrolls;
     @JsonProperty("easyClueScrolls")
-    private OsrsScroll easyClueScrolls;
+    private Scroll easyClueScrolls;
     @JsonProperty("mediumClueScrolls")
-    private OsrsScroll mediumClueScrolls;
+    private Scroll mediumClueScrolls;
     @JsonProperty("hardClueScrolls")
-    private OsrsScroll hardClueScrolls;
+    private Scroll hardClueScrolls;
     @JsonProperty("eliteClueScrolls")
-    private OsrsScroll eliteClueScrolls;
+    private Scroll eliteClueScrolls;
     @JsonProperty("masterClueScrolls")
-    private OsrsScroll masterClueScrolls;
+    private Scroll masterClueScrolls;
 }

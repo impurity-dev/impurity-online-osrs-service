@@ -7,11 +7,11 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class OsrsMiniGames {
+public class MiniGames {
     @JsonProperty("bountyHunter")
-    private OsrsMiniGame bountyHunter;
+    private MiniGame bountyHunter;
     @JsonProperty("bountyHunterRogues")
-    private OsrsMiniGame bountyHunterRogues;
+    private MiniGame bountyHunterRogues;
     @JsonProperty("lastManStanding")
-    private OsrsMiniGame lastManStanding;
+    private MiniGame lastManStanding;
 }

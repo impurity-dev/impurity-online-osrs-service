@@ -1,6 +1,6 @@
 package com.impurityonline.osrs.controller;
 
-import com.impurityonline.osrs.response.OsrsPlayerResponse;
+import com.impurityonline.osrs.response.PlayerResponse;
 import com.impurityonline.osrs.service.PlayerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,11 +36,11 @@ public class PlayerController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
-    public OsrsPlayerResponse getPlayer(
+    public PlayerResponse getPlayer(
             @PathVariable("playerName") String playerName
     ) {
-        OsrsPlayerResponse osrsPlayerResponse = new OsrsPlayerResponse();
-        osrsPlayerResponse.setPlayer(playerService.getPlayer(playerName));
-        return osrsPlayerResponse;
+        PlayerResponse playerResponse = new PlayerResponse();
+        playerResponse.setPlayer(playerService.getPlayer(playerName));
+        return playerResponse;
     }
 }

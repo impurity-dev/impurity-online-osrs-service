@@ -16,21 +16,21 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class OsrsApplicationTests extends AbstractTest {
+class OsrsApplicationTests extends AbstractTest {
 
 	@Autowired
 	private ApplicationContext applicationContext;
 
 	@Test
 	@DisplayName("The application entry works")
-	public void application_entry() {
+	void application_entry() {
 		OsrsApplication.main(new String[]{"Apples", "Bananas"});
 		assertNotNull(applicationContext);
 	}
 
 	@Test
 	@DisplayName("The application context loads")
-	public void context_loads() {
+	void context_loads() {
 		assertNotNull(applicationContext);
 	}
 

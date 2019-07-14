@@ -1,12 +1,12 @@
 package com.impurityonline.osrs.utils;
 
 import com.impurityonline.osrs.client.response.OsrsApiItemResponse;
-import com.impurityonline.osrs.domain.OsrsItem;
-import com.impurityonline.osrs.domain.OsrsItemPrice;
-import com.impurityonline.osrs.domain.OsrsItemTrend;
-import com.impurityonline.osrs.domain.OsrsPlayer;
+import com.impurityonline.osrs.domain.Item;
+import com.impurityonline.osrs.domain.ItemPrice;
+import com.impurityonline.osrs.domain.ItemTrend;
+import com.impurityonline.osrs.domain.Player;
 
-import static com.impurityonline.osrs.builder.OsrsPlayerBuilder.buildPlayer;
+import static com.impurityonline.osrs.builder.PlayerBuilder.buildPlayer;
 
 /**
  * @author impurity
@@ -160,63 +160,64 @@ public class OsrsFactory {
                 "-1,-1";
     }
 
-    public static OsrsItem getValidOsrsItem(Long id) {
-        OsrsItemPrice current = new OsrsItemPrice();
-        current.setPrice("");
-        current.setTrend("");
-        OsrsItemTrend today = new OsrsItemTrend();
-        current.setPrice("");
-        current.setTrend("");
-        OsrsItemTrend day30 = new OsrsItemTrend();
-        current.setPrice("");
-        current.setTrend("");
-        OsrsItemTrend day90 = new OsrsItemTrend();
-        current.setPrice("");
-        current.setTrend("");
-        OsrsItemTrend day180 = new OsrsItemTrend();
-        current.setPrice("");
-        current.setTrend("");
+    public static Item getValidOsrsItem(Long id) {
+        ItemPrice current = new ItemPrice();
+        current.setPrice("price");
+        current.setTrend("trend");
+        ItemPrice today = new ItemPrice();
+        current.setPrice("price");
+        current.setTrend("trend");
+        ItemTrend day30 = new ItemTrend();
+        day30.setChange("change");
+        day30.setTrend("trend");
+        ItemTrend day90 = new ItemTrend();
+        day90.setChange("change");
+        day90.setTrend("trend");
+        ItemTrend day180 = new ItemTrend();
+        day180.setChange("change");
+        day180.setTrend("trend");
 
-        OsrsItem item = new OsrsItem();
+        Item item = new Item();
+        item.setName("name");
         item.setCurrent(current);
-        item.setDescription("");
-        item.setIcon("");
-        item.setIconLarge("");
-        item.setId(id.toString());
+        item.setDescription("desc");
+        item.setIcon("ico");
+        item.setIconLarge("ico-large");
+        item.setId(id);
         item.setMembers(true);
         item.setToday(today);
         item.setDay30(day30);
         item.setDay90(day90);
         item.setDay180(day180);
-        item.setType("");
-        item.setTypeIcon("");
+        item.setType("type");
+        item.setTypeIcon("type-ico");
 
         return item;
     }
 
-    public static OsrsPlayer getValidOsrsPlayer(String name, String type) {
+    public static Player getValidOsrsPlayer(String name, String type) {
         return buildPlayer(name, type, getValidOsrsPlayerClientResponse());
     }
 
     public static OsrsApiItemResponse getValidOsrsApiItemResponse() {
-        OsrsItemPrice price = new OsrsItemPrice();
+        ItemPrice price = new ItemPrice();
         price.setPrice("123");
         price.setTrend("321");
 
-        OsrsItemTrend trend = new OsrsItemTrend();
+        ItemTrend trend = new ItemTrend();
         trend.setChange("456");
         trend.setTrend("654");
 
-        OsrsItem item = new OsrsItem();
+        Item item = new Item();
         item.setIcon("a");
         item.setIconLarge("b");
-        item.setId("c");
+        item.setId(1L);
         item.setType("d");
         item.setTypeIcon("e");
         item.setDescription("f");
         item.setMembers(true);
         item.setCurrent(price);
-        item.setToday(trend);
+        item.setToday(price);
         item.setDay30(trend);
         item.setDay90(trend);
         item.setDay180(trend);

@@ -17,13 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles(UNIT_TEST)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class OsrsPlayerNotFoundExceptionTests extends AbstractTest {
+class PlayerNotFoundExceptionTests extends AbstractTest {
 
     @Test
     @DisplayName("The osrs player not found exception stores message properly")
-    public void captures_message() {
+    void captures_message() {
         String testMessage = "apples";
-        assertEquals(new OsrsPlayerNotFoundException(testMessage).getMessage(), testMessage);
+        assertEquals(new PlayerNotFoundException(testMessage).getMessage(), testMessage);
     }
 }
 

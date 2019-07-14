@@ -1,19 +1,19 @@
 package com.impurityonline.osrs.builder;
 
-import com.impurityonline.osrs.domain.OsrsScroll;
-import com.impurityonline.osrs.domain.OsrsScrolls;
+import com.impurityonline.osrs.domain.Scroll;
+import com.impurityonline.osrs.domain.Scrolls;
 import com.impurityonline.osrs.enums.OsrsHiScore;
 import lombok.NonNull;
 
 /**
  * @author impurity
  */
-public class OsrsScrollsBuilder {
+public class ScrollsBuilder {
     private static final String DELIMITER = ",";
     private static final int SCROLLS_TOTAL = 6;
     private static final int SCROLL_VALUE_TOTAL = 2;
 
-    private OsrsScrollsBuilder() {}
+    private ScrollsBuilder() {}
 
     /**
      * Create all scrolls based off hiscores
@@ -21,11 +21,11 @@ public class OsrsScrollsBuilder {
      * @param hiscores the collection of values still delimited by commas
      * @return The osrs scrolls with proper mapping
      */
-    public static OsrsScrolls buildScrolls(@NonNull final String[] hiscores) {
-        if (hiscores.length != OsrsPlayerBuilder.HISCORE_TOTAL) {
+    public static Scrolls buildScrolls(@NonNull final String[] hiscores) {
+        if (hiscores.length != PlayerBuilder.HISCORE_TOTAL) {
             throw new IllegalArgumentException("Invalid hiscores length");
         }
-        OsrsScroll[] scrolls = buildScrollsFromStringArray(
+        Scroll[] scrolls = buildScrollsFromStringArray(
                 new String[] {
                         hiscores[OsrsHiScore.CLUE_SCROLLS.ordinal()],
                         hiscores[OsrsHiScore.EASY_CLUE_SCROLLS.ordinal()],
@@ -36,7 +36,7 @@ public class OsrsScrollsBuilder {
                 }
         );
         int i = -1;
-        OsrsScrolls osrsScrolls = new OsrsScrolls();
+        Scrolls osrsScrolls = new Scrolls();
         osrsScrolls.setClueScrolls(scrolls[++i]);
         osrsScrolls.setEasyClueScrolls(scrolls[++i]);
         osrsScrolls.setMediumClueScrolls(scrolls[++i]);
@@ -52,8 +52,8 @@ public class OsrsScrollsBuilder {
      * @param scrollValues the collection of values still delimited by commas
      * @return The collection of scrolls
      */
-    private static OsrsScroll[] buildScrollsFromStringArray(final String[] scrollValues) {
-        OsrsScroll[] scrolls = new OsrsScroll[SCROLLS_TOTAL];
+    private static Scroll[] buildScrollsFromStringArray(final String[] scrollValues) {
+        Scroll[] scrolls = new Scroll[SCROLLS_TOTAL];
         for (int i = 0; i < scrolls.length; i++) {
             scrolls[i] = buildScrollFromString(scrollValues[i]);
         }
@@ -65,12 +65,12 @@ public class OsrsScrollsBuilder {
      * @param scrollValue - Scroll string with comma delimiter
      * @return The Osrs scrolls object that was created based off the parameter
      */
-    private static OsrsScroll buildScrollFromString(final String scrollValue) {
+    private static Scroll buildScrollFromString(final String scrollValue) {
         String[] skillValues = scrollValue.split(DELIMITER);
         if (skillValues.length != SCROLL_VALUE_TOTAL) {
             throw new IllegalArgumentException("Invalid skillValue length");
         }
-        OsrsScroll scroll = new OsrsScroll();
+        Scroll scroll = new Scroll();
         scroll.setRank(Long.parseLong(skillValues[0]));
         scroll.setScore(Long.parseLong(skillValues[1]));
         return scroll;

@@ -1,7 +1,6 @@
 package com.impurityonline.osrs.service;
 
-import com.impurityonline.osrs.domain.OsrsItem;
-import com.impurityonline.osrs.domain.OsrsPlayer;
+import com.impurityonline.osrs.domain.Item;
 
 /**
  * @author impurity
@@ -13,5 +12,5 @@ public interface ItemService {
      * @param itemId - the osrs item identifying number
      * @return - the osrs item statistics
      */
-    OsrsItem getItem(Long itemId);
+    Item getItem(Long itemId);
 }

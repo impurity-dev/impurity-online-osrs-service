@@ -1,5 +1,6 @@
 package com.impurityonline.osrs.domain;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -7,11 +8,11 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class OsrsItem {
+public class Item {
     @JsonProperty("name")
     private String name;
     @JsonProperty("id")
-    private String id;
+    private Long id;
     @JsonProperty("description")
     private String description;
     @JsonProperty("type")
@@ -20,18 +21,19 @@ public class OsrsItem {
     private String typeIcon;
     @JsonProperty("icon")
     private String icon;
-    @JsonProperty("icon_large")
+    @JsonProperty("iconLarge")
+    @JsonAlias("icon_large")
     private String iconLarge;
     @JsonProperty("members")
     private Boolean members;
     @JsonProperty("current")
-    private OsrsItemPrice current;
+    private ItemPrice current;
     @JsonProperty("today")
-    private OsrsItemTrend today;
+    private ItemPrice today;
     @JsonProperty("day30")
-    private OsrsItemTrend day30;
+    private ItemTrend day30;
     @JsonProperty("day90")
-    private OsrsItemTrend day90;
+    private ItemTrend day90;
     @JsonProperty("day180")
-    private OsrsItemTrend day180;
+    private ItemTrend day180;
 }

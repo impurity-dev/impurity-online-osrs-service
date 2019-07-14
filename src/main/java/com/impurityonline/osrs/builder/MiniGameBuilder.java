@@ -1,19 +1,19 @@
 package com.impurityonline.osrs.builder;
 
-import com.impurityonline.osrs.domain.OsrsMiniGame;
-import com.impurityonline.osrs.domain.OsrsMiniGames;
+import com.impurityonline.osrs.domain.MiniGame;
+import com.impurityonline.osrs.domain.MiniGames;
 import com.impurityonline.osrs.enums.OsrsHiScore;
 import lombok.NonNull;
 
 /**
  * @author impurity
  */
-public class OsrsMiniGameBuilder {
+public class MiniGameBuilder {
     private static final String DELIMITER = ",";
     private static final int MINIGAMES_TOTAL = 3;
     private static final int MINIGAME_VALUE_TOTAL = 2;
 
-    private OsrsMiniGameBuilder() {}
+    private MiniGameBuilder() {}
 
     /**
      * Create all scrolls based off hiscores
@@ -21,11 +21,11 @@ public class OsrsMiniGameBuilder {
      * @param hiscores the collection of values still delimited by commas
      * @return The osrs scrolls with proper mapping
      */
-    public static OsrsMiniGames buildMiniGames(@NonNull final String[] hiscores) {
-        if (hiscores.length != OsrsPlayerBuilder.HISCORE_TOTAL) {
+    public static MiniGames buildMiniGames(@NonNull final String[] hiscores) {
+        if (hiscores.length != PlayerBuilder.HISCORE_TOTAL) {
             throw new IllegalArgumentException("Invalid hiscores length");
         }
-        OsrsMiniGame[] miniGames = buildMiniGamesFromStringArray(
+        MiniGame[] miniGames = buildMiniGamesFromStringArray(
                 new String[] {
                         hiscores[OsrsHiScore.BOUNTY_HUNTER.ordinal()],
                         hiscores[OsrsHiScore.BOUNTY_HUNTER_ROGUES.ordinal()],
@@ -33,7 +33,7 @@ public class OsrsMiniGameBuilder {
                 }
         );
         int i = -1;
-        OsrsMiniGames osrsMiniGames = new OsrsMiniGames();
+        MiniGames osrsMiniGames = new MiniGames();
         osrsMiniGames.setBountyHunter(miniGames[++i]);
         osrsMiniGames.setBountyHunterRogues(miniGames[++i]);
         osrsMiniGames.setLastManStanding(miniGames[++i]);
@@ -46,8 +46,8 @@ public class OsrsMiniGameBuilder {
      * @param miniGameValues the collection of values still delimited by commas
      * @return The collection of minigames
      */
-    private static OsrsMiniGame[] buildMiniGamesFromStringArray(final String[] miniGameValues) {
-        OsrsMiniGame[] miniGames = new OsrsMiniGame[MINIGAMES_TOTAL];
+    private static MiniGame[] buildMiniGamesFromStringArray(final String[] miniGameValues) {
+        MiniGame[] miniGames = new MiniGame[MINIGAMES_TOTAL];
         for (int i = 0; i < miniGames.length; i++) {
             miniGames[i] = buildMiniGame(miniGameValues[i]);
         }
@@ -60,12 +60,12 @@ public class OsrsMiniGameBuilder {
      * @param miniGameValue - MiniGame string with comma delimiter
      * @return The Osrs minigame object that was created based off the parameter
      */
-    private static OsrsMiniGame buildMiniGame(final String miniGameValue) {
+    private static MiniGame buildMiniGame(final String miniGameValue) {
         String[] miniGameValues = miniGameValue.split(DELIMITER);
         if (miniGameValues.length != MINIGAME_VALUE_TOTAL) {
             throw new IllegalArgumentException("Invalid miniGameValue length");
         }
-        OsrsMiniGame miniGame = new OsrsMiniGame();
+        MiniGame miniGame = new MiniGame();
         miniGame.setRank(Long.parseLong(miniGameValues[0]));
         miniGame.setScore(Long.parseLong(miniGameValues[1]));
         return miniGame;

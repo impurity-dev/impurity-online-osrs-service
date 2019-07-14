@@ -6,8 +6,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 /**
  * @author impurity
  */
-public class OsrsUrlBuilder {
-    private OsrsUrlBuilder() {}
+public class UrlBuilder {
+    private UrlBuilder() {}
 
     public static UriComponentsBuilder buildPlayerURL(@NonNull final String playerName) {
         return UriComponentsBuilder
