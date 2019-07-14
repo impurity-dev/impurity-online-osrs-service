@@ -1,10 +1,9 @@
 package com.impurityonline.osrs.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.impurityonline.osrs.client.response.OsrsApiItemResponse;
+import com.impurityonline.osrs.client.response.item.ApiItemResponse;
 import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
 import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
-import com.impurityonline.osrs.exception.RestTemplateServerException;
 import com.impurityonline.osrs.utils.AbstractTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +21,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import static com.impurityonline.osrs.builder.UrlBuilder.buildGrandExchangeURL;
 import static com.impurityonline.osrs.builder.UrlBuilder.buildPlayerURL;
 import static com.impurityonline.osrs.constant.Profiles.UNIT_TEST;
-import static com.impurityonline.osrs.utils.OsrsFactory.getValidOsrsApiItemResponse;
+import static com.impurityonline.osrs.utils.OsrsFactory.getValidApiItemResponse;
 import static com.impurityonline.osrs.utils.OsrsFactory.getValidOsrsPlayerClientResponse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -105,7 +104,7 @@ class OsrsClientTests extends AbstractTest {
     @DisplayName("When the osrs client gets itemid, return response")
     void osrsClient_with_OK_osrsApiItemResponse() throws JsonProcessingException {
         Long itemId = 123L;
-        OsrsApiItemResponse osrsApiPlayerResponse = getValidOsrsApiItemResponse();
+        ApiItemResponse osrsApiPlayerResponse = getValidApiItemResponse();
         mockServer.expect(once(), requestTo(buildGrandExchangeURL(itemId).toUriString()))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK)
@@ -119,7 +118,7 @@ class OsrsClientTests extends AbstractTest {
     @DisplayName("When the osrs client item has client error, throw OsrsClientItemHttpRequestException")
     void osrsClient_with_CLIENTERROR_osrsApiItemResponse() throws JsonProcessingException {
         Long itemId = 123L;
-        OsrsApiItemResponse osrsApiPlayerResponse = getValidOsrsApiItemResponse();
+        ApiItemResponse osrsApiPlayerResponse = getValidApiItemResponse();
         mockServer.expect(once(), requestTo(buildGrandExchangeURL(itemId).toUriString()))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.NOT_FOUND)
@@ -133,13 +132,13 @@ class OsrsClientTests extends AbstractTest {
     @DisplayName("When the steam client library has server error, throw RestTemplateServerException")
     void osrsClient_with_SERVERERROR_osrsApiItemResponse() throws JsonProcessingException {
         Long itemId = 123L;
-        OsrsApiItemResponse osrsApiPlayerResponse = getValidOsrsApiItemResponse();
+        ApiItemResponse osrsApiPlayerResponse = getValidApiItemResponse();
         mockServer.expect(once(), requestTo(buildGrandExchangeURL(itemId).toUriString()))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(mapToJson(osrsApiPlayerResponse))
                 );
-        assertThrows(OsrsClientPlayerHttpRequestException.class, () -> osrsClient.getItem(itemId));
+        assertThrows(OsrsClientItemHttpRequestException.class, () -> osrsClient.getItem(itemId));
     }
 }

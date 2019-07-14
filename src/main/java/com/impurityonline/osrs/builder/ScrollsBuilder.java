@@ -1,7 +1,7 @@
 package com.impurityonline.osrs.builder;
 
-import com.impurityonline.osrs.domain.Scroll;
-import com.impurityonline.osrs.domain.Scrolls;
+import com.impurityonline.osrs.domain.player.Scroll;
+import com.impurityonline.osrs.domain.player.Scrolls;
 import com.impurityonline.osrs.enums.OsrsHiScore;
 import lombok.NonNull;
 

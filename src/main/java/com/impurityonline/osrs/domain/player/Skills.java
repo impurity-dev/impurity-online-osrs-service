@@ -1,4 +1,4 @@
-package com.impurityonline.osrs.domain;
+package com.impurityonline.osrs.domain.player;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

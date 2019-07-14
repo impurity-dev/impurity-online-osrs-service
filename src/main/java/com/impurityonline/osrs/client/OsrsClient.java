@@ -1,6 +1,6 @@
 package com.impurityonline.osrs.client;
 
-import com.impurityonline.osrs.client.response.OsrsApiItemResponse;
+import com.impurityonline.osrs.client.response.item.ApiItemResponse;
 import com.impurityonline.osrs.exception.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -67,13 +67,13 @@ public class OsrsClient extends RestClient {
      * @param itemId - Item id
      * @return - Player item
      */
-    public OsrsApiItemResponse getItem(@NonNull final Long itemId) {
+    public ApiItemResponse getItem(@NonNull final Long itemId) {
         try {
-            ResponseEntity<OsrsApiItemResponse> itemEntity = executeRequest(
+            ResponseEntity<ApiItemResponse> itemEntity = executeRequest(
                     HttpMethod.GET,
                     buildGrandExchangeURL(itemId).toUriString(),
                     new HttpEntity<>(new HttpHeaders()),
-                    OsrsApiItemResponse.class
+                    ApiItemResponse.class
             );
             return Optional.ofNullable(itemEntity.getBody())
                     .orElseThrow(() -> new ItemNotFoundException("No response body found for itemId=" + itemId));
@@ -82,7 +82,7 @@ public class OsrsClient extends RestClient {
             throw new OsrsClientItemHttpRequestException("Cannot get item", ex.getStatus(), ex);
         } catch (RestTemplateServerException ex) {
             log.error("Osrs Server Issues: {}", ex.getMessage());
-            throw new OsrsClientPlayerHttpRequestException("Cannot get item", ex.getStatus(), ex);
+            throw new OsrsClientItemHttpRequestException("Cannot get item", ex.getStatus(), ex);
         }
     }
 }

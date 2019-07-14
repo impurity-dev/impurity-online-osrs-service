@@ -1,7 +1,7 @@
 package com.impurityonline.osrs.builder;
 
-import com.impurityonline.osrs.domain.Skill;
-import com.impurityonline.osrs.domain.Skills;
+import com.impurityonline.osrs.domain.player.Skill;
+import com.impurityonline.osrs.domain.player.Skills;
 import com.impurityonline.osrs.enums.OsrsHiScore;
 import lombok.NonNull;
 

@@ -1,6 +1,6 @@
 package com.impurityonline.osrs.builder;
 
-import com.impurityonline.osrs.domain.Player;
+import com.impurityonline.osrs.domain.player.Player;
 import lombok.NonNull;
 
 import static com.impurityonline.osrs.builder.MiniGameBuilder.buildMiniGames;

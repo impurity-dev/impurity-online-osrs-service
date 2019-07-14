@@ -1,4 +1,4 @@
-package com.impurityonline.osrs.domain;
+package com.impurityonline.osrs.client.response.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class ItemTrend {
+public class ApiItemTrend {
     @JsonProperty("trend")
     private String trend;
     @JsonProperty("change")

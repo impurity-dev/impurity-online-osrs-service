@@ -1,7 +1,7 @@
 package com.impurityonline.osrs.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.impurityonline.osrs.domain.Player;
+import com.impurityonline.osrs.domain.player.Player;
 import lombok.Data;
 
 /**

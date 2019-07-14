@@ -1,14 +1,13 @@
-package com.impurityonline.osrs.controller.response;
+package com.impurityonline.osrs.domain.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.impurityonline.osrs.domain.item.ItemPrice;
 import lombok.Data;
 
 /**
  * @author impurity
  */
 @Data
-public class PricesResponse {
+public class ItemPrices {
     @JsonProperty("current")
     private ItemPrice current;
     @JsonProperty("today")

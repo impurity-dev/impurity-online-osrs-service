@@ -1,14 +1,13 @@
-package com.impurityonline.osrs.controller.response;
+package com.impurityonline.osrs.domain.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.impurityonline.osrs.domain.item.ItemTrend;
 import lombok.Data;
 
 /**
  * @author impurity
  */
 @Data
-public class TrendsResponse {
+public class ItemTrends {
     @JsonProperty("day_30")
     private ItemTrend day30;
     @JsonProperty("day_90")

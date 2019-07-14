@@ -1,15 +1,11 @@
 package com.impurityonline.osrs.service.impl;
 
 import com.impurityonline.osrs.client.OsrsClient;
-import com.impurityonline.osrs.domain.Player;
-import com.impurityonline.osrs.exception.PlayerNotFoundException;
+import com.impurityonline.osrs.domain.player.Player;
 import com.impurityonline.osrs.service.PlayerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 import static com.impurityonline.osrs.builder.PlayerBuilder.buildPlayer;
 

@@ -1,6 +1,6 @@
 package com.impurityonline.osrs.service;
 
-import com.impurityonline.osrs.domain.Item;
+import com.impurityonline.osrs.domain.item.Item;
 
 /**
  * @author impurity

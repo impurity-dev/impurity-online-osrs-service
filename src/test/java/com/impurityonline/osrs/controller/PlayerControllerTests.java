@@ -1,6 +1,6 @@
 package com.impurityonline.osrs.controller;
 
-import com.impurityonline.osrs.domain.Player;
+import com.impurityonline.osrs.domain.player.Player;
 import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
 import com.impurityonline.osrs.exception.PlayerNotFoundException;
 import com.impurityonline.osrs.controller.response.PlayerResponse;

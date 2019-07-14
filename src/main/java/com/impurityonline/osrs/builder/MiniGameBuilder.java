@@ -1,7 +1,7 @@
 package com.impurityonline.osrs.builder;
 
-import com.impurityonline.osrs.domain.MiniGame;
-import com.impurityonline.osrs.domain.MiniGames;
+import com.impurityonline.osrs.domain.player.MiniGame;
+import com.impurityonline.osrs.domain.player.MiniGames;
 import com.impurityonline.osrs.enums.OsrsHiScore;
 import lombok.NonNull;
 

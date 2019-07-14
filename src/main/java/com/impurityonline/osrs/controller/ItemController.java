@@ -1,8 +1,8 @@
 package com.impurityonline.osrs.controller;
 
-import com.impurityonline.osrs.domain.Item;
-import com.impurityonline.osrs.domain.ItemPrice;
-import com.impurityonline.osrs.domain.ItemTrend;
+import com.impurityonline.osrs.domain.item.Item;
+import com.impurityonline.osrs.domain.item.ItemPrice;
+import com.impurityonline.osrs.domain.item.ItemTrend;
 import com.impurityonline.osrs.controller.response.IconsResponse;
 import com.impurityonline.osrs.controller.response.PricesResponse;
 import com.impurityonline.osrs.controller.response.TrendsResponse;
@@ -114,9 +114,9 @@ public class ItemController {
     ) {
         Item item = itemService.getItem(itemId);
         IconsResponse iconsResponse = new IconsResponse();
-        iconsResponse.setTypeIcon(item.getTypeIcon());
-        iconsResponse.setSmallIcon(item.getSmallIcon());
-        iconsResponse.setLargeIcon(item.getLargeIcon());
+        iconsResponse.setTypeIcon(item.getIcons().getTypeIcon());
+        iconsResponse.setSmallIcon(item.getIcons().getSmallIcon());
+        iconsResponse.setLargeIcon(item.getIcons().getLargeIcon());
         return iconsResponse;
     }
 
@@ -134,7 +134,7 @@ public class ItemController {
     public String getItemTypeIcon(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getTypeIcon();
+        return itemService.getItem(itemId).getIcons().getTypeIcon();
     }
 
     @ApiOperation(value = "Returns Osrs item small icon")
@@ -151,7 +151,7 @@ public class ItemController {
     public String getItemSmallIcon(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getSmallIcon();
+        return itemService.getItem(itemId).getIcons().getSmallIcon();
     }
 
     @ApiOperation(value = "Returns Osrs item large icon")
@@ -168,7 +168,7 @@ public class ItemController {
     public String getItemLargeIcon(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getLargeIcon();
+        return itemService.getItem(itemId).getIcons().getLargeIcon();
     }
 
     @ApiOperation(value = "Returns Osrs item member status")
@@ -204,8 +204,8 @@ public class ItemController {
     ) {
         Item item = itemService.getItem(itemId);
         PricesResponse pricesResponse = new PricesResponse();
-        pricesResponse.setCurrent(item.getCurrent());
-        pricesResponse.setToday(item.getToday());
+        pricesResponse.setCurrent(item.getPrices().getCurrent());
+        pricesResponse.setToday(item.getPrices().getToday());
         return pricesResponse;
     }
 
@@ -223,7 +223,7 @@ public class ItemController {
     public ItemPrice getItemCurrentPrice(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getCurrent();
+        return itemService.getItem(itemId).getPrices().getCurrent();
     }
 
     @ApiOperation(value = "Returns Osrs item today price")
@@ -240,7 +240,7 @@ public class ItemController {
     public ItemPrice getItemTodayPrice(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getToday();
+        return itemService.getItem(itemId).getPrices().getToday();
     }
 
     @ApiOperation(value = "Returns Osrs item trends")
@@ -258,9 +258,9 @@ public class ItemController {
             @PathVariable("itemId") Long itemId
     ) {
         Item item = itemService.getItem(itemId);
-        ItemTrend day30 = item.getDay30();
-        ItemTrend day90 = item.getDay90();
-        ItemTrend day180 = item.getDay180();
+        ItemTrend day30 = item.getTrends().getDay30();
+        ItemTrend day90 = item.getTrends().getDay90();
+        ItemTrend day180 = item.getTrends().getDay180();
         TrendsResponse trendsResponse = new TrendsResponse();
         trendsResponse.setDay30(day30);
         trendsResponse.setDay90(day90);
@@ -282,7 +282,7 @@ public class ItemController {
     public ItemTrend getItemTrendDay30(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getDay30();
+        return itemService.getItem(itemId).getTrends().getDay30();
     }
 
     @ApiOperation(value = "Returns Osrs item day 90 trends")
@@ -299,7 +299,7 @@ public class ItemController {
     public ItemTrend getItemTrendDay90(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getDay90();
+        return itemService.getItem(itemId).getTrends().getDay90();
     }
 
     @ApiOperation(value = "Returns Osrs item day 180 trends")
@@ -316,6 +316,6 @@ public class ItemController {
     public ItemTrend getItemTrendDay180(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getDay180();
+        return itemService.getItem(itemId).getTrends().getDay180();
     }
 }
