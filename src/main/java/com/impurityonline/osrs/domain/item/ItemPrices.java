@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class ItemPrices {
     @JsonProperty("current")
-    private ItemPrice current;
+    private String current;
     @JsonProperty("today")
-    private ItemPrice today;
+    private String today;
 }

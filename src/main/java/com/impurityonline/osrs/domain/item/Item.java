@@ -22,6 +22,8 @@ public class Item {
     private ItemIcons icons;
     @JsonProperty("prices")
     private ItemPrices prices;
+    @JsonProperty("changes")
+    private ItemChanges changes;
     @JsonProperty("trends")
     private ItemTrends trends;
 }

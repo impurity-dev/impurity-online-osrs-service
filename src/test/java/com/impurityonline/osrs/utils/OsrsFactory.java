@@ -168,28 +168,20 @@ public class OsrsFactory {
         icons.setTypeIcon("type_ico");
 
         ItemPrices prices = new ItemPrices();
-        ItemPrice current = new ItemPrice();
-        current.setPrice("current_price");
-        current.setTrend("current_trend");
-        ItemPrice today = new ItemPrice();
-        today.setPrice("today_price");
-        today.setTrend("today_trend");
-        prices.setCurrent(current);
-        prices.setToday(today);
+        prices.setCurrent("current_price");
+        prices.setToday("today_price");
+
+        ItemChanges changes = new ItemChanges();
+        changes.setDay30("day30_change");
+        changes.setDay90("day90_change");
+        changes.setDay180("day1800_change");
 
         ItemTrends trends = new ItemTrends();
-        ItemTrend day30 = new ItemTrend();
-        day30.setChange("day30_change");
-        day30.setTrend("day30_trend");
-        ItemTrend day90 = new ItemTrend();
-        day90.setChange("day90_change");
-        day90.setTrend("day90_trend");
-        ItemTrend day180 = new ItemTrend();
-        day180.setChange("day180_change");
-        day180.setTrend("day180_trend");
-        trends.setDay30(day30);
-        trends.setDay90(day90);
-        trends.setDay180(day180);
+        trends.setCurrent("current_price");
+        trends.setToday("today_price");
+        trends.setDay30("day30_price");
+        trends.setDay90("day90_price");
+        trends.setDay180("day1800_price");
 
         Item item = new Item();
         item.setName("name");
@@ -200,7 +192,7 @@ public class OsrsFactory {
         item.setIcons(icons);
         item.setPrices(prices);
         item.setTrends(trends);
-
+        item.setChanges(changes);
         return item;
     }
 

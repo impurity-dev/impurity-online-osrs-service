@@ -8,10 +8,14 @@ import lombok.Data;
  */
 @Data
 public class ItemTrends {
+    @JsonProperty("current")
+    private String current;
+    @JsonProperty("today")
+    private String today;
     @JsonProperty("day_30")
-    private ItemTrend day30;
+    private String day30;
     @JsonProperty("day_90")
-    private ItemTrend day90;
+    private String day90;
     @JsonProperty("day_180")
-    private ItemTrend day180;
+    private String day180;
 }

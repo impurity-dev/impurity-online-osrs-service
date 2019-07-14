@@ -30,29 +30,20 @@ public class ItemServiceImpl implements ItemService {
         itemIcons.setTypeIcon(apiItem.getTypeIcon());
 
         ItemPrices itemPrices = new ItemPrices();
-        ItemPrice currentItemPrice = new ItemPrice();
-        currentItemPrice.setPrice(apiItem.getCurrent().getPrice());
-        currentItemPrice.setTrend(apiItem.getCurrent().getTrend());
-        ItemPrice todayItemPrice = new ItemPrice();
-        todayItemPrice.setPrice(apiItem.getToday().getPrice());
-        todayItemPrice.setTrend(apiItem.getToday().getTrend());
-        itemPrices.setCurrent(currentItemPrice);
-        itemPrices.setToday(todayItemPrice);
+        itemPrices.setCurrent(apiItem.getCurrent().getPrice());
+        itemPrices.setToday(apiItem.getToday().getPrice());
 
         ItemTrends itemTrends = new ItemTrends();
-        ItemTrend day30Trend = new ItemTrend();
-        day30Trend.setTrend(apiItem.getDay30().getTrend());
-        day30Trend.setChange(apiItem.getDay30().getChange());
-        ItemTrend day90Trend = new ItemTrend();
-        day90Trend.setTrend(apiItem.getDay90().getTrend());
-        day90Trend.setChange(apiItem.getDay90().getChange());
-        ItemTrend day180Trend = new ItemTrend();
-        day180Trend.setTrend(apiItem.getDay180().getTrend());
-        day180Trend.setChange(apiItem.getDay180().getChange());
-        itemTrends.setDay30(day30Trend);
-        itemTrends.setDay90(day90Trend);
-        itemTrends.setDay180(day180Trend);
+        itemTrends.setCurrent(apiItem.getCurrent().getPrice());
+        itemTrends.setToday(apiItem.getToday().getPrice());
+        itemTrends.setDay30(apiItem.getDay30().getTrend());
+        itemTrends.setDay90(apiItem.getDay90().getTrend());
+        itemTrends.setDay180(apiItem.getDay180().getTrend());
 
+        ItemChanges itemChanges = new ItemChanges();
+        itemChanges.setDay30(apiItem.getDay30().getChange());
+        itemChanges.setDay90(apiItem.getDay90().getChange());
+        itemChanges.setDay180(apiItem.getDay180().getChange());
 
         Item item = new Item();
         item.setId(apiItem.getId());
@@ -63,6 +54,7 @@ public class ItemServiceImpl implements ItemService {
         item.setIcons(itemIcons);
         item.setPrices(itemPrices);
         item.setTrends(itemTrends);
+        item.setChanges(itemChanges);
         return item;
     }
 }

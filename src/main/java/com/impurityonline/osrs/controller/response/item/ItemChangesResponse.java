@@ -7,11 +7,7 @@ import lombok.Data;
  * @author impurity
  */
 @Data
-public class ItemTrendsResponse {
-    @JsonProperty("current")
-    private String current;
-    @JsonProperty("today")
-    private String today;
+public class ItemChangesResponse {
     @JsonProperty("day_30")
     private String day30;
     @JsonProperty("day_90")
