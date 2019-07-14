@@ -4,13 +4,10 @@ import com.impurityonline.osrs.client.OsrsClient;
 import com.impurityonline.osrs.client.response.item.ApiItem;
 import com.impurityonline.osrs.client.response.item.ApiItemResponse;
 import com.impurityonline.osrs.domain.item.*;
-import com.impurityonline.osrs.exception.ItemNotFoundException;
 import com.impurityonline.osrs.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 /**
  * @author impurity

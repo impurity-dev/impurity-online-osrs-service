@@ -2,7 +2,6 @@ package com.impurityonline.osrs.controller;
 
 import com.impurityonline.osrs.controller.response.item.*;
 import com.impurityonline.osrs.domain.item.Item;
-import com.impurityonline.osrs.domain.item.ItemPrice;
 import com.impurityonline.osrs.domain.item.ItemTrend;
 import com.impurityonline.osrs.service.ItemService;
 import io.swagger.annotations.Api;
