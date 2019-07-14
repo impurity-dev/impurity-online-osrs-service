@@ -162,7 +162,7 @@ class ItemControllerTests extends AbstractTest {
 
     @Test
     @DisplayName("When getting a osrs item icons, return 200 and icons")
-    void itemIcon_return200() throws Exception {
+    void itemIcons_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
         ItemIconsResponse itemIconsResponse = new ItemIconsResponse();
         itemIconsResponse.setLargeIcon(item.getIcons().getLargeIcon());
@@ -177,7 +177,7 @@ class ItemControllerTests extends AbstractTest {
 
     @Test
     @DisplayName("When getting a osrs item icons and is not found, return 404")
-    void no_itemIcon_return404() throws Exception {
+    void no_itemIcons_return404() throws Exception {
         when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -186,7 +186,7 @@ class ItemControllerTests extends AbstractTest {
 
     @Test
     @DisplayName("When getting a osrs item icons and it cannot be created, return 500")
-    void itemIcon_return500() throws Exception {
+    void itemIcons_return500() throws Exception {
         when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -373,7 +373,65 @@ class ItemControllerTests extends AbstractTest {
     }
 
     @Test
-    @DisplayName("When getting a osrs item current price, return 200 and current price")
+    @DisplayName("When getting a osrs item current prices price, return 200 and current prices price")
+    void itemCurrentPricesPrice_return200() throws Exception {
+        Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/current-prices/prices")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(item.getPrices().getCurrent().getPrice()));
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item current prices price and is not found, return 404")
+    void no_itemCurrentPricesPrice_return404() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/current-prices/prices")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item current prices price and it cannot be created, return 500")
+    void itemCurrentPricesPrice_return500() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/current-prices/prices")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item current prices trend, return 200 and current prices trend")
+    void itemCurrentPricesTrend_return200() throws Exception {
+        Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/current-prices/trends")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(item.getPrices().getCurrent().getTrend()));
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item current prices trend and is not found, return 404")
+    void no_itemCurrentPricesTrend_return404() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/current-prices/trends")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item current prices trend and it cannot be created, return 500")
+    void itemCurrentPricesTrend_return500() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/current-prices/trends")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item today price, return 200 and current price")
     void itemTodayPrice_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
         ItemPriceResponse itemPriceResponse = new ItemPriceResponse();
@@ -386,7 +444,7 @@ class ItemControllerTests extends AbstractTest {
     }
 
     @Test
-    @DisplayName("When getting a osrs item current price and is not found, return 404")
+    @DisplayName("When getting a osrs item today price and is not found, return 404")
     void no_itemTodayPrice_return404() throws Exception {
         when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/today-prices")
@@ -395,10 +453,68 @@ class ItemControllerTests extends AbstractTest {
     }
 
     @Test
-    @DisplayName("When getting a osrs item current price and it cannot be created, return 500")
+    @DisplayName("When getting a osrs item today price and it cannot be created, return 500")
     void itemTodayPrice_return500() throws Exception {
         when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/today-prices")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item today prices price, return 200 and today prices price")
+    void itemTodayPricesPrice_return200() throws Exception {
+        Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/today-prices/prices")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(item.getPrices().getToday().getPrice()));
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item today prices price and is not found, return 404")
+    void no_itemTodayPricesPrice_return404() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/today-prices/prices")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item today prices price and it cannot be created, return 500")
+    void itemTodayPricesPrice_return500() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/today-prices/prices")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item today prices trend, return 200 and today prices trend")
+    void itemTodayPricesTrend_return200() throws Exception {
+        Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/today-prices/trends")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(item.getPrices().getToday().getTrend()));
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item today prices trend and is not found, return 404")
+    void no_itemTodayPricesTrend_return404() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/today-prices/trends")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item today prices trend and it cannot be created, return 500")
+    void itemTodayPricesTrend_return500() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/today-prices/trends")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
     }
@@ -438,7 +554,7 @@ class ItemControllerTests extends AbstractTest {
 
     @Test
     @DisplayName("When getting a osrs item 30 day trend, return 200 and current 30 day trend")
-    void itemDay30Trend_return200() throws Exception {
+    void itemDay30Trends_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
         ItemTrendResponse itemTrendResponse = new ItemTrendResponse();
         itemTrendResponse.setTrend(item.getTrends().getDay30());
@@ -451,7 +567,7 @@ class ItemControllerTests extends AbstractTest {
 
     @Test
     @DisplayName("When getting a osrs item 30 day trend and is not found, return 404")
-    void no_itemDay30Trend_return404() throws Exception {
+    void no_itemDay30Trends_return404() throws Exception {
         when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/30-days")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -460,9 +576,67 @@ class ItemControllerTests extends AbstractTest {
 
     @Test
     @DisplayName("When getting a osrs item 30 day trend and it cannot be created, return 500")
-    void itemDay30Trend_return500() throws Exception {
+    void itemDay30Trends_return500() throws Exception {
         when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/30-days")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 30 day trends trend, return 200 and current 30 day trends trend")
+    void itemDay30TrendsTrend_return200() throws Exception {
+        Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/30-days/trends")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(item.getTrends().getDay30().getTrend()));
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 30 day trends trend and is not found, return 404")
+    void no_itemDay30TrendsTrend_return404() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/30-days/trends")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 30 day trends trend and it cannot be created, return 500")
+    void itemDay30TrendsTrend_return500() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/30-days/changes")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 30 day trends change, return 200 and current 30 day trends change")
+    void itemDay30TrendsChange_return200() throws Exception {
+        Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/30-days/changes")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(item.getTrends().getDay30().getChange()));
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 30 day trends change and is not found, return 404")
+    void no_itemDay30TrendsChange_return404() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/30-days/changes")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 30 day trends change and it cannot be created, return 500")
+    void itemDay30TrendsChange_return500() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/30-days/trends")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
     }
@@ -499,6 +673,64 @@ class ItemControllerTests extends AbstractTest {
     }
 
     @Test
+    @DisplayName("When getting a osrs item 90 day trends trend, return 200 and current 90 day trends trend")
+    void itemDay90TrendsTrend_return200() throws Exception {
+        Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/90-days/trends")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(item.getTrends().getDay90().getTrend()));
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 90 day trends trend and is not found, return 404")
+    void no_itemDay90TrendsTrend_return404() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/90-days/trends")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 90 day trends trend and it cannot be created, return 500")
+    void itemDay90TrendsTrend_return500() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/90-days/trends")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 90 day trends change, return 200 and current 90 day trends change")
+    void itemDay90TrendsChange_return200() throws Exception {
+        Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/90-days/changes")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(item.getTrends().getDay90().getChange()));
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 90 day trends change and is not found, return 404")
+    void no_itemDay90TrendsChange_return404() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/90-days/changes")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 90 day trends change and it cannot be created, return 500")
+    void itemDay90TrendsChange_return500() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/90-days/changes")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
     @DisplayName("When getting a osrs item 180 day trend, return 200 and current 180 day trend")
     void itemDay180Trend_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
@@ -525,6 +757,64 @@ class ItemControllerTests extends AbstractTest {
     void itemDay180Trend_return500() throws Exception {
         when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/180-days")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 180 day trends trend, return 200 and current 180 day trends trend")
+    void itemDay180TrendsTrend_return200() throws Exception {
+        Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/180-days/trends")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(item.getTrends().getDay180().getTrend()));
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 180 day trends trend and is not found, return 404")
+    void no_itemDay180TrendsTrend_return404() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/180-days/trends")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 180 day trends trend and it cannot be created, return 500")
+    void itemDay180TrendsTrend_return500() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/180-days/trends")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 180 day trends change, return 200 and current 180 day trends change")
+    void itemDay180TrendsChange_return200() throws Exception {
+        Item item = getValidOsrsItem(MOCK_ITEM_ID);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/180-days/changes")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(item.getTrends().getDay180().getChange()));
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 180 day trends change and is not found, return 404")
+    void no_itemDay180TrendsChange_return404() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(ItemNotFoundException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/180-days/changes")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("When getting a osrs item 180 day trends change and it cannot be created, return 500")
+    void itemDay180TrendsChange_return500() throws Exception {
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/180-days/changes")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
     }

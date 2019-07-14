@@ -236,7 +236,7 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/prices/current-prices/price",
+            value = "/{itemId}/prices/current-prices/prices",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
@@ -253,7 +253,7 @@ public class ItemController {
             @ApiResponse(code = 503, message = "The osrs api is unavailable")
     })
     @GetMapping(
-            value = "/{itemId}/prices/current-prices/trend",
+            value = "/{itemId}/prices/current-prices/trends",
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE
     )
