@@ -3,9 +3,9 @@ package com.impurityonline.osrs.controller;
 import com.impurityonline.osrs.domain.Item;
 import com.impurityonline.osrs.domain.ItemPrice;
 import com.impurityonline.osrs.domain.ItemTrend;
-import com.impurityonline.osrs.response.IconsResponse;
-import com.impurityonline.osrs.response.PricesResponse;
-import com.impurityonline.osrs.response.TrendsResponse;
+import com.impurityonline.osrs.controller.response.IconsResponse;
+import com.impurityonline.osrs.controller.response.PricesResponse;
+import com.impurityonline.osrs.controller.response.TrendsResponse;
 import com.impurityonline.osrs.service.ItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -115,8 +115,8 @@ public class ItemController {
         Item item = itemService.getItem(itemId);
         IconsResponse iconsResponse = new IconsResponse();
         iconsResponse.setTypeIcon(item.getTypeIcon());
-        iconsResponse.setSmallIcon(item.getIcon());
-        iconsResponse.setLargeIcon(item.getIconLarge());
+        iconsResponse.setSmallIcon(item.getSmallIcon());
+        iconsResponse.setLargeIcon(item.getLargeIcon());
         return iconsResponse;
     }
 
@@ -151,7 +151,7 @@ public class ItemController {
     public String getItemSmallIcon(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getIcon();
+        return itemService.getItem(itemId).getSmallIcon();
     }
 
     @ApiOperation(value = "Returns Osrs item large icon")
@@ -168,7 +168,7 @@ public class ItemController {
     public String getItemLargeIcon(
             @PathVariable("itemId") Long itemId
     ) {
-        return itemService.getItem(itemId).getIconLarge();
+        return itemService.getItem(itemId).getLargeIcon();
     }
 
     @ApiOperation(value = "Returns Osrs item member status")

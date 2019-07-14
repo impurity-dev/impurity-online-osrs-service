@@ -1,4 +1,4 @@
-package com.impurityonline.osrs.response;
+package com.impurityonline.osrs.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.impurityonline.osrs.domain.ItemPrice;

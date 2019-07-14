@@ -1,6 +1,7 @@
 package com.impurityonline.osrs.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.NonNull;
@@ -17,6 +18,7 @@ public class ApiError {
     private final LocalDateTime timestamp;
     private final HttpStatus status;
     private final String message;
+    @JsonProperty(value = "debug_message")
     private final String debugMessage;
 
     public ApiError(@NonNull HttpStatus status, @NonNull String message, @NonNull Throwable ex) {

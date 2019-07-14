@@ -3,7 +3,7 @@ package com.impurityonline.osrs.controller;
 import com.impurityonline.osrs.domain.Player;
 import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
 import com.impurityonline.osrs.exception.PlayerNotFoundException;
-import com.impurityonline.osrs.response.PlayerResponse;
+import com.impurityonline.osrs.controller.response.PlayerResponse;
 import com.impurityonline.osrs.service.PlayerService;
 import com.impurityonline.osrs.utils.AbstractTest;
 import org.junit.jupiter.api.DisplayName;

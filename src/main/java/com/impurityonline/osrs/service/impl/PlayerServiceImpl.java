@@ -25,13 +25,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Player getPlayer(String playerName) {
-        ResponseEntity<String> responseEntity = osrsClient.getPlayer(playerName);
-
-        String osrsApiResponse = Optional
-                .ofNullable(responseEntity.getBody())
-                .orElseThrow(() -> new PlayerNotFoundException("No player body found"));
-
-
+        String osrsApiResponse = osrsClient.getPlayer(playerName);
         return buildPlayer(playerName, "TODO", osrsApiResponse);
     }
 }

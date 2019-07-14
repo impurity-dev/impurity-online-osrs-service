@@ -1,5 +1,6 @@
 package com.impurityonline.osrs.domain;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class Player {
     private Skills skills;
     @JsonProperty("scrolls")
     private Scrolls scrolls;
-    @JsonProperty("miniGames")
+    @JsonProperty("mini_games")
+    @JsonAlias("miniGames")
     private MiniGames miniGames;
 }

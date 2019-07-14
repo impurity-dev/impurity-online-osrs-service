@@ -65,7 +65,7 @@ class OsrsClientTests extends AbstractTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(osrsApiPlayerResponse)
                 );
-        assertEquals(osrsApiPlayerResponse, osrsClient.getPlayer(playerName).getBody());
+        assertEquals(osrsApiPlayerResponse, osrsClient.getPlayer(playerName));
     }
 
     @Test
@@ -93,7 +93,7 @@ class OsrsClientTests extends AbstractTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(osrsApiPlayerResponse)
                 );
-        assertThrows(RestTemplateServerException.class, () -> osrsClient.getPlayer(playerName));
+        assertThrows(OsrsClientPlayerHttpRequestException.class, () -> osrsClient.getPlayer(playerName));
     }
     @Test
     @DisplayName("When the osrs client item has null itemid, throw null pointer")
@@ -112,7 +112,7 @@ class OsrsClientTests extends AbstractTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(mapToJson(osrsApiPlayerResponse))
                 );
-        assertEquals(osrsApiPlayerResponse, osrsClient.getItem(itemId).getBody());
+        assertEquals(osrsApiPlayerResponse, osrsClient.getItem(itemId));
     }
 
     @Test
@@ -140,6 +140,6 @@ class OsrsClientTests extends AbstractTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(mapToJson(osrsApiPlayerResponse))
                 );
-        assertThrows(RestTemplateServerException.class, () -> osrsClient.getItem(itemId));
+        assertThrows(OsrsClientPlayerHttpRequestException.class, () -> osrsClient.getItem(itemId));
     }
 }

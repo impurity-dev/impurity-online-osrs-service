@@ -1,5 +1,6 @@
 package com.impurityonline.osrs.domain;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -8,16 +9,22 @@ import lombok.Data;
  */
 @Data
 public class Scrolls {
-    @JsonProperty("clueScrolls")
+    @JsonProperty("clue_scrolls")
+    @JsonAlias("clueScrolls")
     private Scroll clueScrolls;
-    @JsonProperty("easyClueScrolls")
+    @JsonProperty("easy_clue_scrolls")
+    @JsonAlias("easyClueScrolls")
     private Scroll easyClueScrolls;
-    @JsonProperty("mediumClueScrolls")
+    @JsonProperty("medium_clue_scrolls")
+    @JsonAlias("mediumClueScrolls")
     private Scroll mediumClueScrolls;
-    @JsonProperty("hardClueScrolls")
+    @JsonProperty("hard_clue_scrolls")
+    @JsonAlias("hardClueScrolls")
     private Scroll hardClueScrolls;
-    @JsonProperty("eliteClueScrolls")
+    @JsonProperty("elite_clue_scrolls")
+    @JsonAlias("eliteClueScrolls")
     private Scroll eliteClueScrolls;
-    @JsonProperty("masterClueScrolls")
+    @JsonProperty("master_clue_scrolls")
+    @JsonAlias("masterClueScrolls")
     private Scroll masterClueScrolls;
 }

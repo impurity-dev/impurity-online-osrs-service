@@ -3,9 +3,9 @@ package com.impurityonline.osrs.controller;
 import com.impurityonline.osrs.domain.Item;
 import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
 import com.impurityonline.osrs.exception.ItemNotFoundException;
-import com.impurityonline.osrs.response.IconsResponse;
-import com.impurityonline.osrs.response.PricesResponse;
-import com.impurityonline.osrs.response.TrendsResponse;
+import com.impurityonline.osrs.controller.response.IconsResponse;
+import com.impurityonline.osrs.controller.response.PricesResponse;
+import com.impurityonline.osrs.controller.response.TrendsResponse;
 import com.impurityonline.osrs.service.ItemService;
 import com.impurityonline.osrs.utils.AbstractTest;
 import org.junit.jupiter.api.DisplayName;
@@ -165,8 +165,8 @@ class ItemControllerTests extends AbstractTest {
     void itemIcon_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
         IconsResponse iconsResponse = new IconsResponse();
-        iconsResponse.setLargeIcon(item.getIconLarge());
-        iconsResponse.setSmallIcon(item.getIcon());
+        iconsResponse.setLargeIcon(item.getLargeIcon());
+        iconsResponse.setSmallIcon(item.getSmallIcon());
         iconsResponse.setTypeIcon(item.getTypeIcon());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons")
@@ -230,7 +230,7 @@ class ItemControllerTests extends AbstractTest {
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons/small-icons")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(item.getIcon()));
+                .andExpect(content().string(item.getSmallIcon()));
     }
 
     @Test
@@ -259,7 +259,7 @@ class ItemControllerTests extends AbstractTest {
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons/large-icons")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(item.getIconLarge()));
+                .andExpect(content().string(item.getLargeIcon()));
     }
 
     @Test

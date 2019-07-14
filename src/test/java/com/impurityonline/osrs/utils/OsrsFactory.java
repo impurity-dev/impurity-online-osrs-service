@@ -181,8 +181,8 @@ public class OsrsFactory {
         item.setName("name");
         item.setCurrent(current);
         item.setDescription("desc");
-        item.setIcon("ico");
-        item.setIconLarge("ico-large");
+        item.setSmallIcon("ico");
+        item.setLargeIcon("ico-large");
         item.setId(id);
         item.setMembers(true);
         item.setToday(today);
@@ -209,8 +209,8 @@ public class OsrsFactory {
         trend.setTrend("654");
 
         Item item = new Item();
-        item.setIcon("a");
-        item.setIconLarge("b");
+        item.setSmallIcon("a");
+        item.setLargeIcon("b");
         item.setId(1L);
         item.setType("d");
         item.setTypeIcon("e");

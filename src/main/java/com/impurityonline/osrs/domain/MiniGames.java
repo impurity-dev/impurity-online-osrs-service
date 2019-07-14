@@ -1,5 +1,6 @@
 package com.impurityonline.osrs.domain;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -8,10 +9,13 @@ import lombok.Data;
  */
 @Data
 public class MiniGames {
-    @JsonProperty("bountyHunter")
+    @JsonProperty("bounty_hunter")
+    @JsonAlias("bountyHunter")
     private MiniGame bountyHunter;
-    @JsonProperty("bountyHunterRogues")
+    @JsonProperty("bounty_hunter_rogues")
+    @JsonAlias("bountyHunterRogues")
     private MiniGame bountyHunterRogues;
-    @JsonProperty("lastManStanding")
+    @JsonProperty("last_man_standing")
+    @JsonAlias("lastManStanding")
     private MiniGame lastManStanding;
 }

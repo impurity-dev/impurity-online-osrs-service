@@ -1,7 +1,6 @@
-package com.impurityonline.osrs.response;
+package com.impurityonline.osrs.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.impurityonline.osrs.domain.ItemPrice;
 import lombok.Data;
 
 /**
@@ -9,10 +8,10 @@ import lombok.Data;
  */
 @Data
 public class IconsResponse {
-    @JsonProperty("typeIcon")
+    @JsonProperty("type_icon")
     private String typeIcon;
-    @JsonProperty("smallIcon")
+    @JsonProperty("small_icon")
     private String smallIcon;
-    @JsonProperty("largeIcon")
+    @JsonProperty("large_icon")
     private String largeIcon;
 }

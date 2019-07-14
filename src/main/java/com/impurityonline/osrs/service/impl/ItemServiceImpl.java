@@ -24,12 +24,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item getItem(Long itemId) {
-        ResponseEntity<OsrsApiItemResponse> responseEntity = osrsClient.getItem(itemId);
-
-        OsrsApiItemResponse osrsApiItemResponse = Optional
-                .ofNullable(responseEntity.getBody())
-                .orElseThrow(() -> new ItemNotFoundException("No item body found"));
-
+        OsrsApiItemResponse osrsApiItemResponse = osrsClient.getItem(itemId);
         return Optional
                 .ofNullable(osrsApiItemResponse.getItem())
                 .orElseThrow(() -> new ItemNotFoundException("No item found"));

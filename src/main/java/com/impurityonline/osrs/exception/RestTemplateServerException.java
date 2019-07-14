@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 /**
  * @author impurity
  */
-public class RestTemplateServerException extends RuntimeException {
+public class RestTemplateServerException extends Exception {
     private static final long serialVersionUID = 2832075658057627897L;
 
     @Getter
