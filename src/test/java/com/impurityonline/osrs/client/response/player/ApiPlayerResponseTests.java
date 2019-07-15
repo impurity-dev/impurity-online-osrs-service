@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static com.impurityonline.osrs.utils.OsrsFactory.getValidApiPlayerResponseString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -68,26 +70,71 @@ class ApiPlayerResponseTests extends AbstractTest {
     }
 
     @Test
-    @DisplayName("When the api clue scroll has empty hiscores, throw apiPlayerResponseException")
+    @DisplayName("When the api player responsel has empty hiscores, throw apiPlayerResponseException")
     void apiPlayerResponse_emptyHiScores_apiPlayerResponseException() {
         assertThrows(ApiPlayerResponseException.class, () -> new ApiPlayerResponse(""));
     }
 
     @Test
-    @DisplayName("When the api clue scroll has too few hiscores, throw apiPlayerResponseException")
+    @DisplayName("When the api player response has too few hiscores, throw apiPlayerResponseException")
     void apiPlayerResponse_tooFewHiScores_apiPlayerResponseException() {
         assertThrows(ApiPlayerResponseException.class, () -> new ApiPlayerResponse("1,"));
     }
 
     @Test
-    @DisplayName("When the api clue scroll has too many hiscores, throw apiPlayerResponseException")
+    @DisplayName("When the api player response has too many hiscores, throw apiPlayerResponseException")
     void apiPlayerResponse_tooManyHiScores_apiPlayerResponseException() {
         assertThrows(ApiPlayerResponseException.class, () -> new ApiPlayerResponse(getLongInvalidApiPlayerResponseString()));
     }
 
     @Test
-    @DisplayName("When the api clue scroll has too many hiscores, throw apiPlayerResponseException")
+    @DisplayName("When the api player response has too many hiscores, throw apiPlayerResponseException")
     void apiPlayerResponse_invalidHiScores_apiPlayerResponseException() {
         assertThrows(ApiPlayerResponseException.class, () -> new ApiPlayerResponse(getInvalidApiPlayerResponseString()));
+    }
+
+    @Test
+    @DisplayName("When the api skills hashcode, return proper hashcode")
+    void apiSkills_hashCode() throws Exception {
+        ApiPlayerResponse playerResponse = new ApiPlayerResponse(validApiPlayerResponseString);
+        final int prime = 29;
+        int hashCode = 1;
+        hashCode = prime * hashCode + Arrays.hashCode(playerResponse.getHiscores());
+        hashCode = prime * hashCode + playerResponse.getOverall().hashCode();
+        hashCode = prime * hashCode + playerResponse.getAttack().hashCode();
+        hashCode = prime * hashCode + playerResponse.getDefence().hashCode();
+        hashCode = prime * hashCode + playerResponse.getStrength().hashCode();
+        hashCode = prime * hashCode + playerResponse.getHitpoints().hashCode();
+        hashCode = prime * hashCode + playerResponse.getRanged().hashCode();
+        hashCode = prime * hashCode + playerResponse.getPrayer().hashCode();
+        hashCode = prime * hashCode + playerResponse.getMagic().hashCode();
+        hashCode = prime * hashCode + playerResponse.getCooking().hashCode();
+        hashCode = prime * hashCode + playerResponse.getWoodcutting().hashCode();
+        hashCode = prime * hashCode + playerResponse.getFletching().hashCode();
+        hashCode = prime * hashCode + playerResponse.getFishing().hashCode();
+        hashCode = prime * hashCode + playerResponse.getFiremaking().hashCode();
+        hashCode = prime * hashCode + playerResponse.getCrafting().hashCode();
+        hashCode = prime * hashCode + playerResponse.getSmithing().hashCode();
+        hashCode = prime * hashCode + playerResponse.getMining().hashCode();
+        hashCode = prime * hashCode + playerResponse.getHerblore().hashCode();
+        hashCode = prime * hashCode + playerResponse.getAgility().hashCode();
+        hashCode = prime * hashCode + playerResponse.getThieving().hashCode();
+        hashCode = prime * hashCode + playerResponse.getSlayer().hashCode();
+        hashCode = prime * hashCode + playerResponse.getFarming().hashCode();
+        hashCode = prime * hashCode + playerResponse.getRunecrafting().hashCode();
+        hashCode = prime * hashCode + playerResponse.getHunter().hashCode();
+        hashCode = prime * hashCode + playerResponse.getConstruction().hashCode();
+
+        hashCode = prime * hashCode + playerResponse.getBountyHunter().hashCode();
+        hashCode = prime * hashCode + playerResponse.getBountyHunterRogues().hashCode();
+        hashCode = prime * hashCode + playerResponse.getLastManStanding().hashCode();
+
+        hashCode = prime * hashCode + playerResponse.getClueScrolls().hashCode();
+        hashCode = prime * hashCode + playerResponse.getEasyClueScrolls().hashCode();
+        hashCode = prime * hashCode + playerResponse.getMediumClueScrolls().hashCode();
+        hashCode = prime * hashCode + playerResponse.getHardClueScrolls().hashCode();
+        hashCode = prime * hashCode + playerResponse.getEliteClueScrolls().hashCode();
+        hashCode = prime * hashCode + playerResponse.getMasterClueScrolls().hashCode();
+        assertEquals(hashCode, playerResponse.hashCode());
     }
 }
