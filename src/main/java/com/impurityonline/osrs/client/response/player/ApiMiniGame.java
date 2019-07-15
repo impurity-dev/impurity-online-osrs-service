@@ -1,7 +1,7 @@
 package com.impurityonline.osrs.client.response.player;
 
 import com.impurityonline.osrs.exception.ApiPlayerResponseException;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,11 +11,11 @@ import lombok.extern.slf4j.Slf4j;
  * @author impurity
  */
 @Slf4j
-@Getter
+@Data
 public class ApiMiniGame {
     private static final int MINIGAME_HISCORE_TOTAL = 2;
-    private final Long rank;
-    private final Long score;
+    private Long rank;
+    private Long score;
 
     /**
      * Create api mini game response based off hiscore values

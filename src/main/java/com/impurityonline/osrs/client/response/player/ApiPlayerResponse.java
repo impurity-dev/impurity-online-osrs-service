@@ -2,11 +2,9 @@ package com.impurityonline.osrs.client.response.player;
 
 import com.impurityonline.osrs.enums.OsrsHiScore;
 import com.impurityonline.osrs.exception.ApiPlayerResponseException;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.Arrays;
 
 import static com.impurityonline.osrs.enums.OsrsHiScore.*;
 
@@ -16,43 +14,43 @@ import static com.impurityonline.osrs.enums.OsrsHiScore.*;
  * @author impurity
  */
 @Slf4j
-@Getter
+@Data
 public class ApiPlayerResponse {
     private static final int HISCORE_TOTAL = 34;
-    private final String[] hiscores;
-    private final ApiSkill overall;
-    private final ApiSkill attack;
-    private final ApiSkill defence;
-    private final ApiSkill strength;
-    private final ApiSkill hitpoints;
-    private final ApiSkill ranged;
-    private final ApiSkill prayer;
-    private final ApiSkill magic;
-    private final ApiSkill cooking;
-    private final ApiSkill woodcutting;
-    private final ApiSkill fletching;
-    private final ApiSkill fishing;
-    private final ApiSkill firemaking;
-    private final ApiSkill crafting;
-    private final ApiSkill smithing;
-    private final ApiSkill mining;
-    private final ApiSkill herblore;
-    private final ApiSkill agility;
-    private final ApiSkill thieving;
-    private final ApiSkill slayer;
-    private final ApiSkill farming;
-    private final ApiSkill runecrafting;
-    private final ApiSkill hunter;
-    private final ApiSkill construction;
-    private final ApiMiniGame bountyHunter;
-    private final ApiMiniGame bountyHunterRogues;
-    private final ApiMiniGame lastManStanding;
-    private final ApiClueScroll clueScrolls;
-    private final ApiClueScroll easyClueScrolls;
-    private final ApiClueScroll mediumClueScrolls;
-    private final ApiClueScroll hardClueScrolls;
-    private final ApiClueScroll eliteClueScrolls;
-    private final ApiClueScroll masterClueScrolls;
+    private String[] hiscores;
+    private ApiSkill overall;
+    private ApiSkill attack;
+    private ApiSkill defence;
+    private ApiSkill strength;
+    private ApiSkill hitpoints;
+    private ApiSkill ranged;
+    private ApiSkill prayer;
+    private ApiSkill magic;
+    private ApiSkill cooking;
+    private ApiSkill woodcutting;
+    private ApiSkill fletching;
+    private ApiSkill fishing;
+    private ApiSkill firemaking;
+    private ApiSkill crafting;
+    private ApiSkill smithing;
+    private ApiSkill mining;
+    private ApiSkill herblore;
+    private ApiSkill agility;
+    private ApiSkill thieving;
+    private ApiSkill slayer;
+    private ApiSkill farming;
+    private ApiSkill runecrafting;
+    private ApiSkill hunter;
+    private ApiSkill construction;
+    private ApiMiniGame bountyHunter;
+    private ApiMiniGame bountyHunterRogues;
+    private ApiMiniGame lastManStanding;
+    private ApiClueScroll clueScrolls;
+    private ApiClueScroll easyClueScrolls;
+    private ApiClueScroll mediumClueScrolls;
+    private ApiClueScroll hardClueScrolls;
+    private ApiClueScroll eliteClueScrolls;
+    private ApiClueScroll masterClueScrolls;
 
     /**
      * Create api player response based off hiscores
@@ -110,95 +108,7 @@ public class ApiPlayerResponse {
      * @param osrsHiScore the enum for the array lookup
      * @return the hiscore for the given hiscore enum ordinal
      */
-    public String getHiscore(OsrsHiScore osrsHiScore) {
+    private String getHiscore(OsrsHiScore osrsHiScore) {
         return hiscores[osrsHiScore.ordinal()];
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        } else if (obj == null || obj.getClass() != this.getClass()) {
-            return false;
-        }
-        ApiPlayerResponse playerResponse = (ApiPlayerResponse) obj;
-        log.error("getOverall: {}", playerResponse.getOverall() == this.overall);
-        return playerResponse.getOverall().equals(this.overall) &&
-                playerResponse.getAttack().equals(this.attack) &&
-                playerResponse.getDefence().equals(this.defence) &&
-                playerResponse.getStrength().equals(this.strength) &&
-                playerResponse.getHitpoints().equals(this.hitpoints) &&
-                playerResponse.getRanged().equals(this.ranged) &&
-                playerResponse.getPrayer().equals(this.prayer) &&
-                playerResponse.getMagic().equals(this.magic) &&
-                playerResponse.getCooking().equals(this.cooking) &&
-                playerResponse.getWoodcutting().equals(this.woodcutting) &&
-                playerResponse.getFletching().equals(this.fletching) &&
-                playerResponse.getFishing().equals(this.fishing) &&
-                playerResponse.getFiremaking().equals(this.firemaking) &&
-                playerResponse.getCrafting().equals(this.crafting) &&
-                playerResponse.getSmithing().equals(this.smithing) &&
-                playerResponse.getMining().equals(this.mining) &&
-                playerResponse.getHerblore().equals(this.herblore) &&
-                playerResponse.getAgility().equals(this.agility) &&
-                playerResponse.getThieving().equals(this.thieving) &&
-                playerResponse.getSlayer().equals(this.slayer) &&
-                playerResponse.getFarming().equals(this.farming) &&
-                playerResponse.getRunecrafting().equals(this.runecrafting) &&
-                playerResponse.getHunter().equals(this.hunter) &&
-                playerResponse.getConstruction().equals(this.construction) &&
-
-                playerResponse.getBountyHunter().equals(this.bountyHunter) &&
-                playerResponse.getBountyHunterRogues().equals(this.bountyHunterRogues) &&
-                playerResponse.getLastManStanding().equals(this.lastManStanding) &&
-
-                playerResponse.getClueScrolls().equals(this.clueScrolls) &&
-                playerResponse.getEasyClueScrolls().equals(this.easyClueScrolls) &&
-                playerResponse.getMediumClueScrolls().equals(this.mediumClueScrolls) &&
-                playerResponse.getHardClueScrolls().equals(this.hardClueScrolls) &&
-                playerResponse.getEliteClueScrolls().equals(this.eliteClueScrolls) &&
-                playerResponse.getMasterClueScrolls().equals(this.masterClueScrolls);
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 29;
-        int hashCode = 1;
-        hashCode = prime * hashCode + this.overall.hashCode();
-        hashCode = prime * hashCode + this.attack.hashCode();
-        hashCode = prime * hashCode + this.defence.hashCode();
-        hashCode = prime * hashCode + this.strength.hashCode();
-        hashCode = prime * hashCode + this.hitpoints.hashCode();
-        hashCode = prime * hashCode + this.ranged.hashCode();
-        hashCode = prime * hashCode + this.prayer.hashCode();
-        hashCode = prime * hashCode + this.magic.hashCode();
-        hashCode = prime * hashCode + this.cooking.hashCode();
-        hashCode = prime * hashCode + this.woodcutting.hashCode();
-        hashCode = prime * hashCode + this.fletching.hashCode();
-        hashCode = prime * hashCode + this.fishing.hashCode();
-        hashCode = prime * hashCode + this.firemaking.hashCode();
-        hashCode = prime * hashCode + this.crafting.hashCode();
-        hashCode = prime * hashCode + this.smithing.hashCode();
-        hashCode = prime * hashCode + this.mining.hashCode();
-        hashCode = prime * hashCode + this.herblore.hashCode();
-        hashCode = prime * hashCode + this.agility.hashCode();
-        hashCode = prime * hashCode + this.thieving.hashCode();
-        hashCode = prime * hashCode + this.slayer.hashCode();
-        hashCode = prime * hashCode + this.farming.hashCode();
-        hashCode = prime * hashCode + this.runecrafting.hashCode();
-        hashCode = prime * hashCode + this.hunter.hashCode();
-        hashCode = prime * hashCode + this.construction.hashCode();
-
-        hashCode = prime * hashCode + this.bountyHunter.hashCode();
-        hashCode = prime * hashCode + this.bountyHunterRogues.hashCode();
-        hashCode = prime * hashCode + this.lastManStanding.hashCode();
-
-        hashCode = prime * hashCode + this.clueScrolls.hashCode();
-        hashCode = prime * hashCode + this.easyClueScrolls.hashCode();
-        hashCode = prime * hashCode + this.mediumClueScrolls.hashCode();
-        hashCode = prime * hashCode + this.hardClueScrolls.hashCode();
-        hashCode = prime * hashCode + this.eliteClueScrolls.hashCode();
-        hashCode = prime * hashCode + this.masterClueScrolls.hashCode();
-        return hashCode;
     }
 }

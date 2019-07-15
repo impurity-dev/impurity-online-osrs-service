@@ -1,7 +1,7 @@
 package com.impurityonline.osrs.client.response.player;
 
 import com.impurityonline.osrs.exception.ApiPlayerResponseException;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,11 +11,11 @@ import lombok.extern.slf4j.Slf4j;
  * @author impurity
  */
 @Slf4j
-@Getter
+@Data
 public class ApiClueScroll {
     private static final int SCROLL_HISCORE_TOTAL = 2;
-    private final Long rank;
-    private final Long score;
+    private Long rank;
+    private Long score;
 
     /**
      * Create api clue response based off hiscore values
@@ -36,26 +36,5 @@ public class ApiClueScroll {
             log.error("Not valid scroll hiscores values: hiscores={}", scrollHiscores);
             throw new ApiPlayerResponseException("Invalid scroll hiscores values");
         }
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        } else if (obj == null || obj.getClass() != this.getClass()) {
-            return false;
-        }
-        ApiClueScroll apiClueScroll = (ApiClueScroll) obj;
-        return apiClueScroll.getRank().longValue() == this.getRank().longValue() &&
-                apiClueScroll.getScore().longValue() == this.getScore().longValue();
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 23;
-        int hashCode = 1;
-        hashCode = prime * hashCode + rank.hashCode();
-        hashCode = prime * hashCode + score.hashCode();
-        return hashCode;
     }
 }
