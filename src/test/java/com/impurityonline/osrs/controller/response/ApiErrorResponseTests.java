@@ -1,6 +1,5 @@
-package com.impurityonline.osrs.domain;
+package com.impurityonline.osrs.controller.response;
 
-import com.impurityonline.osrs.controller.response.ApiErrorResponse;
 import com.impurityonline.osrs.utils.configs.AbstractTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

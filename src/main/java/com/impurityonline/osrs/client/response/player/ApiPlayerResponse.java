@@ -4,6 +4,7 @@ import com.impurityonline.osrs.enums.OsrsHiScore;
 import com.impurityonline.osrs.exception.ApiPlayerResponseException;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 
 import static com.impurityonline.osrs.enums.OsrsHiScore.*;
 
@@ -12,6 +13,7 @@ import static com.impurityonline.osrs.enums.OsrsHiScore.*;
  *
  * @author impurity
  */
+@Slf4j
 @Getter
 public class ApiPlayerResponse {
     private static final int HISCORE_TOTAL = 34;
@@ -39,7 +41,7 @@ public class ApiPlayerResponse {
     private final ApiSkill farming;
     private final ApiSkill runecrafting;
     private final ApiSkill hunter;
-    private final ApiSkill contruction;
+    private final ApiSkill construction;
     private final ApiMiniGame bountyHunter;
     private final ApiMiniGame bountyHunterRogues;
     private final ApiMiniGame lastManStanding;
@@ -57,11 +59,12 @@ public class ApiPlayerResponse {
      * @throws ApiPlayerResponseException if the hiscores are invalid
      */
     public ApiPlayerResponse(@NonNull String hiscores) throws ApiPlayerResponseException {
-        String[] scores = hiscores.split("\\n");
-        if (scores.length != HISCORE_TOTAL) {
-            throw new ApiPlayerResponseException("Invalid hiscores length");
+        this.hiscores = hiscores.split("\\n");
+        if (this.hiscores.length != HISCORE_TOTAL) {
+            log.error("Not valid player hiscores count: hiscores={}", hiscores);
+            throw new ApiPlayerResponseException("Invalid player hiscores length");
         }
-        this.hiscores = scores;
+
         this.overall = new ApiSkill(getHiscore(OVERALL));
         this.attack = new ApiSkill(getHiscore(ATTACK));
         this.defence = new ApiSkill(getHiscore(DEFENCE));
@@ -85,7 +88,7 @@ public class ApiPlayerResponse {
         this.farming = new ApiSkill(getHiscore(FARMING));
         this.runecrafting = new ApiSkill(getHiscore(RUNECRAFTING));
         this.hunter = new ApiSkill(getHiscore(HUNTER));
-        this.contruction = new ApiSkill(getHiscore(CONSTRUCTION));
+        this.construction = new ApiSkill(getHiscore(CONSTRUCTION));
 
         this.bountyHunter = new ApiMiniGame(getHiscore(BOUNTY_HUNTER));
         this.bountyHunterRogues = new ApiMiniGame(getHiscore(BOUNTY_HUNTER_ROGUES));
@@ -105,7 +108,7 @@ public class ApiPlayerResponse {
      * @param osrsHiScore the enum for the array lookup
      * @return the hiscore for the given hiscore enum ordinal
      */
-    private String getHiscore(OsrsHiScore osrsHiScore) {
+    public String getHiscore(OsrsHiScore osrsHiScore) {
         return hiscores[osrsHiScore.ordinal()];
     }
 }

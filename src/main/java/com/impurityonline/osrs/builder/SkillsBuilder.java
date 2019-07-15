@@ -38,7 +38,7 @@ public class SkillsBuilder {
         skills.setFarming(buildSkill(apiPlayerResponse.getFarming()));
         skills.setRunecrafting(buildSkill(apiPlayerResponse.getRunecrafting()));
         skills.setHunter(buildSkill(apiPlayerResponse.getHunter()));
-        skills.setConstruction(buildSkill(apiPlayerResponse.getContruction()));
+        skills.setConstruction(buildSkill(apiPlayerResponse.getConstruction()));
         return skills;
     }
 
