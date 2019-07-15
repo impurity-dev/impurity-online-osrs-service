@@ -4,6 +4,8 @@ import com.impurityonline.osrs.client.response.item.ApiItem;
 import com.impurityonline.osrs.client.response.item.ApiItemPrice;
 import com.impurityonline.osrs.client.response.item.ApiItemResponse;
 import com.impurityonline.osrs.client.response.item.ApiItemTrend;
+import com.impurityonline.osrs.client.response.player.ApiClueScroll;
+import com.impurityonline.osrs.client.response.player.ApiMiniGame;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.domain.item.*;
 import com.impurityonline.osrs.domain.player.Player;
@@ -70,6 +72,14 @@ public class OsrsFactory {
                 "-1,-1\n" +
                 "-1,-1\n" +
                 "-1,-1";
+    }
+
+    public static ApiClueScroll getValidScroll() throws Exception {
+        return new ApiClueScroll("1,1");
+    }
+
+    public static ApiMiniGame getValidMiniGame() throws Exception {
+        return new ApiMiniGame("1,1");
     }
 
     public static Item getValidOsrsItem(Long id) {

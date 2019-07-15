@@ -9,8 +9,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.impurityonline.osrs.utils.OsrsFactory.getValidApiPlayerResponse;
+import static com.impurityonline.osrs.utils.OsrsFactory.getValidMiniGame;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * @author impurity
@@ -22,6 +25,36 @@ class MiniGameBuilderTests extends AbstractTest {
     @BeforeAll
     public static void setup() throws Exception {
         apiPlayerResponse = getValidApiPlayerResponse();
+    }
+
+    @Test
+    @DisplayName("When bounty hunter minigame is null, throw null pointer")
+    void minigameBuilder_nullBountyHunter_throwsNullpointer() throws Exception {
+        ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
+        when(playerResponse.getBountyHunter()).thenReturn(null);
+        when(playerResponse.getBountyHunterRogues()).thenReturn(getValidMiniGame());
+        when(playerResponse.getLastManStanding()).thenReturn(getValidMiniGame());
+        assertThrows(NullPointerException.class, () -> MiniGameBuilder.buildMiniGames(playerResponse));
+    }
+
+    @Test
+    @DisplayName("When bounty hunter rogues minigame is null, throw null pointer")
+    void minigameBuilder_nullBountyHunterRogues_throwsNullpointer() throws Exception {
+        ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
+        when(playerResponse.getBountyHunter()).thenReturn(getValidMiniGame());
+        when(playerResponse.getBountyHunterRogues()).thenReturn(getValidMiniGame());
+        when(playerResponse.getLastManStanding()).thenReturn(null);
+        assertThrows(NullPointerException.class, () -> MiniGameBuilder.buildMiniGames(playerResponse));
+    }
+
+    @Test
+    @DisplayName("When last man standing minigame is null, throw null pointer")
+    void minigameBuilder_nullLastManStanding_throwsNullpointer() throws Exception {
+        ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
+        when(playerResponse.getBountyHunter()).thenReturn(getValidMiniGame());
+        when(playerResponse.getBountyHunterRogues()).thenReturn(getValidMiniGame());
+        when(playerResponse.getLastManStanding()).thenReturn(null);
+        assertThrows(NullPointerException.class, () -> MiniGameBuilder.buildMiniGames(playerResponse));
     }
 
     @Test
