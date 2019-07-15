@@ -1,24 +1,16 @@
 package com.impurityonline.osrs.domain;
 
 import com.impurityonline.osrs.controller.response.ApiErrorResponse;
-import com.impurityonline.osrs.utils.AbstractTest;
+import com.impurityonline.osrs.utils.configs.AbstractTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static com.impurityonline.osrs.constant.Profiles.UNIT_TEST;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.http.HttpStatus.OK;
 
 /**
  * @author tmk2003
  */
-@ExtendWith(SpringExtension.class)
-@ActiveProfiles(UNIT_TEST)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApiErrorResponseTests extends AbstractTest {
 
     @Test

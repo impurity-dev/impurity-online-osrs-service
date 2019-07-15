@@ -5,21 +5,12 @@ import com.impurityonline.osrs.domain.player.Player;
 import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
 import com.impurityonline.osrs.exception.PlayerNotFoundException;
 import com.impurityonline.osrs.service.PlayerService;
-import com.impurityonline.osrs.utils.AbstractTest;
+import com.impurityonline.osrs.utils.configs.AbstractControllerTest;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
 
-import static com.impurityonline.osrs.constant.Profiles.UNIT_TEST;
 import static com.impurityonline.osrs.utils.OsrsFactory.getValidOsrsPlayer;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -29,17 +20,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * @author impurity
  */
-@Tag("Controller")
-@ExtendWith(SpringExtension.class)
-@AutoConfigureMockMvc
-@ActiveProfiles(UNIT_TEST)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class PlayerControllerTests extends AbstractTest {
+class PlayerControllerTests extends AbstractControllerTest {
 
     @MockBean
     private PlayerService playerService;
-    @Autowired
-    private MockMvc mockMvc;
     private final String MOCK_PLAYER_NAME = "abc123";
 
     @Test

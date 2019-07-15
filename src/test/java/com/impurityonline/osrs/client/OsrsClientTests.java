@@ -4,23 +4,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.impurityonline.osrs.client.response.item.ApiItemResponse;
 import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
 import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
-import com.impurityonline.osrs.utils.AbstractTest;
+import com.impurityonline.osrs.utils.configs.AbstractTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.client.MockRestServiceServer;
 
 import static com.impurityonline.osrs.builder.UrlBuilder.buildGrandExchangeURL;
 import static com.impurityonline.osrs.builder.UrlBuilder.buildPlayerURL;
-import static com.impurityonline.osrs.constant.Profiles.UNIT_TEST;
 import static com.impurityonline.osrs.utils.OsrsFactory.getValidApiItemResponse;
 import static com.impurityonline.osrs.utils.OsrsFactory.getValidApiPlayerResponseString;
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,9 +27,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 /**
  * @author tmk2003
  */
-@ExtendWith(SpringExtension.class)
-@ActiveProfiles(UNIT_TEST)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class OsrsClientTests extends AbstractTest {
 
     @Autowired

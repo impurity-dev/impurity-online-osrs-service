@@ -1,21 +1,16 @@
 package com.impurityonline.osrs;
 
-import com.impurityonline.osrs.utils.AbstractTest;
+import com.impurityonline.osrs.utils.configs.AbstractTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author impurity
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest
 class OsrsApplicationTests extends AbstractTest {
 
 	@Autowired

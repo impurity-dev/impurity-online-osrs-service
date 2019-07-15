@@ -1,15 +1,24 @@
-package com.impurityonline.osrs.utils;
+package com.impurityonline.osrs.utils.configs;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.IOException;
+
+import static com.impurityonline.osrs.constant.Profiles.UNIT_TEST;
 
 /**
  * @author impurity
  */
+@ExtendWith(SpringExtension.class)
+@ActiveProfiles(UNIT_TEST)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class AbstractTest {
 
     private final ObjectMapper _objectMapper = new ObjectMapper();
