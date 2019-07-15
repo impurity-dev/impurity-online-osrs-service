@@ -49,4 +49,13 @@ public class ApiClueScroll {
         return apiClueScroll.getRank().longValue() == this.getRank().longValue() &&
                 apiClueScroll.getScore().longValue() == this.getScore().longValue();
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 23;
+        int hashCode = 1;
+        hashCode = prime * hashCode + rank.hashCode();
+        hashCode = prime * hashCode + score.hashCode();
+        return hashCode;
+    }
 }

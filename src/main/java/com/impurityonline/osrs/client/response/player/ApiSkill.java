@@ -52,4 +52,14 @@ public class ApiSkill {
                 apiSkill.getLevel().longValue() == this.getLevel().longValue() &&
                 apiSkill.getExperience().longValue() == this.getExperience().longValue();
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 29;
+        int hashCode = 1;
+        hashCode = prime * hashCode + rank.hashCode();
+        hashCode = prime * hashCode + level.hashCode();
+        hashCode = prime * hashCode + experience.hashCode();
+        return hashCode;
+    }
 }
