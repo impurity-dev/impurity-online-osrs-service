@@ -37,25 +37,4 @@ public class ApiMiniGame {
             throw new ApiPlayerResponseException("Invalid minigame hiscores values");
         }
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        } else if (obj == null || obj.getClass() != this.getClass()) {
-            return false;
-        }
-        ApiMiniGame apiMiniGame = (ApiMiniGame) obj;
-        return apiMiniGame.getRank().longValue() == this.rank.longValue() &&
-                apiMiniGame.getScore().longValue() == this.score.longValue();
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 19;
-        int hashCode = 1;
-        hashCode = prime * hashCode + rank.hashCode();
-        hashCode = prime * hashCode + score.hashCode();
-        return hashCode;
-    }
 }
