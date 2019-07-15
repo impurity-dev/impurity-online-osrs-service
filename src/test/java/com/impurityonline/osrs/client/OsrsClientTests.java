@@ -2,6 +2,7 @@ package com.impurityonline.osrs.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.impurityonline.osrs.client.response.item.ApiItemResponse;
+import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
 import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
 import com.impurityonline.osrs.utils.configs.AbstractTest;
@@ -16,8 +17,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 
 import static com.impurityonline.osrs.builder.UrlBuilder.buildGrandExchangeURL;
 import static com.impurityonline.osrs.builder.UrlBuilder.buildPlayerURL;
-import static com.impurityonline.osrs.utils.OsrsFactory.getValidApiItemResponse;
-import static com.impurityonline.osrs.utils.OsrsFactory.getValidApiPlayerResponseString;
+import static com.impurityonline.osrs.utils.OsrsFactory.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.client.ExpectedCount.once;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -46,20 +46,33 @@ class OsrsClientTests extends AbstractTest {
 
     @Test
     @DisplayName("When the osrs client gets player, return response")
-    void osrsClient_with_OK_osrsApiPlayerResponse() {
+    void osrsClient_with_OK_osrsApiPlayerResponse() throws Exception {
         String playerName = "123";
         String apiPlayerResponseString = getValidApiPlayerResponseString();
         mockServer.expect(once(), requestTo(buildPlayerURL(playerName).toUriString()))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(getValidApiPlayerResponseString())
+                        .body(apiPlayerResponseString)
                 );
-        assertArrayEquals(apiPlayerResponseString.split("\\n"), osrsClient.getPlayer(playerName).getHiscores());
+        assertEquals(new ApiPlayerResponse(apiPlayerResponseString), osrsClient.getPlayer(playerName));
     }
 
     @Test
-    @DisplayName("When the steam client library has client error, throw OsrsClientPlayerHttpRequestException")
+    @DisplayName("When the osrs client player has response error, throw OsrsClientPlayerHttpRequestException")
+    void osrsClient_with_RESPONSEERROR_osrsApiPlayerResponse() {
+        String playerName = "123";
+        mockServer.expect(once(), requestTo(buildPlayerURL(playerName).toUriString()))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(getInvalidApiPlayerResponseString())
+                );
+        assertThrows(OsrsClientPlayerHttpRequestException.class, () -> osrsClient.getPlayer(playerName));
+    }
+
+    @Test
+    @DisplayName("When the osrs client player has client error, throw OsrsClientPlayerHttpRequestException")
     void osrsClient_with_CLIENTERROR_osrsApiPlayerResponse() {
         String playerName = "123";
         String osrsApiPlayerResponse = getValidApiPlayerResponseString();
@@ -73,7 +86,7 @@ class OsrsClientTests extends AbstractTest {
     }
 
     @Test
-    @DisplayName("When the steam client library has client error, throw OsrsClientPlayerHttpRequestException")
+    @DisplayName("When the osrs client player has client error, throw OsrsClientPlayerHttpRequestException")
     void osrsClient_with_CLIENTERROR_invalidResponse() {
         String playerName = "123";
         mockServer.expect(once(), requestTo(buildPlayerURL(playerName).toUriString()))
@@ -86,7 +99,7 @@ class OsrsClientTests extends AbstractTest {
     }
 
     @Test
-    @DisplayName("When the steam client library has server error, throw OsrsClientPlayerHttpRequestException")
+    @DisplayName("When the osrs client player has server error, throw OsrsClientPlayerHttpRequestException")
     void osrsClient_with_SERVERERROR_osrsApiPlayerResponse() {
         String playerName = "123";
         String osrsApiPlayerResponse = getValidApiPlayerResponseString();

@@ -42,8 +42,8 @@ class MiniGameBuilderTests extends AbstractTest {
     void minigameBuilder_nullBountyHunterRogues_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getBountyHunter()).thenReturn(getValidMiniGame());
-        when(playerResponse.getBountyHunterRogues()).thenReturn(getValidMiniGame());
-        when(playerResponse.getLastManStanding()).thenReturn(null);
+        when(playerResponse.getBountyHunterRogues()).thenReturn(null);
+        when(playerResponse.getLastManStanding()).thenReturn(getValidMiniGame());
         assertThrows(NullPointerException.class, () -> MiniGameBuilder.buildMiniGames(playerResponse));
     }
 
