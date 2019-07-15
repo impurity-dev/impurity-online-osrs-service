@@ -4,7 +4,6 @@ package com.impurityonline.osrs.enums;
  * @author impurity
  */
 public enum OsrsHiScore {
-    INVALID,
     OVERALL,
     ATTACK,
     DEFENCE,
@@ -34,8 +33,8 @@ public enum OsrsHiScore {
     CLUE_SCROLLS,
     BOUNTY_HUNTER,
     BOUNTY_HUNTER_ROGUES,
-    HARD_CLUE_SCROLL,
+    HARD_CLUE_SCROLLS,
     LAST_MAN_STANDING,
-    ELITE_CLUE_SCROLL,
-    MASTER_CLUE_SCROLL,
+    ELITE_CLUE_SCROLLS,
+    MASTER_CLUE_SCROLLS,
 }

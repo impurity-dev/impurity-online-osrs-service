@@ -1,13 +1,11 @@
 package com.impurityonline.osrs.client;
 
 import com.impurityonline.osrs.client.response.item.ApiItemResponse;
+import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.exception.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
 
@@ -41,7 +39,7 @@ public class OsrsClient extends RestClient {
      * @param playerName - Player name
      * @return - Player hiscores
      */
-    public String getPlayer(@NonNull final String playerName) {
+    public ApiPlayerResponse getPlayer(@NonNull final String playerName) {
         try {
             ResponseEntity<String> playerEntity = executeRequest(
                     HttpMethod.GET,
@@ -50,8 +48,12 @@ public class OsrsClient extends RestClient {
                     String.class
             );
 
-            return Optional.ofNullable(playerEntity.getBody())
+            String hiscores = Optional.ofNullable(playerEntity.getBody())
                     .orElseThrow(() -> new PlayerNotFoundException("No response body found for playerName=" + playerName));
+            return new ApiPlayerResponse(hiscores);
+        } catch(ApiPlayerResponseException ex) {
+            log.error("Osrs Client Response Issues: {}", ex.getMessage());
+            throw new OsrsClientPlayerHttpRequestException("Cannot create player", HttpStatus.INTERNAL_SERVER_ERROR, ex);
         } catch (RestTemplateClientException ex) {
             log.error("Osrs Client Issues: {}", ex.getMessage());
             throw new OsrsClientPlayerHttpRequestException("Cannot get player", ex.getStatus(), ex);

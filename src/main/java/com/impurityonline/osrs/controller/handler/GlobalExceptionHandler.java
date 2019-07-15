@@ -1,6 +1,6 @@
 package com.impurityonline.osrs.controller.handler;
 
-import com.impurityonline.osrs.domain.ApiError;
+import com.impurityonline.osrs.controller.response.ApiErrorResponse;
 import com.impurityonline.osrs.exception.RestTemplateServerException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
@@ -20,23 +20,23 @@ import static org.springframework.http.HttpStatus.*;
 @Order(Ordered.LOWEST_PRECEDENCE)
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
-    protected ResponseEntity<ApiError> handledIllegalArgumentException(final IllegalArgumentException ex) {
+    protected ResponseEntity<ApiErrorResponse> handledIllegalArgumentException(final IllegalArgumentException ex) {
         log.info("Illegal Argument: {}", ex.getMessage());
-        ApiError apiError = new ApiError(BAD_REQUEST, "Illegal Argument present internally", ex);
+        ApiErrorResponse apiError = new ApiErrorResponse(BAD_REQUEST, "Illegal Argument present internally", ex);
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 
     @ExceptionHandler(NullPointerException.class)
-    protected ResponseEntity<ApiError> handledNullPointerException(final NullPointerException ex) {
+    protected ResponseEntity<ApiErrorResponse> handledNullPointerException(final NullPointerException ex) {
         log.info("Null pointer: {}", ex.getMessage());
-        ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR, "Null Pointer present internally", ex);
+        ApiErrorResponse apiError = new ApiErrorResponse(INTERNAL_SERVER_ERROR, "Null Pointer present internally", ex);
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 
     @ExceptionHandler(RestTemplateServerException.class)
-    protected ResponseEntity<ApiError> handledRestTemplateServerException(final RestTemplateServerException ex) {
+    protected ResponseEntity<ApiErrorResponse> handledRestTemplateServerException(final RestTemplateServerException ex) {
         log.info("Rest template server exception: {}", ex.getMessage());
-        ApiError apiError = new ApiError(SERVICE_UNAVAILABLE, "Could not complete request to external resource. Try again later.", ex);
+        ApiErrorResponse apiError = new ApiErrorResponse(SERVICE_UNAVAILABLE, "Could not complete request to external resource. Try again later.", ex);
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 }

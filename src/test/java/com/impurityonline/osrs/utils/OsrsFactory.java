@@ -4,129 +4,40 @@ import com.impurityonline.osrs.client.response.item.ApiItem;
 import com.impurityonline.osrs.client.response.item.ApiItemPrice;
 import com.impurityonline.osrs.client.response.item.ApiItemResponse;
 import com.impurityonline.osrs.client.response.item.ApiItemTrend;
+import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.domain.item.*;
 import com.impurityonline.osrs.domain.player.Player;
+import com.impurityonline.osrs.exception.ApiPlayerResponseException;
 
-import static com.impurityonline.osrs.builder.PlayerBuilder.buildPlayer;
+import static com.impurityonline.osrs.builder.MiniGameBuilder.buildMiniGames;
+import static com.impurityonline.osrs.builder.ScrollsBuilder.buildScrolls;
+import static com.impurityonline.osrs.builder.SkillsBuilder.buildSkills;
+
 
 /**
  * @author impurity
  */
 public class OsrsFactory {
-    public static String getValidOsrsPlayerClientResponse() {
+    public static Player getValidOsrsPlayer(String name, String type) throws Exception {
+        ApiPlayerResponse apiPlayerResponse = getValidApiPlayerResponse();
+        Player player = new Player();
+        player.setName(name);
+        player.setType(type);
+        player.setMiniGames(buildMiniGames(apiPlayerResponse));
+        player.setScrolls(buildScrolls(apiPlayerResponse));
+        player.setSkills(buildSkills(apiPlayerResponse));
+        return player;
+    }
+    public static ApiPlayerResponse getValidApiPlayerResponse() throws Exception {
+        try {
+            return new ApiPlayerResponse(getValidApiPlayerResponseString());
+        } catch(ApiPlayerResponseException ex) {
+            throw new Exception("Osrs factory error", ex);
+        }
+    }
+    public static String getValidApiPlayerResponseString() {
         return "590663,1328,39039916\n" +
                 "195711,91,6103476\n" +
-                "205897,89,5298921\n" +
-                "379871,90,5360274\n" +
-                "289325,93,7515747\n" +
-                "384239,87,4244478\n" +
-                "501686,64,425495\n" +
-                "449344,83,2679530\n" +
-                "930420,58,236075\n" +
-                "1339240,51,117752\n" +
-                "1288040,30,13705\n" +
-                "745048,62,335272\n" +
-                "687565,59,264653\n" +
-                "666942,59,258067\n" +
-                "582299,56,187666\n" +
-                "162560,76,1356244\n" +
-                "401936,58,237626\n" +
-                "667564,58,224811\n" +
-                "1231633,28,11508\n" +
-                "168429,87,4147823\n" +
-                "1706522,1,0\n" +
-                "1017801,15,2642\n" +
-                "1288615,1,10\n" +
-                "763340,32,18141\n" +
-                "-1,-1\n" +
-                "-1,-1\n" +
-                "93027,500\n" +
-                "-1,-1\n" +
-                "234068,1\n" +
-                "-1,-1\n" +
-                "-1,-1\n" +
-                "-1,-1\n" +
-                "-1,-1\n" +
-                "-1,-1";
-    }
-
-    public static String getInvalidMinigameHiscores() {
-        return "590663,1328,39039916\n" +
-                "195711,91,6103476\n" +
-                "205897,89,5298921\n" +
-                "379871,90,5360274\n" +
-                "289325,93,7515747\n" +
-                "384239,87,4244478\n" +
-                "501686,64,425495\n" +
-                "449344,83,2679530\n" +
-                "930420,58,236075\n" +
-                "1339240,51,117752\n" +
-                "1288040,30,13705\n" +
-                "745048,62,335272\n" +
-                "687565,59,264653\n" +
-                "666942,59,258067\n" +
-                "582299,56,187666\n" +
-                "162560,76,1356244\n" +
-                "401936,58,237626\n" +
-                "667564,58,224811\n" +
-                "1231633,28,11508\n" +
-                "168429,87,4147823\n" +
-                "1706522,1,0\n" +
-                "1017801,15,2642\n" +
-                "1288615,1,10\n" +
-                "763340,32,18141\n" +
-                "-1,-1\n" +
-                "-1,-1\n" +
-                "93027,500\n" +
-                "-1,-1\n" +
-                "234068,1\n" +
-                "-1,-1\n" +
-                "-1,-1\n" +
-                "-1,-1,-1\n" + // invalid miniGame
-                "-1,-1\n" +
-                "-1,-1";
-    }
-
-    public static String getInvalidScrollsHiscores() {
-        return "590663,1328,39039916\n" +
-                "195711,91,6103476\n" +
-                "205897,89,5298921\n" +
-                "379871,90,5360274\n" +
-                "289325,93,7515747\n" +
-                "384239,87,4244478\n" +
-                "501686,64,425495\n" +
-                "449344,83,2679530\n" +
-                "930420,58,236075\n" +
-                "1339240,51,117752\n" +
-                "1288040,30,13705\n" +
-                "745048,62,335272\n" +
-                "687565,59,264653\n" +
-                "666942,59,258067\n" +
-                "582299,56,187666\n" +
-                "162560,76,1356244\n" +
-                "401936,58,237626\n" +
-                "667564,58,224811\n" +
-                "1231633,28,11508\n" +
-                "168429,87,4147823\n" +
-                "1706522,1,0\n" +
-                "1017801,15,2642\n" +
-                "1288615,1,10\n" +
-                "763340,32,18141\n" +
-                "-1,-1\n" +
-                "-1,-1\n" +
-                "93027,500\n" +
-                "-1,-1\n" +
-                "234068,1\n" +
-                "-1,-1\n" +
-                "-1,-1\n" +
-                "-1,-1\n" +
-                "-1,-1,-1\n" + // invalid scroll
-                "-1,-1";
-    }
-
-    public static String getInvalidSkillsHiscores() {
-        return "590663,1328,39039916\n" +
-                "195711,91,6103476,-1\n" +// invalid scroll
                 "205897,89,5298921\n" +
                 "379871,90,5360274\n" +
                 "289325,93,7515747\n" +
@@ -195,15 +106,6 @@ public class OsrsFactory {
         item.setChanges(changes);
         return item;
     }
-
-    public static Player getValidOsrsPlayer(String name, String type) {
-        return buildPlayer(name, type, getValidOsrsPlayerClientResponse());
-    }
-
-    /**
-     * Generate a valid API item response
-     * @return a valid API item reponse
-     */
     public static ApiItemResponse getValidApiItemResponse() {
         ApiItemPrice currentPrice = new ApiItemPrice();
         currentPrice.setPrice("current_price");

@@ -2,6 +2,7 @@ package com.impurityonline.osrs.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.impurityonline.osrs.client.response.item.ApiItemResponse;
+import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
 import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
 import com.impurityonline.osrs.utils.AbstractTest;
@@ -21,10 +22,8 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import static com.impurityonline.osrs.builder.UrlBuilder.buildGrandExchangeURL;
 import static com.impurityonline.osrs.builder.UrlBuilder.buildPlayerURL;
 import static com.impurityonline.osrs.constant.Profiles.UNIT_TEST;
-import static com.impurityonline.osrs.utils.OsrsFactory.getValidApiItemResponse;
-import static com.impurityonline.osrs.utils.OsrsFactory.getValidOsrsPlayerClientResponse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static com.impurityonline.osrs.utils.OsrsFactory.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.client.ExpectedCount.once;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -57,21 +56,21 @@ class OsrsClientTests extends AbstractTest {
     @DisplayName("When the osrs client gets player, return response")
     void osrsClient_with_OK_osrsApiPlayerResponse() {
         String playerName = "123";
-        String osrsApiPlayerResponse = getValidOsrsPlayerClientResponse();
+        String apiPlayerResponseString = getValidApiPlayerResponseString();
         mockServer.expect(once(), requestTo(buildPlayerURL(playerName).toUriString()))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(osrsApiPlayerResponse)
+                        .body(getValidApiPlayerResponseString())
                 );
-        assertEquals(osrsApiPlayerResponse, osrsClient.getPlayer(playerName));
+        assertArrayEquals(apiPlayerResponseString.split("\\n"), osrsClient.getPlayer(playerName).getHiscores());
     }
 
     @Test
     @DisplayName("When the steam client library has client error, throw OsrsClientPlayerHttpRequestException")
     void osrsClient_with_CLIENTERROR_osrsApiPlayerResponse() {
         String playerName = "123";
-        String osrsApiPlayerResponse = getValidOsrsPlayerClientResponse();
+        String osrsApiPlayerResponse = getValidApiPlayerResponseString();
         mockServer.expect(once(), requestTo(buildPlayerURL(playerName).toUriString()))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.NOT_FOUND)
@@ -85,7 +84,7 @@ class OsrsClientTests extends AbstractTest {
     @DisplayName("When the steam client library has server error, throw RestTemplateServerException")
     void osrsClient_with_SERVERERROR_osrsApiPlayerResponse() {
         String playerName = "123";
-        String osrsApiPlayerResponse = getValidOsrsPlayerClientResponse();
+        String osrsApiPlayerResponse = getValidApiPlayerResponseString();
         mockServer.expect(once(), requestTo(buildPlayerURL(playerName).toUriString()))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.INTERNAL_SERVER_ERROR)
