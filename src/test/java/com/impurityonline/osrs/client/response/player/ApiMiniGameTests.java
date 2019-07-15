@@ -64,6 +64,22 @@ class ApiMiniGameTests extends AbstractTest {
     }
 
     @Test
+    @DisplayName("When the api miniGame equals has different rank, return false")
+    void apiSkills_validHiScores_equalsDifferentRank() throws Exception {
+        ApiMiniGame miniGame1 = new ApiMiniGame("1,2");
+        ApiMiniGame miniGame2 = new ApiMiniGame("9,2");
+        assertFalse(miniGame1.equals(miniGame2));
+    }
+
+    @Test
+    @DisplayName("When the api miniGame equals has different score, return false")
+    void apiSkills_validHiScores_equalsDifferentScore() throws Exception {
+        ApiMiniGame miniGame1 = new ApiMiniGame("1,2");
+        ApiMiniGame miniGame2 = new ApiMiniGame("1,9");
+        assertFalse(miniGame1.equals(miniGame2));
+    }
+
+    @Test
     @DisplayName("When the api miniGame equals is same values, return true")
     void apiMiniGames_validHiScores_equalsSameValues() throws Exception {
         ApiMiniGame miniGame1 = new ApiMiniGame("1,2");

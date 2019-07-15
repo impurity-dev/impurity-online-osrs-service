@@ -72,15 +72,15 @@ class ApiSkillTests extends AbstractTest {
     }
 
     @Test
-    @DisplayName("When the api skills equals is same values, return true")
-    void apiSkills_validHiScores_equalsSameValues() throws Exception {
+    @DisplayName("When the api skills equals has different rank, return false")
+    void apiSkills_validHiScores_equalsDifferentRank() throws Exception {
         ApiSkill skill1 = new ApiSkill("1,2,3");
         ApiSkill skill2 = new ApiSkill("9,2,3");
         assertFalse(skill1.equals(skill2));
     }
 
     @Test
-    @DisplayName("When the api skills equals has different rank, return false")
+    @DisplayName("When the api skills equals has different level, return false")
     void apiSkills_validHiScores_equalsDifferentLevel() throws Exception {
         ApiSkill skill1 = new ApiSkill("1,2,3");
         ApiSkill skill2 = new ApiSkill("1,9,3");
@@ -88,7 +88,7 @@ class ApiSkillTests extends AbstractTest {
     }
 
     @Test
-    @DisplayName("When the api skills equals has different rank, return false")
+    @DisplayName("When the api skills equals has different experience, return false")
     void apiSkills_validHiScores_equalsDifferentExperience() throws Exception {
         ApiSkill skill1 = new ApiSkill("1,2,3");
         ApiSkill skill2 = new ApiSkill("1,2,9");
@@ -96,8 +96,8 @@ class ApiSkillTests extends AbstractTest {
     }
 
     @Test
-    @DisplayName("When the api skills equals has different rank, return false")
-    void apiSkills_validHiScores_equalsDifferentRank() throws Exception {
+    @DisplayName("When the api skills equals is same values, return true")
+    void apiSkills_validHiScores_equalsSameValues() throws Exception {
         ApiSkill skill1 = new ApiSkill("1,2,3");
         ApiSkill skill2 = new ApiSkill("1,2,3");
         assertTrue(skill1.equals(skill2));

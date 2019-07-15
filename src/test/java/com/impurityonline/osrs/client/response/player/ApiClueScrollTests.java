@@ -65,6 +65,22 @@ class ApiClueScrollTests extends AbstractTest {
     }
 
     @Test
+    @DisplayName("When the api clue scroll equals has different rank, return false")
+    void apiSkills_validHiScores_equalsDifferentRank() throws Exception {
+        ApiClueScroll clueScroll1 = new ApiClueScroll("1,2");
+        ApiClueScroll clueScroll2 = new ApiClueScroll("9,2");
+        assertFalse(clueScroll1.equals(clueScroll2));
+    }
+
+    @Test
+    @DisplayName("When the api clue scroll equals has different score, return false")
+    void apiSkills_validHiScores_equalsDifferentScore() throws Exception {
+        ApiClueScroll clueScroll1 = new ApiClueScroll("1,2");
+        ApiClueScroll clueScroll2 = new ApiClueScroll("1,9");
+        assertFalse(clueScroll1.equals(clueScroll2));
+    }
+
+    @Test
     @DisplayName("When the api clue scroll equals is same values, return true")
     void apiClueScrolls_validHiScores_equalsSameValues() throws Exception {
         ApiClueScroll clueScroll1 = new ApiClueScroll("1,2");
