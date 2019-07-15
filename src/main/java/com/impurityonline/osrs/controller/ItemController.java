@@ -120,9 +120,7 @@ public class ItemController {
     public ItemIconsResponse getItemIcons(@PathVariable("itemId") Long itemId) {
         Item item = itemService.getItem(itemId);
         ItemIconsResponse itemIconsResponse = new ItemIconsResponse();
-        itemIconsResponse.setTypeIcon(item.getIcons().getTypeIcon());
-        itemIconsResponse.setSmallIcon(item.getIcons().getSmallIcon());
-        itemIconsResponse.setLargeIcon(item.getIcons().getLargeIcon());
+        itemIconsResponse.setIcons(item.getIcons());
         return itemIconsResponse;
     }
 
@@ -185,8 +183,7 @@ public class ItemController {
     public ItemPricesResponse getItemPrices(@PathVariable("itemId") Long itemId) {
         Item item = itemService.getItem(itemId);
         ItemPricesResponse itemPricesResponse = new ItemPricesResponse();
-        itemPricesResponse.setCurrent(item.getPrices().getCurrent());
-        itemPricesResponse.setToday(item.getPrices().getToday());
+        itemPricesResponse.setPrices(item.getPrices());
         return itemPricesResponse;
     }
 
@@ -234,11 +231,7 @@ public class ItemController {
     public ItemTrendsResponse getItemTrends(@PathVariable("itemId") Long itemId) {
         Item item = itemService.getItem(itemId);
         ItemTrendsResponse itemTrendsResponse = new ItemTrendsResponse();
-        itemTrendsResponse.setCurrent(item.getTrends().getCurrent());
-        itemTrendsResponse.setToday(item.getTrends().getToday());
-        itemTrendsResponse.setDay30(item.getTrends().getDay30());
-        itemTrendsResponse.setDay90(item.getTrends().getDay90());
-        itemTrendsResponse.setDay180(item.getTrends().getDay180());
+        itemTrendsResponse.setTrends(item.getTrends());
         return itemTrendsResponse;
     }
 

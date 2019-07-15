@@ -1,6 +1,7 @@
 package com.impurityonline.osrs.controller.response.item;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.impurityonline.osrs.domain.item.ItemChanges;
 import lombok.Data;
 
 /**
@@ -8,10 +9,6 @@ import lombok.Data;
  */
 @Data
 public class ItemChangesResponse {
-    @JsonProperty("day_30")
-    private String day30;
-    @JsonProperty("day_90")
-    private String day90;
-    @JsonProperty("day_180")
-    private String day180;
+    @JsonProperty("changes")
+    private ItemChanges changes;
 }

@@ -152,9 +152,7 @@ class ItemControllerTests extends AbstractControllerTest {
     void itemIcons_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
         ItemIconsResponse itemIconsResponse = new ItemIconsResponse();
-        itemIconsResponse.setLargeIcon(item.getIcons().getLargeIcon());
-        itemIconsResponse.setSmallIcon(item.getIcons().getSmallIcon());
-        itemIconsResponse.setTypeIcon(item.getIcons().getTypeIcon());
+        itemIconsResponse.setIcons(item.getIcons());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -301,8 +299,7 @@ class ItemControllerTests extends AbstractControllerTest {
     void itemPrices_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
         ItemPricesResponse itemPricesResponse = new ItemPricesResponse();
-        itemPricesResponse.setCurrent(item.getPrices().getCurrent());
-        itemPricesResponse.setToday(item.getPrices().getToday());
+        itemPricesResponse.setPrices(item.getPrices());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -449,11 +446,7 @@ class ItemControllerTests extends AbstractControllerTest {
     void itemTrends_return200() throws Exception {
         Item item = getValidOsrsItem(MOCK_ITEM_ID);
         ItemTrendsResponse itemTrendsResponse = new ItemTrendsResponse();
-        itemTrendsResponse.setCurrent(item.getTrends().getCurrent());
-        itemTrendsResponse.setToday(item.getTrends().getToday());
-        itemTrendsResponse.setDay30(item.getTrends().getDay30());
-        itemTrendsResponse.setDay90(item.getTrends().getDay90());
-        itemTrendsResponse.setDay180(item.getTrends().getDay180());
+        itemTrendsResponse.setTrends(item.getTrends());
         when(itemService.getItem(MOCK_ITEM_ID)).thenReturn(item);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends")
                 .contentType(MediaType.APPLICATION_JSON))
