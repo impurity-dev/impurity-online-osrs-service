@@ -85,4 +85,15 @@ class ApiClueScrollTests extends AbstractTest {
         ApiClueScroll clueScroll = new ApiClueScroll("1,2");
         assertFalse(clueScroll.equals(null));
     }
+
+    @Test
+    @DisplayName("When the api clue scroll hashcode, return proper hashcode")
+    void apiClueScrolls_hashCode() throws Exception {
+        ApiClueScroll clueScroll = new ApiClueScroll("1,2");
+        final int prime = 23;
+        int hashCode = 1;
+        hashCode = prime * hashCode + clueScroll.getRank().hashCode();
+        hashCode = prime * hashCode + clueScroll.getScore().hashCode();
+        assertEquals(hashCode, clueScroll.hashCode());
+    }
 }

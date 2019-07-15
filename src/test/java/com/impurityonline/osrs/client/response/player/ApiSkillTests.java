@@ -117,4 +117,15 @@ class ApiSkillTests extends AbstractTest {
         assertFalse(skill.equals(null));
     }
 
+    @Test
+    @DisplayName("When the api skills hashcode, return proper hashcode")
+    void apiSkills_hashCode() throws Exception {
+        ApiSkill skill = new ApiSkill("1,2,3");
+        final int prime = 29;
+        int hashCode = 1;
+        hashCode = prime * hashCode + skill.getRank().hashCode();
+        hashCode = prime * hashCode + skill.getLevel().hashCode();
+        hashCode = prime * hashCode + skill.getExperience().hashCode();
+        assertEquals(hashCode, skill.hashCode());
+    }
 }

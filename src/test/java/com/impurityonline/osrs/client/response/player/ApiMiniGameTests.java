@@ -84,4 +84,15 @@ class ApiMiniGameTests extends AbstractTest {
         ApiMiniGame miniGame = new ApiMiniGame("1,2");
         assertFalse(miniGame.equals(null));
     }
+
+    @Test
+    @DisplayName("When the api clue scroll hashcode, return proper hashcode")
+    void apiClueScrolls_hashCode() throws Exception {
+        ApiMiniGame miniGame = new ApiMiniGame("1,2");
+        final int prime = 19;
+        int hashCode = 1;
+        hashCode = prime * hashCode + miniGame.getRank().hashCode();
+        hashCode = prime * hashCode + miniGame.getScore().hashCode();
+        assertEquals(hashCode, miniGame.hashCode());
+    }
 }
