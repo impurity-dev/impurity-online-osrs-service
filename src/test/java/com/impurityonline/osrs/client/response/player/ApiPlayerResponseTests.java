@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static com.impurityonline.osrs.utils.OsrsFactory.getValidApiPlayerResponseString;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * @author impurity
@@ -94,12 +94,40 @@ class ApiPlayerResponseTests extends AbstractTest {
     }
 
     @Test
+    @DisplayName("When the api player response equals is self, return true")
+    void apiPlayerResponse_validHiScores_equalsSelf() throws Exception {
+        ApiPlayerResponse playerResponse = new ApiPlayerResponse(validApiPlayerResponseString);
+        assertTrue(playerResponse.equals(playerResponse));
+    }
+
+    @Test
+    @DisplayName("When the api player response equals is same values, return true")
+    void apiPlayerResponse_validHiScores_equalsSameValues() throws Exception {
+        ApiPlayerResponse playerResponse1 = new ApiPlayerResponse(validApiPlayerResponseString);
+        ApiPlayerResponse playerResponse2 = new ApiPlayerResponse(validApiPlayerResponseString);
+        assertTrue(playerResponse1.equals(playerResponse2));
+    }
+
+    @Test
+    @DisplayName("When the api player response equals is wrong class, return false")
+    void apiPlayerResponse_validHiScores_equalsDifferentClass() throws Exception {
+        ApiPlayerResponse playerResponse = new ApiPlayerResponse(validApiPlayerResponseString);
+        assertFalse(playerResponse.equals(""));
+    }
+
+    @Test
+    @DisplayName("When the api player response equals is null, return false")
+    void apiPlayerResponse_validHiScores_equalsNull() throws Exception {
+        ApiPlayerResponse playerResponse = new ApiPlayerResponse(validApiPlayerResponseString);
+        assertFalse(playerResponse.equals(null));
+    }
+
+    @Test
     @DisplayName("When the api skills hashcode, return proper hashcode")
-    void apiSkills_hashCode() throws Exception {
+    void apiPlayerResponse_hashCode() throws Exception {
         ApiPlayerResponse playerResponse = new ApiPlayerResponse(validApiPlayerResponseString);
         final int prime = 29;
         int hashCode = 1;
-        hashCode = prime * hashCode + Arrays.hashCode(playerResponse.getHiscores());
         hashCode = prime * hashCode + playerResponse.getOverall().hashCode();
         hashCode = prime * hashCode + playerResponse.getAttack().hashCode();
         hashCode = prime * hashCode + playerResponse.getDefence().hashCode();

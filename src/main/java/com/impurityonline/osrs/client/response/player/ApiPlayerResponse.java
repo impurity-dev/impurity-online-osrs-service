@@ -122,50 +122,48 @@ public class ApiPlayerResponse {
             return false;
         }
         ApiPlayerResponse playerResponse = (ApiPlayerResponse) obj;
-        return playerResponse.getHiscores() == this.hiscores &&
+        log.error("getOverall: {}", playerResponse.getOverall() == this.overall);
+        return playerResponse.getOverall().equals(this.overall) &&
+                playerResponse.getAttack().equals(this.attack) &&
+                playerResponse.getDefence().equals(this.defence) &&
+                playerResponse.getStrength().equals(this.strength) &&
+                playerResponse.getHitpoints().equals(this.hitpoints) &&
+                playerResponse.getRanged().equals(this.ranged) &&
+                playerResponse.getPrayer().equals(this.prayer) &&
+                playerResponse.getMagic().equals(this.magic) &&
+                playerResponse.getCooking().equals(this.cooking) &&
+                playerResponse.getWoodcutting().equals(this.woodcutting) &&
+                playerResponse.getFletching().equals(this.fletching) &&
+                playerResponse.getFishing().equals(this.fishing) &&
+                playerResponse.getFiremaking().equals(this.firemaking) &&
+                playerResponse.getCrafting().equals(this.crafting) &&
+                playerResponse.getSmithing().equals(this.smithing) &&
+                playerResponse.getMining().equals(this.mining) &&
+                playerResponse.getHerblore().equals(this.herblore) &&
+                playerResponse.getAgility().equals(this.agility) &&
+                playerResponse.getThieving().equals(this.thieving) &&
+                playerResponse.getSlayer().equals(this.slayer) &&
+                playerResponse.getFarming().equals(this.farming) &&
+                playerResponse.getRunecrafting().equals(this.runecrafting) &&
+                playerResponse.getHunter().equals(this.hunter) &&
+                playerResponse.getConstruction().equals(this.construction) &&
 
-                playerResponse.getOverall() == this.overall &&
-                playerResponse.getAttack() == this.attack &&
-                playerResponse.getDefence() == this.defence &&
-                playerResponse.getStrength() == this.strength &&
-                playerResponse.getHitpoints() == this.hitpoints &&
-                playerResponse.getRanged() == this.ranged &&
-                playerResponse.getPrayer() == this.prayer &&
-                playerResponse.getMagic() == this.magic &&
-                playerResponse.getCooking() == this.cooking &&
-                playerResponse.getWoodcutting() == this.woodcutting &&
-                playerResponse.getFletching() == this.fletching &&
-                playerResponse.getFishing() == this.fishing &&
-                playerResponse.getFiremaking() == this.firemaking &&
-                playerResponse.getCrafting() == this.crafting &&
-                playerResponse.getSmithing() == this.smithing &&
-                playerResponse.getMining() == this.mining &&
-                playerResponse.getHerblore() == this.herblore &&
-                playerResponse.getAgility() == this.agility &&
-                playerResponse.getThieving() == this.thieving &&
-                playerResponse.getSlayer() == this.slayer &&
-                playerResponse.getFarming() == this.farming &&
-                playerResponse.getRunecrafting() == this.runecrafting &&
-                playerResponse.getHunter() == this.hunter &&
-                playerResponse.getConstruction() == this.construction &&
+                playerResponse.getBountyHunter().equals(this.bountyHunter) &&
+                playerResponse.getBountyHunterRogues().equals(this.bountyHunterRogues) &&
+                playerResponse.getLastManStanding().equals(this.lastManStanding) &&
 
-                playerResponse.getBountyHunter() == this.bountyHunter &&
-                playerResponse.getBountyHunterRogues() == this.bountyHunterRogues &&
-                playerResponse.getLastManStanding() == this.lastManStanding &&
-
-                playerResponse.getClueScrolls() == this.clueScrolls &&
-                playerResponse.getEasyClueScrolls() == this.easyClueScrolls &&
-                playerResponse.getMediumClueScrolls() == this.mediumClueScrolls &&
-                playerResponse.getHardClueScrolls() == this.hardClueScrolls &&
-                playerResponse.getEliteClueScrolls() == this.eliteClueScrolls &&
-                playerResponse.getMasterClueScrolls() == this.masterClueScrolls;
+                playerResponse.getClueScrolls().equals(this.clueScrolls) &&
+                playerResponse.getEasyClueScrolls().equals(this.easyClueScrolls) &&
+                playerResponse.getMediumClueScrolls().equals(this.mediumClueScrolls) &&
+                playerResponse.getHardClueScrolls().equals(this.hardClueScrolls) &&
+                playerResponse.getEliteClueScrolls().equals(this.eliteClueScrolls) &&
+                playerResponse.getMasterClueScrolls().equals(this.masterClueScrolls);
     }
 
     @Override
     public int hashCode() {
         final int prime = 29;
         int hashCode = 1;
-        hashCode = prime * hashCode + Arrays.hashCode(this.hiscores);
         hashCode = prime * hashCode + this.overall.hashCode();
         hashCode = prime * hashCode + this.attack.hashCode();
         hashCode = prime * hashCode + this.defence.hashCode();
