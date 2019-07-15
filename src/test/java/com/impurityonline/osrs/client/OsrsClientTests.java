@@ -3,6 +3,7 @@ package com.impurityonline.osrs.client;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.impurityonline.osrs.client.response.item.ApiItemResponse;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
+import com.impurityonline.osrs.exception.ApiPlayerResponseException;
 import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
 import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
 import com.impurityonline.osrs.utils.AbstractTest;
@@ -81,7 +82,20 @@ class OsrsClientTests extends AbstractTest {
     }
 
     @Test
-    @DisplayName("When the steam client library has server error, throw RestTemplateServerException")
+    @DisplayName("When the steam client library has client error, throw OsrsClientPlayerHttpRequestException")
+    void osrsClient_with_CLIENTERROR_invalidResponse() {
+        String playerName = "123";
+        mockServer.expect(once(), requestTo(buildPlayerURL(playerName).toUriString()))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.NOT_FOUND)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body("")
+                );
+        assertThrows(OsrsClientPlayerHttpRequestException.class, () -> osrsClient.getPlayer(playerName));
+    }
+
+    @Test
+    @DisplayName("When the steam client library has server error, throw OsrsClientPlayerHttpRequestException")
     void osrsClient_with_SERVERERROR_osrsApiPlayerResponse() {
         String playerName = "123";
         String osrsApiPlayerResponse = getValidApiPlayerResponseString();
