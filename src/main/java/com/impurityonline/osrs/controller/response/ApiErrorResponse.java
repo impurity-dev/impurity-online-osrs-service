@@ -2,7 +2,6 @@ package com.impurityonline.osrs.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.NonNull;
 import org.springframework.http.HttpStatus;

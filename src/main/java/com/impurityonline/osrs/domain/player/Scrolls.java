@@ -1,6 +1,5 @@
 package com.impurityonline.osrs.domain.player;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 

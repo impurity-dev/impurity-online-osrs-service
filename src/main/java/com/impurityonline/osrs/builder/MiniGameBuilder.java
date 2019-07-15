@@ -4,7 +4,6 @@ import com.impurityonline.osrs.client.response.player.ApiMiniGame;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.domain.player.MiniGame;
 import com.impurityonline.osrs.domain.player.MiniGames;
-import com.impurityonline.osrs.enums.OsrsHiScore;
 import lombok.NonNull;
 
 /**
@@ -18,7 +17,7 @@ public class MiniGameBuilder {
         MiniGames miniGames = new MiniGames();
         miniGames.setBountyHunter(buildMiniGame(apiPlayerResponse.getBountyHunter()));
         miniGames.setBountyHunterRogues(buildMiniGame(apiPlayerResponse.getBountyHunterRogues()));
-        miniGames.setLastManStanding(buildMiniGame(apiPlayerResponse.getLastManStanging()));
+        miniGames.setLastManStanding(buildMiniGame(apiPlayerResponse.getLastManStanding()));
         return miniGames;
     }
 

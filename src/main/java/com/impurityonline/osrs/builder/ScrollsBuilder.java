@@ -4,7 +4,6 @@ import com.impurityonline.osrs.client.response.player.ApiClueScroll;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.domain.player.Scroll;
 import com.impurityonline.osrs.domain.player.Scrolls;
-import com.impurityonline.osrs.enums.OsrsHiScore;
 import lombok.NonNull;
 
 /**

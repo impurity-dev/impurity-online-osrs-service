@@ -2,8 +2,6 @@ package com.impurityonline.osrs.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.impurityonline.osrs.client.response.item.ApiItemResponse;
-import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
-import com.impurityonline.osrs.exception.ApiPlayerResponseException;
 import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
 import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
 import com.impurityonline.osrs.utils.AbstractTest;
@@ -23,7 +21,8 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import static com.impurityonline.osrs.builder.UrlBuilder.buildGrandExchangeURL;
 import static com.impurityonline.osrs.builder.UrlBuilder.buildPlayerURL;
 import static com.impurityonline.osrs.constant.Profiles.UNIT_TEST;
-import static com.impurityonline.osrs.utils.OsrsFactory.*;
+import static com.impurityonline.osrs.utils.OsrsFactory.getValidApiItemResponse;
+import static com.impurityonline.osrs.utils.OsrsFactory.getValidApiPlayerResponseString;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.client.ExpectedCount.once;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;

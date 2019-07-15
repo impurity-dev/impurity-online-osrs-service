@@ -4,10 +4,7 @@ import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.client.response.player.ApiSkill;
 import com.impurityonline.osrs.domain.player.Skill;
 import com.impurityonline.osrs.domain.player.Skills;
-import com.impurityonline.osrs.enums.OsrsHiScore;
 import lombok.NonNull;
-
-import static java.util.Arrays.copyOfRange;
 
 /**
  * @author impurity

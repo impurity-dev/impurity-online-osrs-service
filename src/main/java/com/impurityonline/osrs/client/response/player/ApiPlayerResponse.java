@@ -42,7 +42,7 @@ public class ApiPlayerResponse {
     private final ApiSkill contruction;
     private final ApiMiniGame bountyHunter;
     private final ApiMiniGame bountyHunterRogues;
-    private final ApiMiniGame lastManStanging;
+    private final ApiMiniGame lastManStanding;
     private final ApiClueScroll clueScrolls;
     private final ApiClueScroll easyClueScrolls;
     private final ApiClueScroll mediumClueScrolls;
@@ -89,7 +89,7 @@ public class ApiPlayerResponse {
 
         this.bountyHunter = new ApiMiniGame(getHiscore(BOUNTY_HUNTER));
         this.bountyHunterRogues = new ApiMiniGame(getHiscore(BOUNTY_HUNTER_ROGUES));
-        this.lastManStanging = new ApiMiniGame(getHiscore(LAST_MAN_STANDING));
+        this.lastManStanding = new ApiMiniGame(getHiscore(LAST_MAN_STANDING));
 
         this.clueScrolls = new ApiClueScroll(getHiscore(CLUE_SCROLLS));
         this.easyClueScrolls = new ApiClueScroll(getHiscore(EASY_CLUE_SCROLLS));
