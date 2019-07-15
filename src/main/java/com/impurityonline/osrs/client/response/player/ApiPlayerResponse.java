@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Arrays;
+
 import static com.impurityonline.osrs.enums.OsrsHiScore.*;
 
 /**
@@ -110,5 +112,95 @@ public class ApiPlayerResponse {
      */
     public String getHiscore(OsrsHiScore osrsHiScore) {
         return hiscores[osrsHiScore.ordinal()];
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        ApiPlayerResponse playerResponse = (ApiPlayerResponse) obj;
+        return playerResponse.getHiscores() == this.hiscores &&
+
+                playerResponse.getOverall() == this.overall &&
+                playerResponse.getAttack() == this.attack &&
+                playerResponse.getDefence() == this.defence &&
+                playerResponse.getStrength() == this.strength &&
+                playerResponse.getHitpoints() == this.hitpoints &&
+                playerResponse.getRanged() == this.ranged &&
+                playerResponse.getPrayer() == this.prayer &&
+                playerResponse.getMagic() == this.magic &&
+                playerResponse.getCooking() == this.cooking &&
+                playerResponse.getWoodcutting() == this.woodcutting &&
+                playerResponse.getFletching() == this.fletching &&
+                playerResponse.getFishing() == this.fishing &&
+                playerResponse.getFiremaking() == this.firemaking &&
+                playerResponse.getCrafting() == this.crafting &&
+                playerResponse.getSmithing() == this.smithing &&
+                playerResponse.getMining() == this.mining &&
+                playerResponse.getHerblore() == this.herblore &&
+                playerResponse.getAgility() == this.agility &&
+                playerResponse.getThieving() == this.thieving &&
+                playerResponse.getSlayer() == this.slayer &&
+                playerResponse.getFarming() == this.farming &&
+                playerResponse.getRunecrafting() == this.runecrafting &&
+                playerResponse.getHunter() == this.hunter &&
+                playerResponse.getConstruction() == this.construction &&
+
+                playerResponse.getBountyHunter() == this.bountyHunter &&
+                playerResponse.getBountyHunterRogues() == this.bountyHunterRogues &&
+                playerResponse.getLastManStanding() == this.lastManStanding &&
+
+                playerResponse.getClueScrolls() == this.clueScrolls &&
+                playerResponse.getEasyClueScrolls() == this.easyClueScrolls &&
+                playerResponse.getMediumClueScrolls() == this.mediumClueScrolls &&
+                playerResponse.getHardClueScrolls() == this.hardClueScrolls &&
+                playerResponse.getEliteClueScrolls() == this.eliteClueScrolls &&
+                playerResponse.getMasterClueScrolls() == this.masterClueScrolls;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 29;
+        int hashCode = 1;
+        hashCode = prime * hashCode + Arrays.hashCode(this.hiscores);
+        hashCode = prime * hashCode + this.overall.hashCode();
+        hashCode = prime * hashCode + this.attack.hashCode();
+        hashCode = prime * hashCode + this.defence.hashCode();
+        hashCode = prime * hashCode + this.strength.hashCode();
+        hashCode = prime * hashCode + this.hitpoints.hashCode();
+        hashCode = prime * hashCode + this.ranged.hashCode();
+        hashCode = prime * hashCode + this.prayer.hashCode();
+        hashCode = prime * hashCode + this.magic.hashCode();
+        hashCode = prime * hashCode + this.cooking.hashCode();
+        hashCode = prime * hashCode + this.woodcutting.hashCode();
+        hashCode = prime * hashCode + this.fletching.hashCode();
+        hashCode = prime * hashCode + this.fishing.hashCode();
+        hashCode = prime * hashCode + this.firemaking.hashCode();
+        hashCode = prime * hashCode + this.crafting.hashCode();
+        hashCode = prime * hashCode + this.smithing.hashCode();
+        hashCode = prime * hashCode + this.mining.hashCode();
+        hashCode = prime * hashCode + this.herblore.hashCode();
+        hashCode = prime * hashCode + this.agility.hashCode();
+        hashCode = prime * hashCode + this.thieving.hashCode();
+        hashCode = prime * hashCode + this.slayer.hashCode();
+        hashCode = prime * hashCode + this.farming.hashCode();
+        hashCode = prime * hashCode + this.runecrafting.hashCode();
+        hashCode = prime * hashCode + this.hunter.hashCode();
+        hashCode = prime * hashCode + this.construction.hashCode();
+
+        hashCode = prime * hashCode + this.bountyHunter.hashCode();
+        hashCode = prime * hashCode + this.bountyHunterRogues.hashCode();
+        hashCode = prime * hashCode + this.lastManStanding.hashCode();
+
+        hashCode = prime * hashCode + this.clueScrolls.hashCode();
+        hashCode = prime * hashCode + this.easyClueScrolls.hashCode();
+        hashCode = prime * hashCode + this.mediumClueScrolls.hashCode();
+        hashCode = prime * hashCode + this.hardClueScrolls.hashCode();
+        hashCode = prime * hashCode + this.eliteClueScrolls.hashCode();
+        hashCode = prime * hashCode + this.masterClueScrolls.hashCode();
+        return hashCode;
     }
 }
