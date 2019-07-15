@@ -1,6 +1,6 @@
 package com.impurityonline.osrs.builder;
 
-import com.impurityonline.osrs.client.response.player.ApiMiniGame;
+import com.impurityonline.osrs.client.response.player.ApiMiniGameResponse;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.domain.player.MiniGame;
 import com.impurityonline.osrs.domain.player.MiniGames;
@@ -21,10 +21,10 @@ public class MiniGameBuilder {
         return miniGames;
     }
 
-    private static MiniGame buildMiniGame(@NonNull ApiMiniGame apiMiniGame) {
+    private static MiniGame buildMiniGame(@NonNull ApiMiniGameResponse apiMiniGameResponse) {
         MiniGame miniGame = new MiniGame();
-        miniGame.setRank(apiMiniGame.getRank());
-        miniGame.setScore(apiMiniGame.getScore());
+        miniGame.setRank(apiMiniGameResponse.getRank());
+        miniGame.setScore(apiMiniGameResponse.getScore());
         return miniGame;
     }
 }

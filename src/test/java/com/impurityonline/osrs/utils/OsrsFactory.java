@@ -4,8 +4,8 @@ import com.impurityonline.osrs.client.response.item.ApiItem;
 import com.impurityonline.osrs.client.response.item.ApiItemPrice;
 import com.impurityonline.osrs.client.response.item.ApiItemResponse;
 import com.impurityonline.osrs.client.response.item.ApiItemTrend;
-import com.impurityonline.osrs.client.response.player.ApiClueScroll;
-import com.impurityonline.osrs.client.response.player.ApiMiniGame;
+import com.impurityonline.osrs.client.response.player.ApiClueScrollResponse;
+import com.impurityonline.osrs.client.response.player.ApiMiniGameResponse;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.domain.item.*;
 import com.impurityonline.osrs.domain.player.Player;
@@ -113,12 +113,12 @@ public class OsrsFactory {
         return getValidApiPlayerResponseString() + "\n-1,-1";
     }
 
-    public static ApiClueScroll getValidScroll() throws Exception {
-        return new ApiClueScroll("1,1");
+    public static ApiClueScrollResponse getValidScroll() throws Exception {
+        return new ApiClueScrollResponse("1,1");
     }
 
-    public static ApiMiniGame getValidMiniGame() throws Exception {
-        return new ApiMiniGame("1,1");
+    public static ApiMiniGameResponse getValidMiniGame() throws Exception {
+        return new ApiMiniGameResponse("1,1");
     }
 
     public static Item getValidOsrsItem(Long id) {

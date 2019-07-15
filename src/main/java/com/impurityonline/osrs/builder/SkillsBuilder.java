@@ -1,7 +1,7 @@
 package com.impurityonline.osrs.builder;
 
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
-import com.impurityonline.osrs.client.response.player.ApiSkill;
+import com.impurityonline.osrs.client.response.player.ApiSkillResponse;
 import com.impurityonline.osrs.domain.player.Skill;
 import com.impurityonline.osrs.domain.player.Skills;
 import lombok.NonNull;
@@ -42,11 +42,11 @@ public class SkillsBuilder {
         return skills;
     }
 
-    private static Skill buildSkill(@NonNull ApiSkill apiSkill) {
+    private static Skill buildSkill(@NonNull ApiSkillResponse apiSkillResponse) {
         Skill skill = new Skill();
-        skill.setRank(apiSkill.getRank());
-        skill.setLevel(apiSkill.getLevel());
-        skill.setExperience(apiSkill.getExperience());
+        skill.setRank(apiSkillResponse.getRank());
+        skill.setLevel(apiSkillResponse.getLevel());
+        skill.setExperience(apiSkillResponse.getExperience());
         return skill;
     }
 }

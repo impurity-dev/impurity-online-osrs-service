@@ -11,49 +11,49 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 /**
  * @author impurity
  */
-class ApiClueScrollTests extends AbstractTest {
+class ApiClueScrollResponseTests extends AbstractTest {
 
     @Test
     @DisplayName("When the api clue scroll has null hiscores, throw null pointer")
     void apiClueScrolls_nullHiScores_nullPointer() {
-        assertThrows(NullPointerException.class, () -> new ApiClueScroll(null));
+        assertThrows(NullPointerException.class, () -> new ApiClueScrollResponse(null));
     }
 
     @Test
     @DisplayName("When the api clue scroll has empty hiscores, throw apiPlayerResponseException")
     void apiClueScrolls_emptyHiScores_apiPlayerResponseException() {
-        assertThrows(ApiPlayerResponseException.class, () -> new ApiClueScroll(""));
+        assertThrows(ApiPlayerResponseException.class, () -> new ApiClueScrollResponse(""));
     }
 
     @Test
     @DisplayName("When the api clue scroll has too few hiscores, throw apiPlayerResponseException")
     void apiClueScrolls_tooFewHiScores_apiPlayerResponseException() {
-        assertThrows(ApiPlayerResponseException.class, () -> new ApiClueScroll("1,"));
+        assertThrows(ApiPlayerResponseException.class, () -> new ApiClueScrollResponse("1,"));
     }
 
     @Test
     @DisplayName("When the api clue scroll has too many hiscores, throw apiPlayerResponseException")
     void apiClueScrolls_tooManyHiScores_apiPlayerResponseException() {
-        assertThrows(ApiPlayerResponseException.class, () -> new ApiClueScroll("1,1,1"));
+        assertThrows(ApiPlayerResponseException.class, () -> new ApiClueScrollResponse("1,1,1"));
     }
 
     @Test
     @DisplayName("When the api clue scroll has too many hiscores, throw apiPlayerResponseException")
     void apiClueScrolls_invalidHiScores_apiPlayerResponseException() {
-        assertThrows(ApiPlayerResponseException.class, () -> new ApiClueScroll("a,1"));
+        assertThrows(ApiPlayerResponseException.class, () -> new ApiClueScrollResponse("a,1"));
     }
 
     @Test
     @DisplayName("When the api clue scroll has valid hiscores, create and store rank")
     void apiClueScrolls_validHiScores_rank() throws Exception {
-        ApiClueScroll clueScroll = new ApiClueScroll("1,2");
+        ApiClueScrollResponse clueScroll = new ApiClueScrollResponse("1,2");
         assertEquals(clueScroll.getRank(), (Long) 1L);
     }
 
     @Test
     @DisplayName("When the api clue scroll has valid hiscores, create and store score")
     void apiClueScrolls_validHiScores_score() throws Exception {
-        ApiClueScroll clueScroll = new ApiClueScroll("1,2");
+        ApiClueScrollResponse clueScroll = new ApiClueScrollResponse("1,2");
         assertEquals(clueScroll.getScore(), (Long) 2L);
     }
 }

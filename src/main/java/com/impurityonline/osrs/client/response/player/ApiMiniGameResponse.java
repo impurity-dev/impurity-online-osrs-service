@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Data
-public class ApiMiniGame {
+public class ApiMiniGameResponse {
     private static final int MINIGAME_HISCORE_TOTAL = 2;
     private Long rank;
     private Long score;
@@ -23,7 +23,7 @@ public class ApiMiniGame {
      * @param minigameHiscores the api returned mini game hiscores
      * @throws ApiPlayerResponseException if the hiscores are invalid
      */
-    public ApiMiniGame(@NonNull String minigameHiscores) throws ApiPlayerResponseException {
+    public ApiMiniGameResponse(@NonNull String minigameHiscores) throws ApiPlayerResponseException {
         String[] scores = minigameHiscores.split(",");
         if (scores.length != MINIGAME_HISCORE_TOTAL) {
             log.error("Not valid minigame hiscores count: hiscores={}", minigameHiscores);

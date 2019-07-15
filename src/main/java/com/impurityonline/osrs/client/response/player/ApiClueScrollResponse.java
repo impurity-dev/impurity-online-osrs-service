@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Data
-public class ApiClueScroll {
+public class ApiClueScrollResponse {
     private static final int SCROLL_HISCORE_TOTAL = 2;
     private Long rank;
     private Long score;
@@ -23,7 +23,7 @@ public class ApiClueScroll {
      * @param scrollHiscores the api returned clue scroll hiscores
      * @throws ApiPlayerResponseException if the hiscores are invalid
      */
-    public ApiClueScroll(@NonNull String scrollHiscores) throws ApiPlayerResponseException {
+    public ApiClueScrollResponse(@NonNull String scrollHiscores) throws ApiPlayerResponseException {
         String[] scores = scrollHiscores.split(",");
         if (scores.length != SCROLL_HISCORE_TOTAL) {
             log.error("Not valid scroll hiscores count: hiscores={}", scrollHiscores);

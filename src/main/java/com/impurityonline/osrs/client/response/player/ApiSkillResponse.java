@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Data
-public class ApiSkill {
+public class ApiSkillResponse {
     private static final int SKILL_HISCORE_TOTAL = 3;
     private Long rank;
     private Long level;
@@ -24,7 +24,7 @@ public class ApiSkill {
      * @param skillHiscores the api returned skill hiscores
      * @throws ApiPlayerResponseException if the hiscores are invalid
      */
-    public ApiSkill(@NonNull String skillHiscores) throws ApiPlayerResponseException {
+    public ApiSkillResponse(@NonNull String skillHiscores) throws ApiPlayerResponseException {
         String[] scores = skillHiscores.split(",");
         if (scores.length != SKILL_HISCORE_TOTAL) {
             log.error("Not valid skill hiscores count: hiscores={}", skillHiscores);

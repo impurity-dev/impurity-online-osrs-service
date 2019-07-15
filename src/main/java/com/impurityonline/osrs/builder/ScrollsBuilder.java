@@ -1,6 +1,6 @@
 package com.impurityonline.osrs.builder;
 
-import com.impurityonline.osrs.client.response.player.ApiClueScroll;
+import com.impurityonline.osrs.client.response.player.ApiClueScrollResponse;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.domain.player.Scroll;
 import com.impurityonline.osrs.domain.player.Scrolls;
@@ -24,10 +24,10 @@ public class ScrollsBuilder {
         return scrolls;
     }
 
-    private static Scroll buildScroll(@NonNull ApiClueScroll apiClueScroll) {
+    private static Scroll buildScroll(@NonNull ApiClueScrollResponse apiClueScrollResponse) {
         Scroll scroll = new Scroll();
-        scroll.setRank(apiClueScroll.getRank());
-        scroll.setScore(apiClueScroll.getScore());
+        scroll.setRank(apiClueScrollResponse.getRank());
+        scroll.setScore(apiClueScrollResponse.getScore());
         return scroll;
     }
 }

@@ -1,6 +1,6 @@
 package com.impurityonline.osrs.builder;
 
-import com.impurityonline.osrs.client.response.player.ApiMiniGame;
+import com.impurityonline.osrs.client.response.player.ApiMiniGameResponse;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.domain.player.MiniGame;
 import com.impurityonline.osrs.utils.configs.AbstractTest;
@@ -66,7 +66,7 @@ class MiniGameBuilderTests extends AbstractTest {
     @Test
     @DisplayName("When player api response is valid, build the mini games")
     void minigameBuild_buildsBountyHunter() {
-        ApiMiniGame expected = apiPlayerResponse.getBountyHunter();
+        ApiMiniGameResponse expected = apiPlayerResponse.getBountyHunter();
         MiniGame actual = MiniGameBuilder.buildMiniGames(apiPlayerResponse).getBountyHunter();
         assertEquals(expected.getRank(), actual.getRank());
         assertEquals(expected.getScore(), actual.getScore());
@@ -75,7 +75,7 @@ class MiniGameBuilderTests extends AbstractTest {
     @Test
     @DisplayName("When player api response is valid, build the bounty hunter rogues")
     void minigameBuild_buildsBountyHunterRogues() {
-        ApiMiniGame expected = apiPlayerResponse.getBountyHunterRogues();
+        ApiMiniGameResponse expected = apiPlayerResponse.getBountyHunterRogues();
         MiniGame actual = MiniGameBuilder.buildMiniGames(apiPlayerResponse).getBountyHunterRogues();
         assertEquals(expected.getRank(), actual.getRank());
         assertEquals(expected.getScore(), actual.getScore());
@@ -84,7 +84,7 @@ class MiniGameBuilderTests extends AbstractTest {
     @Test
     @DisplayName("When player api response is valid, build the mini games")
     void minigameBuild_buildsLastManStanding() {
-        ApiMiniGame expected = apiPlayerResponse.getLastManStanding();
+        ApiMiniGameResponse expected = apiPlayerResponse.getLastManStanding();
         MiniGame actual = MiniGameBuilder.buildMiniGames(apiPlayerResponse).getLastManStanding();
         assertEquals(expected.getRank(), actual.getRank());
         assertEquals(expected.getScore(), actual.getScore());
