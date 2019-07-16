@@ -2,7 +2,7 @@ package com.impurityonline.osrs.controller;
 
 import com.impurityonline.osrs.controller.response.player.PlayerResponse;
 import com.impurityonline.osrs.domain.player.Player;
-import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
+import com.impurityonline.osrs.exception.ItemRequestException;
 import com.impurityonline.osrs.exception.PlayerNotFoundException;
 import com.impurityonline.osrs.service.PlayerService;
 import com.impurityonline.osrs.test.utils.configs.AbstractControllerTest;
@@ -54,7 +54,7 @@ class PlayerControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs player and it cannot be created, return 500")
     void osrs_player_return_500() throws Exception {
-        when(playerService.getPlayer(MOCK_PLAYER_NAME)).thenThrow(OsrsClientPlayerHttpRequestException.class);
+        when(playerService.getPlayer(MOCK_PLAYER_NAME)).thenThrow(ItemRequestException.class);
         mockMvc.perform(get("/v1/players/" + MOCK_PLAYER_NAME)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());

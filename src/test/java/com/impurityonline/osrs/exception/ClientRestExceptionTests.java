@@ -10,27 +10,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author tmk2003
  */
-class RestTemplateServerExceptionTests extends AbstractTest {
+class ClientRestExceptionTests extends AbstractTest {
 
     @Test
     @DisplayName("The rest template client exception stores message properly")
     void captures_message() {
         String testMessage = "apples";
-        assertEquals(new RestTemplateServerException(testMessage, HttpStatus.SERVICE_UNAVAILABLE, new Exception()).getMessage(), testMessage);
+        assertEquals(new ClientRestException(testMessage, HttpStatus.SERVICE_UNAVAILABLE, new Exception()).getMessage(), testMessage);
     }
 
     @Test
     @DisplayName("The rest template client exception stores message properly")
     void captures_throwable() {
         Exception testException = new Exception();
-        assertEquals(new RestTemplateServerException("apples", HttpStatus.SERVICE_UNAVAILABLE, testException).getCause(), testException);
+        assertEquals(new ClientRestException("apples", HttpStatus.SERVICE_UNAVAILABLE, testException).getCause(), testException);
     }
 
     @Test
     @DisplayName("The rest template client exception stores message properly")
     void captures_status() {
         HttpStatus testStatus = HttpStatus.ACCEPTED;
-        assertEquals(new RestTemplateServerException("apples",testStatus, new Exception()).getStatus(), testStatus);
+        assertEquals(new ClientRestException("apples",testStatus, new Exception()).getStatus(), testStatus);
     }
 }
 

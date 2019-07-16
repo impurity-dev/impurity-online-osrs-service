@@ -1,7 +1,7 @@
 package com.impurityonline.osrs.client;
 
-import com.impurityonline.osrs.exception.RestTemplateClientException;
-import com.impurityonline.osrs.exception.RestTemplateServerException;
+import com.impurityonline.osrs.exception.ClientRestException;
+import com.impurityonline.osrs.exception.ServerRestException;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -39,16 +39,16 @@ abstract class RestClient {
      * @return The Response from the GET request
      */
     <T> ResponseEntity<T> executeRequest(HttpMethod method, String uri, HttpEntity entity, Class<T> clazz)
-            throws RestTemplateClientException, RestTemplateServerException {
+            throws ClientRestException, ServerRestException {
         try {
             log.info("Request: Method={} Uri={}", method.toString(), uri);
             return restTemplate.exchange(uri, method, entity, clazz);
         } catch(HttpClientErrorException ex) {
             log.error("Could not complete request: Message: {} - Body: {}", ex.getMessage(), ex.getResponseBodyAsString());
-            throw new RestTemplateClientException("Get Request Failure", ex.getStatusCode(), ex);
+            throw new ClientRestException("Get Request Failure", ex.getStatusCode(), ex);
         } catch(HttpServerErrorException ex) {
             log.error("Could not complete request: Message: {} - Body: {}", ex.getMessage(), ex.getResponseBodyAsString());
-            throw new RestTemplateServerException("Get Request Failure", ex.getStatusCode(), ex);
+            throw new ServerRestException("Get Request Failure", ex.getStatusCode(), ex);
         }
     }
 }

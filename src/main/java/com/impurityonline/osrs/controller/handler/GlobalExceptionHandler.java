@@ -1,7 +1,7 @@
 package com.impurityonline.osrs.controller.handler;
 
 import com.impurityonline.osrs.controller.response.ApiErrorResponse;
-import com.impurityonline.osrs.exception.RestTemplateServerException;
+import com.impurityonline.osrs.exception.ServerRestException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -33,8 +33,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 
-    @ExceptionHandler(RestTemplateServerException.class)
-    protected ResponseEntity<ApiErrorResponse> handledRestTemplateServerException(final RestTemplateServerException ex) {
+    @ExceptionHandler(ServerRestException.class)
+    protected ResponseEntity<ApiErrorResponse> handledRestTemplateServerException(final ServerRestException ex) {
         log.info("Rest template server exception: {}", ex.getMessage());
         ApiErrorResponse apiError = new ApiErrorResponse(SERVICE_UNAVAILABLE, "Could not complete request to external resource. Try again later.", ex);
         return new ResponseEntity<>(apiError, apiError.getStatus());

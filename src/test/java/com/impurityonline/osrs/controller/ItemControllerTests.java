@@ -6,7 +6,7 @@ import com.impurityonline.osrs.controller.response.item.ItemResponse;
 import com.impurityonline.osrs.controller.response.item.ItemTrendsResponse;
 import com.impurityonline.osrs.domain.item.Item;
 import com.impurityonline.osrs.exception.ItemNotFoundException;
-import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
+import com.impurityonline.osrs.exception.PlayerRequestException;
 import com.impurityonline.osrs.service.ItemService;
 import com.impurityonline.osrs.test.utils.configs.AbstractControllerTest;
 import org.junit.jupiter.api.DisplayName;
@@ -54,7 +54,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item and it cannot be created, return 500")
     void item_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -83,7 +83,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item name and it cannot be created, return 500")
     void itemName_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/names")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -112,7 +112,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item description and it cannot be created, return 500")
     void itemDescription_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/descriptions")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -141,7 +141,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item type and it cannot be created, return 500")
     void itemType_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/types")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -172,7 +172,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item icons and it cannot be created, return 500")
     void itemIcons_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -201,7 +201,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item type icon and it cannot be created, return 500")
     void itemTypeIcon_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons/type-icons")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -230,7 +230,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item small icon and it cannot be created, return 500")
     void itemSmallIcon_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons/small-icons")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -259,7 +259,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item large icon and it cannot be created, return 500")
     void itemLargeIcon_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/icons/large-icons")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -288,7 +288,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item is member and it cannot be created, return 500")
     void itemIsMember_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/members")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -319,7 +319,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item prices and it cannot be created, return 500")
     void itemPrices_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -348,7 +348,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item current price and it cannot be created, return 500")
     void itemCurrentPrice_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/current-prices")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -377,7 +377,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item current trend and it cannot be created, return 500")
     void itemCurrentTrend_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/current-trends")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -406,7 +406,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item today price and it cannot be created, return 500")
     void itemTodayPrice_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/prices/today-prices")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -435,7 +435,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item today trends and it cannot be created, return 500")
     void itemTodayTrend_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/today-trends")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -466,7 +466,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item trends and it cannot be created, return 500")
     void itemTrends_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -495,7 +495,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item 30 day trend and it cannot be created, return 500")
     void itemDay30Trend_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/30-days")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -524,7 +524,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item 30 day change and it cannot be created, return 500")
     void itemDay30Change_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/changes/30-days")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -553,7 +553,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item 90 day trend and it cannot be created, return 500")
     void itemDay90Trend_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/90-days")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -582,7 +582,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item 90 day change and it cannot be created, return 500")
     void itemDay90Change_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/changes/90-days")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -611,7 +611,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item 180 day trend and it cannot be created, return 500")
     void itemDay180Trend_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/trends/180-days")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -640,7 +640,7 @@ class ItemControllerTests extends AbstractControllerTest {
     @Test
     @DisplayName("When getting a osrs item 180 day trends change and it cannot be created, return 500")
     void itemDay180Change_return500() throws Exception {
-        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(OsrsClientItemHttpRequestException.class);
+        when(itemService.getItem(MOCK_ITEM_ID)).thenThrow(PlayerRequestException.class);
         mockMvc.perform(get("/v1/items/" + MOCK_ITEM_ID + "/changes/180-days")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());

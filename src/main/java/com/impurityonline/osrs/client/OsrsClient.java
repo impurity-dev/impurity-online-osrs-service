@@ -53,13 +53,13 @@ public class OsrsClient extends RestClient {
             return new ApiPlayerResponse(hiscores);
         } catch(ApiPlayerResponseException ex) {
             log.error("Osrs Client Response Issues: {}", ex.getMessage());
-            throw new OsrsClientPlayerHttpRequestException("Cannot create player", HttpStatus.INTERNAL_SERVER_ERROR, ex);
-        } catch (RestTemplateClientException ex) {
+            throw new ItemRequestException("Cannot create player", HttpStatus.INTERNAL_SERVER_ERROR, ex);
+        } catch (ClientRestException ex) {
             log.error("Osrs Client Issues: {}", ex.getMessage());
-            throw new OsrsClientPlayerHttpRequestException("Cannot get player", ex.getStatus(), ex);
-        } catch (RestTemplateServerException ex) {
+            throw new ItemRequestException("Cannot get player", ex.getStatus(), ex);
+        } catch (ServerRestException ex) {
             log.error("Osrs Server Issues: {}", ex.getMessage());
-            throw new OsrsClientPlayerHttpRequestException("Cannot get player", ex.getStatus(), ex);
+            throw new ItemRequestException("Cannot get player", ex.getStatus(), ex);
         }
     }
 
@@ -79,12 +79,12 @@ public class OsrsClient extends RestClient {
             );
             return Optional.ofNullable(itemEntity.getBody())
                     .orElseThrow(() -> new ItemNotFoundException("No response body found for itemId=" + itemId));
-        } catch (RestTemplateClientException ex) {
+        } catch (ClientRestException ex) {
             log.error("Osrs Client Issues: {}", ex.getMessage());
-            throw new OsrsClientItemHttpRequestException("Cannot get item", ex.getStatus(), ex);
-        } catch (RestTemplateServerException ex) {
+            throw new PlayerRequestException("Cannot get item", ex.getStatus(), ex);
+        } catch (ServerRestException ex) {
             log.error("Osrs Server Issues: {}", ex.getMessage());
-            throw new OsrsClientItemHttpRequestException("Cannot get item", ex.getStatus(), ex);
+            throw new PlayerRequestException("Cannot get item", ex.getStatus(), ex);
         }
     }
 }

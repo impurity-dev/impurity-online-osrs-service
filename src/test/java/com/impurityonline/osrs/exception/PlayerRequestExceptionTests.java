@@ -10,27 +10,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author impurity
  */
-class OsrsClientItemHttpRequestExceptionTests extends AbstractTest {
+class PlayerRequestExceptionTests extends AbstractTest {
 
     @Test
     @DisplayName("The osrs item request exception stores message properly")
     void captures_message() {
         String testMessage = "apples";
-        assertEquals(new OsrsClientItemHttpRequestException(testMessage, HttpStatus.SERVICE_UNAVAILABLE, new Exception()).getMessage(), testMessage);
+        assertEquals(new PlayerRequestException(testMessage, HttpStatus.SERVICE_UNAVAILABLE, new Exception()).getMessage(), testMessage);
     }
 
     @Test
     @DisplayName("The osrs item request exception stores message properly")
     void captures_throwable() {
         Exception testException = new Exception();
-        assertEquals(new OsrsClientItemHttpRequestException("apples", HttpStatus.SERVICE_UNAVAILABLE, testException).getCause(), testException);
+        assertEquals(new PlayerRequestException("apples", HttpStatus.SERVICE_UNAVAILABLE, testException).getCause(), testException);
     }
 
     @Test
     @DisplayName("The osrs item request exception stores message properly")
     void captures_status() {
         HttpStatus testStatus = HttpStatus.ACCEPTED;
-        assertEquals(new OsrsClientItemHttpRequestException("apples",testStatus, new Exception()).getStatus(), testStatus);
+        assertEquals(new PlayerRequestException("apples",testStatus, new Exception()).getStatus(), testStatus);
     }
 }
 

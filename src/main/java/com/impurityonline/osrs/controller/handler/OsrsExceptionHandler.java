@@ -2,8 +2,8 @@ package com.impurityonline.osrs.controller.handler;
 
 import com.impurityonline.osrs.controller.response.ApiErrorResponse;
 import com.impurityonline.osrs.exception.ItemNotFoundException;
-import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
-import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
+import com.impurityonline.osrs.exception.ItemRequestException;
+import com.impurityonline.osrs.exception.PlayerRequestException;
 import com.impurityonline.osrs.exception.PlayerNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
@@ -37,15 +37,15 @@ public class OsrsExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 
-    @ExceptionHandler(OsrsClientPlayerHttpRequestException.class)
-    protected ResponseEntity<ApiErrorResponse> handledOsrsClientPlayerHttpRequestException(final OsrsClientPlayerHttpRequestException ex) {
+    @ExceptionHandler(ItemRequestException.class)
+    protected ResponseEntity<ApiErrorResponse> handledOsrsClientPlayerHttpRequestException(final ItemRequestException ex) {
         log.info("The Osrs Client was unable to successfully complete the get player request: {}:{}", ex.getStatus(), ex.getMessage());
         ApiErrorResponse apiError = new ApiErrorResponse(INTERNAL_SERVER_ERROR, "Could not complete request to fetch osrs player.", ex);
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 
-    @ExceptionHandler(OsrsClientItemHttpRequestException.class)
-    protected ResponseEntity<ApiErrorResponse> handledOsrsClientItemHttpRequestException(final OsrsClientItemHttpRequestException ex) {
+    @ExceptionHandler(PlayerRequestException.class)
+    protected ResponseEntity<ApiErrorResponse> handledOsrsClientItemHttpRequestException(final PlayerRequestException ex) {
         log.info("The Osrs Client was unable to successfully complete the get item request: {}:{}", ex.getStatus(), ex.getMessage());
         ApiErrorResponse apiError = new ApiErrorResponse(INTERNAL_SERVER_ERROR, "Could not complete request to fetch osrs item.", ex);
         return new ResponseEntity<>(apiError, apiError.getStatus());
