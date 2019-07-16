@@ -12,6 +12,7 @@ import static com.impurityonline.osrs.factory.ScrollsFactory.buildScrolls;
 import static com.impurityonline.osrs.factory.SkillsFactory.buildSkills;
 import static com.impurityonline.osrs.test.utils.OsrsFactory.getValidApiPlayerResponse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 /**
@@ -23,6 +24,18 @@ class PlayerServiceImplTests extends AbstractServiceTest {
     @InjectMocks
     private PlayerServiceImpl playerService;
     private static String MOCK_PLAYER_NAME = "1234";
+
+    @Test
+    @DisplayName("When playerName is nul, throw nullpointer")
+    void getPlayer_nullName_throwNullPointer() {
+        assertThrows(NullPointerException.class, () -> playerService.getPlayer(null));
+    }
+
+    @Test
+    @DisplayName("When playerName is empty, throw illegal argument")
+    void getPlayer_emptyName_throwIllegalArgument() {
+        assertThrows(IllegalArgumentException.class, () -> playerService.getPlayer(""));
+    }
 
     @Test
     @DisplayName("When the client returns a valid player response, return the player with proper name")
