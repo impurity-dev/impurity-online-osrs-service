@@ -7,6 +7,7 @@ import com.impurityonline.osrs.client.response.item.ApiItemTrend;
 import com.impurityonline.osrs.client.response.player.ApiClueScrollResponse;
 import com.impurityonline.osrs.client.response.player.ApiMiniGameResponse;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
+import com.impurityonline.osrs.client.response.player.ApiSkillResponse;
 import com.impurityonline.osrs.domain.item.*;
 import com.impurityonline.osrs.domain.player.Player;
 import com.impurityonline.osrs.exception.ApiPlayerResponseException;
@@ -111,6 +112,10 @@ public class OsrsFactory {
     }
     public static String getLongInvalidApiPlayerResponseString() {
         return getValidApiPlayerResponseString() + "\n-1,-1";
+    }
+
+    public static ApiSkillResponse getValidSkill() throws Exception {
+        return new ApiSkillResponse("1,1,1");
     }
 
     public static ApiClueScrollResponse getValidScroll() throws Exception {

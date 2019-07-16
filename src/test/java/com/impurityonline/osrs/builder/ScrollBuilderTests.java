@@ -12,7 +12,8 @@ import static com.impurityonline.osrs.utils.OsrsFactory.getValidApiPlayerRespons
 import static com.impurityonline.osrs.utils.OsrsFactory.getValidScroll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * @author impurity
