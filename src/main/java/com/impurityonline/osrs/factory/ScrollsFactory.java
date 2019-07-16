@@ -1,4 +1,4 @@
-package com.impurityonline.osrs.builder;
+package com.impurityonline.osrs.factory;
 
 import com.impurityonline.osrs.client.response.player.ApiClueScrollResponse;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
@@ -9,9 +9,9 @@ import lombok.NonNull;
 /**
  * @author impurity
  */
-public class ScrollsBuilder {
+public class ScrollsFactory {
 
-    private ScrollsBuilder() {}
+    private ScrollsFactory() {}
 
     public static Scrolls buildScrolls(@NonNull ApiPlayerResponse apiPlayerResponse) {
         Scrolls scrolls = new Scrolls();

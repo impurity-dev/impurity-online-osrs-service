@@ -15,8 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 
-import static com.impurityonline.osrs.builder.UrlBuilder.buildGrandExchangeURL;
-import static com.impurityonline.osrs.builder.UrlBuilder.buildPlayerURL;
+import static com.impurityonline.osrs.factory.UrlFactory.buildGrandExchangeURL;
+import static com.impurityonline.osrs.factory.UrlFactory.buildPlayerURL;
 import static com.impurityonline.osrs.utils.OsrsFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

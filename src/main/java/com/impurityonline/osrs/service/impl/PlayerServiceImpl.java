@@ -8,9 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.impurityonline.osrs.builder.MiniGameBuilder.buildMiniGames;
-import static com.impurityonline.osrs.builder.ScrollsBuilder.buildScrolls;
-import static com.impurityonline.osrs.builder.SkillsBuilder.buildSkills;
+import static com.impurityonline.osrs.factory.MiniGameFactory.buildMiniGames;
+import static com.impurityonline.osrs.factory.ScrollsFactory.buildScrolls;
+import static com.impurityonline.osrs.factory.SkillsFactory.buildSkills;
 
 /**
  * @author impurity

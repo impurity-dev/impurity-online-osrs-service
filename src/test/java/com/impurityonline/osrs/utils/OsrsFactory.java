@@ -12,9 +12,9 @@ import com.impurityonline.osrs.domain.item.*;
 import com.impurityonline.osrs.domain.player.Player;
 import com.impurityonline.osrs.exception.ApiPlayerResponseException;
 
-import static com.impurityonline.osrs.builder.MiniGameBuilder.buildMiniGames;
-import static com.impurityonline.osrs.builder.ScrollsBuilder.buildScrolls;
-import static com.impurityonline.osrs.builder.SkillsBuilder.buildSkills;
+import static com.impurityonline.osrs.factory.MiniGameFactory.buildMiniGames;
+import static com.impurityonline.osrs.factory.ScrollsFactory.buildScrolls;
+import static com.impurityonline.osrs.factory.SkillsFactory.buildSkills;
 
 
 /**

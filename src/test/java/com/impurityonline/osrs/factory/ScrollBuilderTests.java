@@ -1,4 +1,4 @@
-package com.impurityonline.osrs.builder;
+package com.impurityonline.osrs.factory;
 
 import com.impurityonline.osrs.client.response.player.ApiClueScrollResponse;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
@@ -30,7 +30,7 @@ class ScrollBuilderTests extends AbstractTest {
     @Test
     @DisplayName("When player api response is null, throw null pointer")
     void minigameBuilder_nullResponse_throwsNullpointer() {
-        assertThrows(NullPointerException.class, () -> ScrollsBuilder.buildScrolls(null));
+        assertThrows(NullPointerException.class, () -> ScrollsFactory.buildScrolls(null));
     }
 
     @Test
@@ -43,7 +43,7 @@ class ScrollBuilderTests extends AbstractTest {
         when(playerResponse.getHardClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getEliteClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getMasterClueScrolls()).thenReturn(getValidScroll());
-        assertThrows(NullPointerException.class, () -> ScrollsBuilder.buildScrolls(playerResponse));
+        assertThrows(NullPointerException.class, () -> ScrollsFactory.buildScrolls(playerResponse));
     }
 
     @Test
@@ -56,7 +56,7 @@ class ScrollBuilderTests extends AbstractTest {
         when(playerResponse.getHardClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getEliteClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getMasterClueScrolls()).thenReturn(getValidScroll());
-        assertThrows(NullPointerException.class, () -> ScrollsBuilder.buildScrolls(playerResponse));
+        assertThrows(NullPointerException.class, () -> ScrollsFactory.buildScrolls(playerResponse));
     }
 
     @Test
@@ -69,7 +69,7 @@ class ScrollBuilderTests extends AbstractTest {
         when(playerResponse.getHardClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getEliteClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getMasterClueScrolls()).thenReturn(getValidScroll());
-        assertThrows(NullPointerException.class, () -> ScrollsBuilder.buildScrolls(playerResponse));
+        assertThrows(NullPointerException.class, () -> ScrollsFactory.buildScrolls(playerResponse));
     }
 
     @Test
@@ -82,7 +82,7 @@ class ScrollBuilderTests extends AbstractTest {
         when(playerResponse.getHardClueScrolls()).thenReturn(null);
         when(playerResponse.getEliteClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getMasterClueScrolls()).thenReturn(getValidScroll());
-        assertThrows(NullPointerException.class, () -> ScrollsBuilder.buildScrolls(playerResponse));
+        assertThrows(NullPointerException.class, () -> ScrollsFactory.buildScrolls(playerResponse));
     }
 
     @Test
@@ -95,7 +95,7 @@ class ScrollBuilderTests extends AbstractTest {
         when(playerResponse.getHardClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getEliteClueScrolls()).thenReturn(null);
         when(playerResponse.getMasterClueScrolls()).thenReturn(getValidScroll());
-        assertThrows(NullPointerException.class, () -> ScrollsBuilder.buildScrolls(playerResponse));
+        assertThrows(NullPointerException.class, () -> ScrollsFactory.buildScrolls(playerResponse));
     }
 
     @Test
@@ -108,14 +108,14 @@ class ScrollBuilderTests extends AbstractTest {
         when(playerResponse.getHardClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getEliteClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getMasterClueScrolls()).thenReturn(null);
-        assertThrows(NullPointerException.class, () -> ScrollsBuilder.buildScrolls(playerResponse));
+        assertThrows(NullPointerException.class, () -> ScrollsFactory.buildScrolls(playerResponse));
     }
 
     @Test
     @DisplayName("When player api response is valid, build the medium clue scroll")
     void scollBuild_buildsClueScroll() {
         ApiClueScrollResponse expected = apiPlayerResponse.getClueScrolls();
-        Scroll actual = ScrollsBuilder.buildScrolls(apiPlayerResponse).getClueScrolls();
+        Scroll actual = ScrollsFactory.buildScrolls(apiPlayerResponse).getClueScrolls();
         assertEquals(expected.getRank(), actual.getRank());
         assertEquals(expected.getScore(), actual.getScore());
     }
@@ -124,7 +124,7 @@ class ScrollBuilderTests extends AbstractTest {
     @DisplayName("When player api response is valid, build the medium clue scroll")
     void scollBuild_buildsEasyClueScroll() {
         ApiClueScrollResponse expected = apiPlayerResponse.getEasyClueScrolls();
-        Scroll actual = ScrollsBuilder.buildScrolls(apiPlayerResponse).getEasyClueScrolls();
+        Scroll actual = ScrollsFactory.buildScrolls(apiPlayerResponse).getEasyClueScrolls();
         assertEquals(expected.getRank(), actual.getRank());
         assertEquals(expected.getScore(), actual.getScore());
     }
@@ -133,7 +133,7 @@ class ScrollBuilderTests extends AbstractTest {
     @DisplayName("When player api response is valid, build the medium clue scroll")
     void scollBuild_buildsMediumClueScroll() {
         ApiClueScrollResponse expected = apiPlayerResponse.getMediumClueScrolls();
-        Scroll actual = ScrollsBuilder.buildScrolls(apiPlayerResponse).getMediumClueScrolls();
+        Scroll actual = ScrollsFactory.buildScrolls(apiPlayerResponse).getMediumClueScrolls();
         assertEquals(expected.getRank(), actual.getRank());
         assertEquals(expected.getScore(), actual.getScore());
     }
@@ -142,7 +142,7 @@ class ScrollBuilderTests extends AbstractTest {
     @DisplayName("When player api response is valid, build the hard clue scroll")
     void scollBuild_buildsHardClueScroll() {
         ApiClueScrollResponse expected = apiPlayerResponse.getHardClueScrolls();
-        Scroll actual = ScrollsBuilder.buildScrolls(apiPlayerResponse).getHardClueScrolls();
+        Scroll actual = ScrollsFactory.buildScrolls(apiPlayerResponse).getHardClueScrolls();
         assertEquals(expected.getRank(), actual.getRank());
         assertEquals(expected.getScore(), actual.getScore());
     }
@@ -151,7 +151,7 @@ class ScrollBuilderTests extends AbstractTest {
     @DisplayName("When player api response is valid, build the elite clue scroll")
     void scollBuild_buildsEliteClueScroll() {
         ApiClueScrollResponse expected = apiPlayerResponse.getEliteClueScrolls();
-        Scroll actual = ScrollsBuilder.buildScrolls(apiPlayerResponse).getEliteClueScrolls();
+        Scroll actual = ScrollsFactory.buildScrolls(apiPlayerResponse).getEliteClueScrolls();
         assertEquals(expected.getRank(), actual.getRank());
         assertEquals(expected.getScore(), actual.getScore());
     }
@@ -160,7 +160,7 @@ class ScrollBuilderTests extends AbstractTest {
     @DisplayName("When player api response is valid, build the master clue scroll")
     void scollBuild_buildsMasterClueScroll() {
         ApiClueScrollResponse expected = apiPlayerResponse.getMasterClueScrolls();
-        Scroll actual = ScrollsBuilder.buildScrolls(apiPlayerResponse).getMasterClueScrolls();
+        Scroll actual = ScrollsFactory.buildScrolls(apiPlayerResponse).getMasterClueScrolls();
         assertEquals(expected.getRank(), actual.getRank());
         assertEquals(expected.getScore(), actual.getScore());
     }

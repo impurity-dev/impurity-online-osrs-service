@@ -1,4 +1,4 @@
-package com.impurityonline.osrs.builder;
+package com.impurityonline.osrs.factory;
 
 import lombok.NonNull;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -6,8 +6,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 /**
  * @author impurity
  */
-public class UrlBuilder {
-    private UrlBuilder() {}
+public class UrlFactory {
+    private UrlFactory() {}
 
     public static UriComponentsBuilder buildPlayerURL(@NonNull final String playerName) {
         return UriComponentsBuilder

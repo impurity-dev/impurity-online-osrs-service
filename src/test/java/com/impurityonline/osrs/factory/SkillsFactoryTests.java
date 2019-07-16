@@ -1,4 +1,4 @@
-package com.impurityonline.osrs.builder;
+package com.impurityonline.osrs.factory;
 
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.utils.configs.AbstractTest;
@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 /**
  * @author impurity
  */
-class SkillsBuilderTests extends AbstractTest {
+class SkillsFactoryTests extends AbstractTest {
 
     private static ApiPlayerResponse apiPlayerResponse;
 
@@ -27,7 +27,7 @@ class SkillsBuilderTests extends AbstractTest {
     @Test
     @DisplayName("When player api response is null, throw null pointer")
     void skillsBuilder_nullResponse_throwsNullpointer() {
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(null));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(null));
     }
 
     @Test
@@ -58,7 +58,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -89,7 +89,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -120,7 +120,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -151,7 +151,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -182,7 +182,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -213,7 +213,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -244,7 +244,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -275,7 +275,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -306,7 +306,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -337,7 +337,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -368,7 +368,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -399,7 +399,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -430,7 +430,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -461,7 +461,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -492,7 +492,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -523,7 +523,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -554,7 +554,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -585,7 +585,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -616,7 +616,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -647,7 +647,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -678,7 +678,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -709,7 +709,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(null);
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -740,7 +740,7 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(null);
         when(playerResponse.getConstruction()).thenReturn(getValidSkill());
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 
     @Test
@@ -771,6 +771,6 @@ class SkillsBuilderTests extends AbstractTest {
         when(playerResponse.getRunecrafting()).thenReturn(getValidSkill());
         when(playerResponse.getHunter()).thenReturn(getValidSkill());
         when(playerResponse.getConstruction()).thenReturn(null);
-        assertThrows(NullPointerException.class, () -> SkillsBuilder.buildSkills(playerResponse));
+        assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(playerResponse));
     }
 }

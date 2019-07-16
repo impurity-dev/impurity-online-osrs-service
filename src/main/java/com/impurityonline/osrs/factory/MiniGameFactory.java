@@ -1,4 +1,4 @@
-package com.impurityonline.osrs.builder;
+package com.impurityonline.osrs.factory;
 
 import com.impurityonline.osrs.client.response.player.ApiMiniGameResponse;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
@@ -9,9 +9,9 @@ import lombok.NonNull;
 /**
  * @author impurity
  */
-public class MiniGameBuilder {
+public class MiniGameFactory {
 
-    private MiniGameBuilder() {}
+    private MiniGameFactory() {}
 
     public static MiniGames buildMiniGames(@NonNull ApiPlayerResponse apiPlayerResponse) {
         MiniGames miniGames = new MiniGames();

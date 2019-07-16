@@ -1,4 +1,4 @@
-package com.impurityonline.osrs.builder;
+package com.impurityonline.osrs.factory;
 
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.client.response.player.ApiSkillResponse;
@@ -9,9 +9,9 @@ import lombok.NonNull;
 /**
  * @author impurity
  */
-public class SkillsBuilder {
+public class SkillsFactory {
 
-    private SkillsBuilder() {}
+    private SkillsFactory() {}
 
     public static Skills buildSkills(@NonNull ApiPlayerResponse apiPlayerResponse) {
         Skills skills = new Skills();

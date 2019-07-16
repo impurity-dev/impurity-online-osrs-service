@@ -1,4 +1,4 @@
-package com.impurityonline.osrs.builder;
+package com.impurityonline.osrs.factory;
 
 import com.impurityonline.osrs.client.response.player.ApiMiniGameResponse;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 /**
  * @author impurity
  */
-class MiniGameBuilderTests extends AbstractTest {
+class MiniGameFactoryTests extends AbstractTest {
 
     private static ApiPlayerResponse apiPlayerResponse;
 
@@ -34,7 +34,7 @@ class MiniGameBuilderTests extends AbstractTest {
         when(playerResponse.getBountyHunter()).thenReturn(null);
         when(playerResponse.getBountyHunterRogues()).thenReturn(getValidMiniGame());
         when(playerResponse.getLastManStanding()).thenReturn(getValidMiniGame());
-        assertThrows(NullPointerException.class, () -> MiniGameBuilder.buildMiniGames(playerResponse));
+        assertThrows(NullPointerException.class, () -> MiniGameFactory.buildMiniGames(playerResponse));
     }
 
     @Test
@@ -44,7 +44,7 @@ class MiniGameBuilderTests extends AbstractTest {
         when(playerResponse.getBountyHunter()).thenReturn(getValidMiniGame());
         when(playerResponse.getBountyHunterRogues()).thenReturn(null);
         when(playerResponse.getLastManStanding()).thenReturn(getValidMiniGame());
-        assertThrows(NullPointerException.class, () -> MiniGameBuilder.buildMiniGames(playerResponse));
+        assertThrows(NullPointerException.class, () -> MiniGameFactory.buildMiniGames(playerResponse));
     }
 
     @Test
@@ -54,20 +54,20 @@ class MiniGameBuilderTests extends AbstractTest {
         when(playerResponse.getBountyHunter()).thenReturn(getValidMiniGame());
         when(playerResponse.getBountyHunterRogues()).thenReturn(getValidMiniGame());
         when(playerResponse.getLastManStanding()).thenReturn(null);
-        assertThrows(NullPointerException.class, () -> MiniGameBuilder.buildMiniGames(playerResponse));
+        assertThrows(NullPointerException.class, () -> MiniGameFactory.buildMiniGames(playerResponse));
     }
 
     @Test
     @DisplayName("When player api response is null, throw null pointer")
     void minigameBuilder_nullResponse_throwsNullpointer() {
-        assertThrows(NullPointerException.class, () -> MiniGameBuilder.buildMiniGames(null));
+        assertThrows(NullPointerException.class, () -> MiniGameFactory.buildMiniGames(null));
     }
 
     @Test
     @DisplayName("When player api response is valid, build the mini games")
     void minigameBuild_buildsBountyHunter() {
         ApiMiniGameResponse expected = apiPlayerResponse.getBountyHunter();
-        MiniGame actual = MiniGameBuilder.buildMiniGames(apiPlayerResponse).getBountyHunter();
+        MiniGame actual = MiniGameFactory.buildMiniGames(apiPlayerResponse).getBountyHunter();
         assertEquals(expected.getRank(), actual.getRank());
         assertEquals(expected.getScore(), actual.getScore());
     }
@@ -76,7 +76,7 @@ class MiniGameBuilderTests extends AbstractTest {
     @DisplayName("When player api response is valid, build the bounty hunter rogues")
     void minigameBuild_buildsBountyHunterRogues() {
         ApiMiniGameResponse expected = apiPlayerResponse.getBountyHunterRogues();
-        MiniGame actual = MiniGameBuilder.buildMiniGames(apiPlayerResponse).getBountyHunterRogues();
+        MiniGame actual = MiniGameFactory.buildMiniGames(apiPlayerResponse).getBountyHunterRogues();
         assertEquals(expected.getRank(), actual.getRank());
         assertEquals(expected.getScore(), actual.getScore());
     }
@@ -85,7 +85,7 @@ class MiniGameBuilderTests extends AbstractTest {
     @DisplayName("When player api response is valid, build the mini games")
     void minigameBuild_buildsLastManStanding() {
         ApiMiniGameResponse expected = apiPlayerResponse.getLastManStanding();
-        MiniGame actual = MiniGameBuilder.buildMiniGames(apiPlayerResponse).getLastManStanding();
+        MiniGame actual = MiniGameFactory.buildMiniGames(apiPlayerResponse).getLastManStanding();
         assertEquals(expected.getRank(), actual.getRank());
         assertEquals(expected.getScore(), actual.getScore());
     }

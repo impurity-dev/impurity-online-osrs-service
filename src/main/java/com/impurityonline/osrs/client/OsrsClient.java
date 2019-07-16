@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static com.impurityonline.osrs.builder.UrlBuilder.buildGrandExchangeURL;
-import static com.impurityonline.osrs.builder.UrlBuilder.buildPlayerURL;
+import static com.impurityonline.osrs.factory.UrlFactory.buildGrandExchangeURL;
+import static com.impurityonline.osrs.factory.UrlFactory.buildPlayerURL;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.TEXT_HTML;
 
