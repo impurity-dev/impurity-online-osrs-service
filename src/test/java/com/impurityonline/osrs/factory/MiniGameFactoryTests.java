@@ -29,7 +29,7 @@ class MiniGameFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When bounty hunter minigame is null, throw null pointer")
-    void minigameBuilder_nullBountyHunter_throwsNullpointer() throws Exception {
+    void minigameFactory_nullBountyHunter_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getBountyHunter()).thenReturn(null);
         when(playerResponse.getBountyHunterRogues()).thenReturn(getValidMiniGame());
@@ -39,7 +39,7 @@ class MiniGameFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When bounty hunter rogues minigame is null, throw null pointer")
-    void minigameBuilder_nullBountyHunterRogues_throwsNullpointer() throws Exception {
+    void minigameFactory_nullBountyHunterRogues_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getBountyHunter()).thenReturn(getValidMiniGame());
         when(playerResponse.getBountyHunterRogues()).thenReturn(null);
@@ -49,7 +49,7 @@ class MiniGameFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When last man standing minigame is null, throw null pointer")
-    void minigameBuilder_nullLastManStanding_throwsNullpointer() throws Exception {
+    void minigameFactory_nullLastManStanding_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getBountyHunter()).thenReturn(getValidMiniGame());
         when(playerResponse.getBountyHunterRogues()).thenReturn(getValidMiniGame());
@@ -59,7 +59,7 @@ class MiniGameFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When player api response is null, throw null pointer")
-    void minigameBuilder_nullResponse_throwsNullpointer() {
+    void minigameFactory_nullResponse_throwsNullpointer() {
         assertThrows(NullPointerException.class, () -> MiniGameFactory.buildMiniGames(null));
     }
 

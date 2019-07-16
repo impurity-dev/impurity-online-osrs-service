@@ -26,13 +26,13 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When player api response is null, throw null pointer")
-    void skillsBuilder_nullResponse_throwsNullpointer() {
+    void skillsFactory_nullResponse_throwsNullpointer() {
         assertThrows(NullPointerException.class, () -> SkillsFactory.buildSkills(null));
     }
 
     @Test
     @DisplayName("When overall skill is null, throw null pointer")
-    void skillsBuilder_nullOverall_throwsNullpointer() throws Exception {
+    void skillsFactory_nullOverall_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(null);
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -63,7 +63,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When attack skill is null, throw null pointer")
-    void skillsBuilder_nullAttack_throwsNullpointer() throws Exception {
+    void skillsFactory_nullAttack_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(null);
@@ -94,7 +94,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When defence skill is null, throw null pointer")
-    void skillsBuilder_nullDefence_throwsNullpointer() throws Exception {
+    void skillsFactory_nullDefence_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -125,7 +125,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When strength skill is null, throw null pointer")
-    void skillsBuilder_nullStrength_throwsNullpointer() throws Exception {
+    void skillsFactory_nullStrength_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -156,7 +156,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When hitpoints skill is null, throw null pointer")
-    void skillsBuilder_nullHitpoints_throwsNullpointer() throws Exception {
+    void skillsFactory_nullHitpoints_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -187,7 +187,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When ranged skill is null, throw null pointer")
-    void skillsBuilder_nullRanged_throwsNullpointer() throws Exception {
+    void skillsFactory_nullRanged_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -218,7 +218,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When prayer skill is null, throw null pointer")
-    void skillsBuilder_nullPrayer_throwsNullpointer() throws Exception {
+    void skillsFactory_nullPrayer_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -249,7 +249,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When magic skill is null, throw null pointer")
-    void skillsBuilder_nullMagic_throwsNullpointer() throws Exception {
+    void skillsFactory_nullMagic_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -280,7 +280,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When cooking skill is null, throw null pointer")
-    void skillsBuilder_nullCooking_throwsNullpointer() throws Exception {
+    void skillsFactory_nullCooking_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -311,7 +311,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When woodcutting skill is null, throw null pointer")
-    void skillsBuilder_nullWoodcutting_throwsNullpointer() throws Exception {
+    void skillsFactory_nullWoodcutting_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -342,7 +342,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When fletching skill is null, throw null pointer")
-    void skillsBuilder_nullFletching_throwsNullpointer() throws Exception {
+    void skillsFactory_nullFletching_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -373,7 +373,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When fishing skill is null, throw null pointer")
-    void skillsBuilder_nullFishing_throwsNullpointer() throws Exception {
+    void skillsFactory_nullFishing_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -404,7 +404,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When firemaking skill is null, throw null pointer")
-    void skillsBuilder_nullFiremaking_throwsNullpointer() throws Exception {
+    void skillsFactory_nullFiremaking_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -435,7 +435,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When crafting skill is null, throw null pointer")
-    void skillsBuilder_nullCrafting_throwsNullpointer() throws Exception {
+    void skillsFactory_nullCrafting_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -466,7 +466,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When smithing skill is null, throw null pointer")
-    void skillsBuilder_nullSmithing_throwsNullpointer() throws Exception {
+    void skillsFactory_nullSmithing_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -497,7 +497,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When mining skill is null, throw null pointer")
-    void skillsBuilder_nullMining_throwsNullpointer() throws Exception {
+    void skillsFactory_nullMining_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -528,7 +528,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When herblore skill is null, throw null pointer")
-    void skillsBuilder_nullHerblore_throwsNullpointer() throws Exception {
+    void skillsFactory_nullHerblore_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -559,7 +559,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When agility skill is null, throw null pointer")
-    void skillsBuilder_nullAgility_throwsNullpointer() throws Exception {
+    void skillsFactory_nullAgility_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -590,7 +590,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When thieving skill is null, throw null pointer")
-    void skillsBuilder_nullThieving_throwsNullpointer() throws Exception {
+    void skillsFactory_nullThieving_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -621,7 +621,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When slayer skill is null, throw null pointer")
-    void skillsBuilder_nullSlayer_throwsNullpointer() throws Exception {
+    void skillsFactory_nullSlayer_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -652,7 +652,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When farming skill is null, throw null pointer")
-    void skillsBuilder_nullFarming_throwsNullpointer() throws Exception {
+    void skillsFactory_nullFarming_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -683,7 +683,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When runecrafting skill is null, throw null pointer")
-    void skillsBuilder_nullRunecrafting_throwsNullpointer() throws Exception {
+    void skillsFactory_nullRunecrafting_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -714,7 +714,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When hunter skill is null, throw null pointer")
-    void skillsBuilder_nullHunter_throwsNullpointer() throws Exception {
+    void skillsFactory_nullHunter_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());
@@ -745,7 +745,7 @@ class SkillsFactoryTests extends AbstractTest {
 
     @Test
     @DisplayName("When construction skill is null, throw null pointer")
-    void skillsBuilder_nullConstruction_throwsNullpointer() throws Exception {
+    void skillsFactory_nullConstruction_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getOverall()).thenReturn(getValidSkill());
         when(playerResponse.getAttack()).thenReturn(getValidSkill());

@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 /**
  * @author impurity
  */
-class ScrollBuilderTests extends AbstractTest {
+class ScrollFactoryTests extends AbstractTest {
 
     private static ApiPlayerResponse apiPlayerResponse;
 
@@ -29,13 +29,13 @@ class ScrollBuilderTests extends AbstractTest {
 
     @Test
     @DisplayName("When player api response is null, throw null pointer")
-    void minigameBuilder_nullResponse_throwsNullpointer() {
+    void minigameFactory_nullResponse_throwsNullpointer() {
         assertThrows(NullPointerException.class, () -> ScrollsFactory.buildScrolls(null));
     }
 
     @Test
     @DisplayName("When clue scroll is null, throw null pointer")
-    void minigameBuilder_nullClueScroll_throwsNullpointer() throws Exception {
+    void minigameFactory_nullClueScroll_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getClueScrolls()).thenReturn(null);
         when(playerResponse.getEasyClueScrolls()).thenReturn(getValidScroll());
@@ -48,7 +48,7 @@ class ScrollBuilderTests extends AbstractTest {
 
     @Test
     @DisplayName("When easy clue scroll is null, throw null pointer")
-    void minigameBuilder_nullEasyClueScroll_throwsNullpointer() throws Exception {
+    void minigameFactory_nullEasyClueScroll_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getEasyClueScrolls()).thenReturn(null);
@@ -61,7 +61,7 @@ class ScrollBuilderTests extends AbstractTest {
 
     @Test
     @DisplayName("When medium clue scroll is null, throw null pointer")
-    void minigameBuilder_nullMediumClueScroll_throwsNullpointer() throws Exception {
+    void minigameFactory_nullMediumClueScroll_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getEasyClueScrolls()).thenReturn(getValidScroll());
@@ -74,7 +74,7 @@ class ScrollBuilderTests extends AbstractTest {
 
     @Test
     @DisplayName("When hard clue scroll is null, throw null pointer")
-    void minigameBuilder_nullHardClueScroll_throwsNullpointer() throws Exception {
+    void minigameFactory_nullHardClueScroll_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getEasyClueScrolls()).thenReturn(getValidScroll());
@@ -87,7 +87,7 @@ class ScrollBuilderTests extends AbstractTest {
 
     @Test
     @DisplayName("When elite clue scroll is null, throw null pointer")
-    void minigameBuilder_nullEliteClueScroll_throwsNullpointer() throws Exception {
+    void minigameFactory_nullEliteClueScroll_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getEasyClueScrolls()).thenReturn(getValidScroll());
@@ -100,7 +100,7 @@ class ScrollBuilderTests extends AbstractTest {
 
     @Test
     @DisplayName("When master clue scroll is null, throw null pointer")
-    void minigameBuilder_nullMasterClueScroll_throwsNullpointer() throws Exception {
+    void minigameFactory_nullMasterClueScroll_throwsNullpointer() throws Exception {
         ApiPlayerResponse playerResponse = mock(ApiPlayerResponse.class);
         when(playerResponse.getClueScrolls()).thenReturn(getValidScroll());
         when(playerResponse.getEasyClueScrolls()).thenReturn(getValidScroll());
