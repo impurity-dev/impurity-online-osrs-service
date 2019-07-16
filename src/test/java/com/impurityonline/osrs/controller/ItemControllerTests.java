@@ -8,13 +8,13 @@ import com.impurityonline.osrs.domain.item.Item;
 import com.impurityonline.osrs.exception.ItemNotFoundException;
 import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
 import com.impurityonline.osrs.service.ItemService;
-import com.impurityonline.osrs.utils.configs.AbstractControllerTest;
+import com.impurityonline.osrs.test.utils.configs.AbstractControllerTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
-import static com.impurityonline.osrs.utils.OsrsFactory.getValidOsrsItem;
+import static com.impurityonline.osrs.test.utils.OsrsFactory.getValidOsrsItem;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

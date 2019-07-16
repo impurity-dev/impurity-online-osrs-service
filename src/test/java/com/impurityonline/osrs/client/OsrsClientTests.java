@@ -5,7 +5,7 @@ import com.impurityonline.osrs.client.response.item.ApiItemResponse;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
 import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
-import com.impurityonline.osrs.utils.configs.AbstractTest;
+import com.impurityonline.osrs.test.utils.configs.AbstractServiceTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 
 import static com.impurityonline.osrs.factory.UrlFactory.buildGrandExchangeURL;
 import static com.impurityonline.osrs.factory.UrlFactory.buildPlayerURL;
-import static com.impurityonline.osrs.utils.OsrsFactory.*;
+import static com.impurityonline.osrs.test.utils.OsrsFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.client.ExpectedCount.once;
@@ -28,7 +28,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 /**
  * @author tmk2003
  */
-class OsrsClientTests extends AbstractTest {
+class OsrsClientTests extends AbstractServiceTest {
 
     @Autowired
     private OsrsClient osrsClient;

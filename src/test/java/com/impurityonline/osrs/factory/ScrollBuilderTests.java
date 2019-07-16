@@ -3,13 +3,13 @@ package com.impurityonline.osrs.factory;
 import com.impurityonline.osrs.client.response.player.ApiClueScrollResponse;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
 import com.impurityonline.osrs.domain.player.Scroll;
-import com.impurityonline.osrs.utils.configs.AbstractTest;
+import com.impurityonline.osrs.test.utils.configs.AbstractTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.impurityonline.osrs.utils.OsrsFactory.getValidApiPlayerResponse;
-import static com.impurityonline.osrs.utils.OsrsFactory.getValidScroll;
+import static com.impurityonline.osrs.test.utils.OsrsFactory.getValidApiPlayerResponse;
+import static com.impurityonline.osrs.test.utils.OsrsFactory.getValidScroll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;

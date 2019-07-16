@@ -1,4 +1,4 @@
-package com.impurityonline.osrs.utils;
+package com.impurityonline.osrs.test.utils;
 
 import com.impurityonline.osrs.client.response.item.ApiItem;
 import com.impurityonline.osrs.client.response.item.ApiItemPrice;

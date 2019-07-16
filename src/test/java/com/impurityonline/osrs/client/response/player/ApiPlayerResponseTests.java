@@ -1,12 +1,12 @@
 package com.impurityonline.osrs.client.response.player;
 
 import com.impurityonline.osrs.exception.ApiPlayerResponseException;
-import com.impurityonline.osrs.utils.configs.AbstractTest;
+import com.impurityonline.osrs.test.utils.configs.AbstractTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.impurityonline.osrs.utils.OsrsFactory.*;
+import static com.impurityonline.osrs.test.utils.OsrsFactory.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**

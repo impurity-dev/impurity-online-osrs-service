@@ -1,4 +1,4 @@
-package com.impurityonline.osrs.utils.configs;
+package com.impurityonline.osrs.test.utils.configs;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;

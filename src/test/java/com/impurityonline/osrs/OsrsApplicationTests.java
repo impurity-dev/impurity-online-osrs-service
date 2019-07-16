@@ -1,6 +1,6 @@
 package com.impurityonline.osrs;
 
-import com.impurityonline.osrs.utils.configs.AbstractTest;
+import com.impurityonline.osrs.test.utils.configs.AbstractTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

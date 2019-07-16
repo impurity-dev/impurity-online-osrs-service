@@ -1,4 +1,4 @@
-package com.impurityonline.osrs.utils.configs;
+package com.impurityonline.osrs.test.utils.configs;
 
 import org.junit.jupiter.api.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
