@@ -26,7 +26,7 @@ class PlayerServiceImplTests extends AbstractServiceTest {
     private static String MOCK_PLAYER_NAME = "1234";
 
     @Test
-    @DisplayName("When playerName is nul, throw nullpointer")
+    @DisplayName("When playerName is null, throw nullpointer")
     void getPlayer_nullName_throwNullPointer() {
         assertThrows(NullPointerException.class, () -> playerService.getPlayer(null));
     }
@@ -41,34 +41,34 @@ class PlayerServiceImplTests extends AbstractServiceTest {
     @DisplayName("When the client returns a valid player response, return the player with proper name")
     void getPlayer_validResponse_setProperName() throws Exception {
         when(osrsClient.getPlayer(MOCK_PLAYER_NAME)).thenReturn(getValidApiPlayerResponse());
-        assertEquals(playerService.getPlayer(MOCK_PLAYER_NAME).getName(), MOCK_PLAYER_NAME);
+        assertEquals(MOCK_PLAYER_NAME, playerService.getPlayer(MOCK_PLAYER_NAME).getName());
     }
 
     @Test
     @DisplayName("When the client returns a valid player response, return the player with proper type")
     void getPlayer_validResponse_setProperType() throws Exception {
         when(osrsClient.getPlayer(MOCK_PLAYER_NAME)).thenReturn(getValidApiPlayerResponse());
-        assertEquals(playerService.getPlayer(MOCK_PLAYER_NAME).getType(), "TODO");
+        assertEquals("TODO", playerService.getPlayer(MOCK_PLAYER_NAME).getType());
     }
 
     @Test
     @DisplayName("When the client returns a valid player response, return the player with proper minigames")
     void getPlayer_validResponse_setProperMiniGames() throws Exception {
         when(osrsClient.getPlayer(MOCK_PLAYER_NAME)).thenReturn(getValidApiPlayerResponse());
-        assertEquals(playerService.getPlayer(MOCK_PLAYER_NAME).getMiniGames(), buildMiniGames(getValidApiPlayerResponse()));
+        assertEquals(buildMiniGames(getValidApiPlayerResponse()), playerService.getPlayer(MOCK_PLAYER_NAME).getMiniGames());
     }
 
     @Test
     @DisplayName("When the client returns a valid player response, return the player with proper scrolls")
     void getPlayer_validResponse_setProperScrolls() throws Exception {
         when(osrsClient.getPlayer(MOCK_PLAYER_NAME)).thenReturn(getValidApiPlayerResponse());
-        assertEquals(playerService.getPlayer(MOCK_PLAYER_NAME).getScrolls(), buildScrolls(getValidApiPlayerResponse()));
+        assertEquals(buildScrolls(getValidApiPlayerResponse()), playerService.getPlayer(MOCK_PLAYER_NAME).getScrolls());
     }
 
     @Test
     @DisplayName("When the client returns a valid player response, return the player with proper skills")
     void getPlayer_validResponse_setProperSkills() throws Exception {
         when(osrsClient.getPlayer(MOCK_PLAYER_NAME)).thenReturn(getValidApiPlayerResponse());
-        assertEquals(playerService.getPlayer(MOCK_PLAYER_NAME).getSkills(), buildSkills(getValidApiPlayerResponse()));
+        assertEquals(buildSkills(getValidApiPlayerResponse()), playerService.getPlayer(MOCK_PLAYER_NAME).getSkills());
     }
 }

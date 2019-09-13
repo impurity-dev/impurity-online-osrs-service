@@ -39,27 +39,22 @@ public class OsrsClient extends RestClient {
      * @param playerName - Player name
      * @return - Player hiscores
      */
-    public ApiPlayerResponse getPlayer(@NonNull final String playerName) {
-        try {
-            ResponseEntity<String> playerEntity = executeRequest(
-                    HttpMethod.GET,
-                    buildPlayerURL(playerName).toUriString(),
-                    new HttpEntity<>(new HttpHeaders()),
-                    String.class
-            );
+    public ApiPlayerResponse getPlayer(@NonNull final String playerName)
+            throws ClientRestException, ServerRestException {
+        ResponseEntity<String> playerEntity = executeRequest(
+                HttpMethod.GET,
+                buildPlayerURL(playerName).toUriString(),
+                new HttpEntity<>(new HttpHeaders()),
+                String.class
+        );
 
+        try {
             String hiscores = Optional.ofNullable(playerEntity.getBody())
                     .orElseThrow(() -> new PlayerNotFoundException("No response body found for playerName=" + playerName));
             return new ApiPlayerResponse(hiscores);
         } catch(ApiPlayerResponseException ex) {
             log.error("Osrs Client Response Issues: {}", ex.getMessage());
-            throw new ItemRequestException("Cannot create player", HttpStatus.INTERNAL_SERVER_ERROR, ex);
-        } catch (ClientRestException ex) {
-            log.error("Osrs Client Issues: {}", ex.getMessage());
-            throw new ItemRequestException("Cannot get player", ex.getStatus(), ex);
-        } catch (ServerRestException ex) {
-            log.error("Osrs Server Issues: {}", ex.getMessage());
-            throw new ItemRequestException("Cannot get player", ex.getStatus(), ex);
+            throw new ClientRestException("Cannot create player", HttpStatus.INTERNAL_SERVER_ERROR, ex);
         }
     }
 
@@ -69,22 +64,15 @@ public class OsrsClient extends RestClient {
      * @param itemId - Item id
      * @return - Player item
      */
-    public ApiItemResponse getItem(@NonNull final Long itemId) {
-        try {
-            ResponseEntity<ApiItemResponse> itemEntity = executeRequest(
-                    HttpMethod.GET,
-                    buildGrandExchangeURL(itemId).toUriString(),
-                    new HttpEntity<>(new HttpHeaders()),
-                    ApiItemResponse.class
-            );
-            return Optional.ofNullable(itemEntity.getBody())
-                    .orElseThrow(() -> new ItemNotFoundException("No response body found for itemId=" + itemId));
-        } catch (ClientRestException ex) {
-            log.error("Osrs Client Issues: {}", ex.getMessage());
-            throw new PlayerRequestException("Cannot get item", ex.getStatus(), ex);
-        } catch (ServerRestException ex) {
-            log.error("Osrs Server Issues: {}", ex.getMessage());
-            throw new PlayerRequestException("Cannot get item", ex.getStatus(), ex);
-        }
+    public ApiItemResponse getItem(@NonNull final Long itemId)
+            throws ClientRestException, ServerRestException {
+        ResponseEntity<ApiItemResponse> itemEntity = executeRequest(
+                HttpMethod.GET,
+                buildGrandExchangeURL(itemId).toUriString(),
+                new HttpEntity<>(new HttpHeaders()),
+                ApiItemResponse.class
+        );
+        return Optional.ofNullable(itemEntity.getBody())
+                .orElseThrow(() -> new ItemNotFoundException("No response body found for itemId=" + itemId));
     }
 }

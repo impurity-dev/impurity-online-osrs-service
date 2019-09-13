@@ -3,8 +3,7 @@ package com.impurityonline.osrs.client;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.impurityonline.osrs.client.response.item.ApiItemResponse;
 import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
-import com.impurityonline.osrs.exception.PlayerRequestException;
-import com.impurityonline.osrs.exception.ItemRequestException;
+import com.impurityonline.osrs.exception.*;
 import com.impurityonline.osrs.test.utils.configs.AbstractServiceTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -47,7 +46,7 @@ class OsrsClientTests extends AbstractServiceTest {
 
     @Test
     @DisplayName("When the osrs client gets player, return response")
-    void osrsClient_with_OK_osrsApiPlayerResponse() throws Exception {
+    void osrsClient_with_OK_osrsApiPlayerResponse() throws ApiPlayerResponseException, ClientRestException, ServerRestException {
         String playerName = "123";
         String apiPlayerResponseString = getValidApiPlayerResponseString();
         mockServer.expect(once(), requestTo(buildPlayerURL(playerName).toUriString()))
@@ -60,8 +59,8 @@ class OsrsClientTests extends AbstractServiceTest {
     }
 
     @Test
-    @DisplayName("When the osrs client player has response error, throw ItemRequestException")
-    void osrsClient_with_RESPONSEERROR_osrsApiPlayerResponse() {
+    @DisplayName("When the osrs client player has response error, throw ClientRestException")
+    void osrsClient_with_RESPONSEERROR_ServerRestException() {
         String playerName = "123";
         mockServer.expect(once(), requestTo(buildPlayerURL(playerName).toUriString()))
                 .andExpect(method(HttpMethod.GET))
@@ -69,11 +68,11 @@ class OsrsClientTests extends AbstractServiceTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(getInvalidApiPlayerResponseString())
                 );
-        assertThrows(ItemRequestException.class, () -> osrsClient.getPlayer(playerName));
+        assertThrows(ClientRestException.class, () -> osrsClient.getPlayer(playerName));
     }
 
     @Test
-    @DisplayName("When the osrs client player has client error, throw ItemRequestException")
+    @DisplayName("When the osrs client player has client error, throw ClientRestException")
     void osrsClient_with_CLIENTERROR_osrsApiPlayerResponse() {
         String playerName = "123";
         String osrsApiPlayerResponse = getValidApiPlayerResponseString();
@@ -83,11 +82,11 @@ class OsrsClientTests extends AbstractServiceTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(osrsApiPlayerResponse)
                 );
-        assertThrows(ItemRequestException.class, () -> osrsClient.getPlayer(playerName));
+        assertThrows(ClientRestException.class, () -> osrsClient.getPlayer(playerName));
     }
 
     @Test
-    @DisplayName("When the osrs client player has client error, throw ItemRequestException")
+    @DisplayName("When the osrs client player has client error, throw ClientRestException")
     void osrsClient_with_CLIENTERROR_invalidResponse() {
         String playerName = "123";
         mockServer.expect(once(), requestTo(buildPlayerURL(playerName).toUriString()))
@@ -96,11 +95,11 @@ class OsrsClientTests extends AbstractServiceTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body("")
                 );
-        assertThrows(ItemRequestException.class, () -> osrsClient.getPlayer(playerName));
+        assertThrows(ClientRestException.class, () -> osrsClient.getPlayer(playerName));
     }
 
     @Test
-    @DisplayName("When the osrs client player has server error, throw ItemRequestException")
+    @DisplayName("When the osrs client player has server error, throw ServerRestException")
     void osrsClient_with_SERVERERROR_osrsApiPlayerResponse() {
         String playerName = "123";
         String osrsApiPlayerResponse = getValidApiPlayerResponseString();
@@ -110,8 +109,9 @@ class OsrsClientTests extends AbstractServiceTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(osrsApiPlayerResponse)
                 );
-        assertThrows(ItemRequestException.class, () -> osrsClient.getPlayer(playerName));
+        assertThrows(ServerRestException.class, () -> osrsClient.getPlayer(playerName));
     }
+
     @Test
     @DisplayName("When the osrs client item has null itemid, throw null pointer")
     void osrsClient_item_null_itemId() {
@@ -120,7 +120,7 @@ class OsrsClientTests extends AbstractServiceTest {
 
     @Test
     @DisplayName("When the osrs client gets itemid, return response")
-    void osrsClient_with_OK_osrsApiItemResponse() throws JsonProcessingException {
+    void osrsClient_with_OK_osrsApiItemResponse() throws JsonProcessingException, ClientRestException, ServerRestException {
         Long itemId = 123L;
         ApiItemResponse osrsApiPlayerResponse = getValidApiItemResponse();
         mockServer.expect(once(), requestTo(buildGrandExchangeURL(itemId).toUriString()))
@@ -133,7 +133,7 @@ class OsrsClientTests extends AbstractServiceTest {
     }
 
     @Test
-    @DisplayName("When the osrs client item has client error, throw PlayerRequestException")
+    @DisplayName("When the osrs client item has client error, throw ClientRestException")
     void osrsClient_with_CLIENTERROR_osrsApiItemResponse() throws JsonProcessingException {
         Long itemId = 123L;
         ApiItemResponse osrsApiPlayerResponse = getValidApiItemResponse();
@@ -143,11 +143,11 @@ class OsrsClientTests extends AbstractServiceTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(mapToJson(osrsApiPlayerResponse))
                 );
-        assertThrows(PlayerRequestException.class, () -> osrsClient.getItem(itemId));
+        assertThrows(ClientRestException.class, () -> osrsClient.getItem(itemId));
     }
 
     @Test
-    @DisplayName("When the steam client library has server error, throw ServerRestException")
+    @DisplayName("When the osrs client item has server error, throw ServerRestException")
     void osrsClient_with_SERVERERROR_osrsApiItemResponse() throws JsonProcessingException {
         Long itemId = 123L;
         ApiItemResponse osrsApiPlayerResponse = getValidApiItemResponse();
@@ -157,6 +157,6 @@ class OsrsClientTests extends AbstractServiceTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(mapToJson(osrsApiPlayerResponse))
                 );
-        assertThrows(PlayerRequestException.class, () -> osrsClient.getItem(itemId));
+        assertThrows(ServerRestException.class, () -> osrsClient.getItem(itemId));
     }
 }
