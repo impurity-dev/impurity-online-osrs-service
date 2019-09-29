@@ -26,6 +26,7 @@ abstract class RestClient {
      */
     RestClient() {
         this.restTemplate = new RestTemplate();
+        this.restTemplate.setErrorHandler(new RestClientErrorHandler());
     }
 
     /**
