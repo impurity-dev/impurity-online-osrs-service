@@ -6,7 +6,7 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Raw string returned back from
+ * Osrs raw string converted into a clue scroll reponse
  *
  * @author impurity
  */
