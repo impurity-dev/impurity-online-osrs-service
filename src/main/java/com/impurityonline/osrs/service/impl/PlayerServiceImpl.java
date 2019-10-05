@@ -1,17 +1,21 @@
 package com.impurityonline.osrs.service.impl;
 
 import com.impurityonline.osrs.client.OsrsClient;
-import com.impurityonline.osrs.domain.Player;
-import com.impurityonline.osrs.exception.PlayerNotFoundException;
+import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
+import com.impurityonline.osrs.domain.player.Player;
+import com.impurityonline.osrs.exception.ClientRestException;
+import com.impurityonline.osrs.exception.ItemRequestException;
+import com.impurityonline.osrs.exception.ServerRestException;
 import com.impurityonline.osrs.service.PlayerService;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
-import java.util.Optional;
-
-import static com.impurityonline.osrs.builder.PlayerBuilder.buildPlayer;
+import static com.impurityonline.osrs.factory.MiniGameFactory.buildMiniGames;
+import static com.impurityonline.osrs.factory.ScrollsFactory.buildScrolls;
+import static com.impurityonline.osrs.factory.SkillsFactory.buildSkills;
 
 /**
  * @author impurity
@@ -24,14 +28,25 @@ public class PlayerServiceImpl implements PlayerService {
     private OsrsClient osrsClient;
 
     @Override
-    public Player getPlayer(String playerName) {
-        ResponseEntity<String> responseEntity = osrsClient.getPlayer(playerName);
-
-        String osrsApiResponse = Optional
-                .ofNullable(responseEntity.getBody())
-                .orElseThrow(() -> new PlayerNotFoundException("No player body found"));
-
-
-        return buildPlayer(playerName, "TODO", osrsApiResponse);
+    public Player getPlayer(@NonNull String playerName) {
+        if(StringUtils.isEmpty(playerName)) {
+            throw new IllegalArgumentException("PlayerName cannot be empty");
+        }
+        try {
+            ApiPlayerResponse apiPlayerResponse = osrsClient.getPlayer(playerName);
+            Player player = new Player();
+            player.setName(playerName);
+            player.setType("TODO");
+            player.setMiniGames(buildMiniGames(apiPlayerResponse));
+            player.setScrolls(buildScrolls(apiPlayerResponse));
+            player.setSkills(buildSkills(apiPlayerResponse));
+            return player;
+        } catch (ClientRestException ex) {
+            log.error("Osrs Client Issues: {}", ex.getMessage());
+            throw new ItemRequestException("Cannot get player", ex.getStatus(), ex);
+        } catch (ServerRestException ex) {
+            log.error("Osrs Server Issues: {}", ex.getMessage());
+            throw new ItemRequestException("Cannot get player", ex.getStatus(), ex);
+        }
     }
 }

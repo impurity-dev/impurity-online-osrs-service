@@ -1,10 +1,10 @@
 package com.impurityonline.osrs.controller.handler;
 
-import com.impurityonline.osrs.domain.ApiError;
-import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
-import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
+import com.impurityonline.osrs.controller.response.ApiErrorResponse;
 import com.impurityonline.osrs.exception.ItemNotFoundException;
+import com.impurityonline.osrs.exception.ItemRequestException;
 import com.impurityonline.osrs.exception.PlayerNotFoundException;
+import com.impurityonline.osrs.exception.PlayerRequestException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -24,30 +24,30 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class OsrsExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(PlayerNotFoundException.class)
-    protected ResponseEntity<ApiError> handledOsrsPlayerNotFoundException(final PlayerNotFoundException ex) {
+    protected ResponseEntity<ApiErrorResponse> handledOsrsPlayerNotFoundException(final PlayerNotFoundException ex) {
         log.info("The Osrs player from the Osrs API could not be found: {}", ex.getMessage());
-        ApiError apiError = new ApiError(NOT_FOUND, "Could not find osrs player.", ex);
+        ApiErrorResponse apiError = new ApiErrorResponse(NOT_FOUND, "Could not find osrs player.", ex);
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
     
     @ExceptionHandler(ItemNotFoundException.class)
-    protected ResponseEntity<ApiError> handledOsrsItemNotFoundException(final ItemNotFoundException ex) {
+    protected ResponseEntity<ApiErrorResponse> handledOsrsItemNotFoundException(final ItemNotFoundException ex) {
         log.info("The Osrs player from the Osrs API could not be found: {}", ex.getMessage());
-        ApiError apiError = new ApiError(NOT_FOUND, "Could not find osrs item.", ex);
+        ApiErrorResponse apiError = new ApiErrorResponse(NOT_FOUND, "Could not find osrs item.", ex);
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 
-    @ExceptionHandler(OsrsClientPlayerHttpRequestException.class)
-    protected ResponseEntity<ApiError> handledOsrsClientPlayerHttpRequestException(final OsrsClientPlayerHttpRequestException ex) {
+    @ExceptionHandler(ItemRequestException.class)
+    protected ResponseEntity<ApiErrorResponse> handledOsrsClientPlayerHttpRequestException(final ItemRequestException ex) {
         log.info("The Osrs Client was unable to successfully complete the get player request: {}:{}", ex.getStatus(), ex.getMessage());
-        ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR, "Could not complete request to fetch osrs player.", ex);
+        ApiErrorResponse apiError = new ApiErrorResponse(INTERNAL_SERVER_ERROR, "Could not complete request to fetch osrs player.", ex);
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 
-    @ExceptionHandler(OsrsClientItemHttpRequestException.class)
-    protected ResponseEntity<ApiError> handledOsrsClientItemHttpRequestException(final OsrsClientItemHttpRequestException ex) {
+    @ExceptionHandler(PlayerRequestException.class)
+    protected ResponseEntity<ApiErrorResponse> handledOsrsClientItemHttpRequestException(final PlayerRequestException ex) {
         log.info("The Osrs Client was unable to successfully complete the get item request: {}:{}", ex.getStatus(), ex.getMessage());
-        ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR, "Could not complete request to fetch osrs item.", ex);
+        ApiErrorResponse apiError = new ApiErrorResponse(INTERNAL_SERVER_ERROR, "Could not complete request to fetch osrs item.", ex);
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 }

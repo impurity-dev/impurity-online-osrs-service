@@ -1,6 +1,6 @@
 package com.impurityonline.osrs.controller;
 
-import com.impurityonline.osrs.response.PlayerResponse;
+import com.impurityonline.osrs.controller.response.player.PlayerResponse;
 import com.impurityonline.osrs.service.PlayerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

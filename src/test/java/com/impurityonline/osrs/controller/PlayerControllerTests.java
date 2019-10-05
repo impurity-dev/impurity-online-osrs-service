@@ -1,26 +1,17 @@
 package com.impurityonline.osrs.controller;
 
-import com.impurityonline.osrs.domain.Player;
-import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
+import com.impurityonline.osrs.controller.response.player.PlayerResponse;
+import com.impurityonline.osrs.domain.player.Player;
+import com.impurityonline.osrs.exception.ItemRequestException;
 import com.impurityonline.osrs.exception.PlayerNotFoundException;
-import com.impurityonline.osrs.response.PlayerResponse;
 import com.impurityonline.osrs.service.PlayerService;
-import com.impurityonline.osrs.utils.AbstractTest;
+import com.impurityonline.osrs.test.utils.configs.AbstractControllerTest;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
 
-import static com.impurityonline.osrs.constant.Profiles.UNIT_TEST;
-import static com.impurityonline.osrs.utils.OsrsFactory.getValidOsrsPlayer;
+import static com.impurityonline.osrs.test.utils.OsrsFactory.getValidOsrsPlayer;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -29,17 +20,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * @author impurity
  */
-@Tag("Controller")
-@ExtendWith(SpringExtension.class)
-@AutoConfigureMockMvc
-@ActiveProfiles(UNIT_TEST)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class PlayerControllerTests extends AbstractTest {
+class PlayerControllerTests extends AbstractControllerTest {
 
     @MockBean
     private PlayerService playerService;
-    @Autowired
-    private MockMvc mockMvc;
     private final String MOCK_PLAYER_NAME = "abc123";
 
     @Test
@@ -70,7 +54,7 @@ class PlayerControllerTests extends AbstractTest {
     @Test
     @DisplayName("When getting a osrs player and it cannot be created, return 500")
     void osrs_player_return_500() throws Exception {
-        when(playerService.getPlayer(MOCK_PLAYER_NAME)).thenThrow(OsrsClientPlayerHttpRequestException.class);
+        when(playerService.getPlayer(MOCK_PLAYER_NAME)).thenThrow(ItemRequestException.class);
         mockMvc.perform(get("/v1/players/" + MOCK_PLAYER_NAME)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());

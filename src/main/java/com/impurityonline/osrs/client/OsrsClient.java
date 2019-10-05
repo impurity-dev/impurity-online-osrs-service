@@ -1,26 +1,25 @@
 package com.impurityonline.osrs.client;
 
-import com.impurityonline.osrs.client.response.OsrsApiItemResponse;
-import com.impurityonline.osrs.exception.OsrsClientItemHttpRequestException;
-import com.impurityonline.osrs.exception.OsrsClientPlayerHttpRequestException;
-import com.impurityonline.osrs.exception.RestTemplateClientException;
+import com.impurityonline.osrs.client.response.item.ApiItemResponse;
+import com.impurityonline.osrs.client.response.player.ApiPlayerResponse;
+import com.impurityonline.osrs.exception.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Optional;
 
-import static com.impurityonline.osrs.builder.UrlBuilder.buildGrandExchangeURL;
-import static com.impurityonline.osrs.builder.UrlBuilder.buildPlayerURL;
+import static com.impurityonline.osrs.factory.UrlFactory.buildGrandExchangeURL;
+import static com.impurityonline.osrs.factory.UrlFactory.buildPlayerURL;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.TEXT_HTML;
 
 /**
+ * Rest client to communicate with the OSRS endpoints.
+ *
  * @author impurity
  */
 @Slf4j
@@ -28,7 +27,7 @@ import static org.springframework.http.MediaType.TEXT_HTML;
 public class OsrsClient extends RestClient {
 
     /**
-     * Create client with supported media types: text/html application/json
+     * Create client with supported media types: text/html application/json.
      */
     public OsrsClient() {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
@@ -36,48 +35,46 @@ public class OsrsClient extends RestClient {
         getRestTemplate().getMessageConverters().add(converter);
     }
 
-    @Override
-    protected HttpHeaders getHeaders() {
-        return new HttpHeaders();
-    }
-
     /**
-     * Get a OSRS player based off he player name
+     * Get a OSRS player based off he player name.
      *
-     * @param playerName - Player name
-     * @return - Player hiscores
+     * @param playerName - Name of player to get from OSRS
+     * @return - Player hiscores converted to a response object
      */
-    public ResponseEntity<String> getPlayer(@NonNull final String playerName) {
+    public ApiPlayerResponse getPlayer(@NonNull final String playerName)
+        throws ClientRestException, ServerRestException {
+        ResponseEntity<String> playerEntity = executeRequest(
+            HttpMethod.GET,
+            buildPlayerURL(playerName).toUriString(),
+            new HttpEntity<>(new HttpHeaders()),
+            String.class
+        );
+
         try {
-            return executeRequest(
-                    HttpMethod.GET,
-                    buildPlayerURL(playerName).toUriString(),
-                    new HttpEntity<>(this.getHeaders()),
-                    String.class
-            );
-        } catch (RestTemplateClientException ex) {
-            log.error("Osrs Client Issues: {}", ex.getMessage());
-            throw new OsrsClientPlayerHttpRequestException("Cannot get player", ex.getStatus(), ex);
+            String hiscores = Optional.ofNullable(playerEntity.getBody())
+                .orElseThrow(() -> new PlayerNotFoundException("No response body found for playerName=" + playerName));
+            return new ApiPlayerResponse(hiscores);
+        } catch (ApiPlayerResponseException ex) {
+            log.error("Osrs Client Response Issues: {}", ex.getMessage());
+            throw new ClientRestException("Cannot create player", HttpStatus.INTERNAL_SERVER_ERROR, ex);
         }
     }
 
     /**
-     * Get a OSRS item based off he item id
+     * Get a OSRS item based off he item id.
      *
-     * @param itemId - Item id
-     * @return - Player item
+     * @param itemId - Item identifier to get from OSRS endpoint
+     * @return - Item converted to a response object
      */
-    public ResponseEntity<OsrsApiItemResponse> getItem(@NonNull final Long itemId) {
-        try {
-            return executeRequest(
-                    HttpMethod.GET,
-                    buildGrandExchangeURL(itemId).toUriString(),
-                    new HttpEntity<>(this.getHeaders()),
-                    OsrsApiItemResponse.class
-            );
-        } catch (RestTemplateClientException ex) {
-            log.error("Osrs Client Issues: {}", ex.getMessage());
-            throw new OsrsClientItemHttpRequestException("Cannot get item", ex.getStatus(), ex);
-        }
+    public ApiItemResponse getItem(@NonNull final Long itemId)
+        throws ClientRestException, ServerRestException {
+        ResponseEntity<ApiItemResponse> itemEntity = executeRequest(
+            HttpMethod.GET,
+            buildGrandExchangeURL(itemId).toUriString(),
+            new HttpEntity<>(new HttpHeaders()),
+            ApiItemResponse.class
+        );
+        return Optional.ofNullable(itemEntity.getBody())
+            .orElseThrow(() -> new ItemNotFoundException("No response body found for itemId=" + itemId));
     }
 }

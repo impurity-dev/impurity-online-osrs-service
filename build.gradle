@@ -1,9 +1,10 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.6.RELEASE'
-	id 'java'
-	id 'org.sonarqube' version '2.7'
-	id 'jacoco'
-	id 'idea'
+    id 'org.springframework.boot' version '2.1.6.RELEASE'
+    id 'java'
+    id 'org.sonarqube' version '2.7'
+    id 'jacoco'
+    id 'idea'
+    id 'checkstyle'
 }
 
 apply plugin: 'java'
@@ -12,6 +13,7 @@ apply plugin: 'jacoco'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.sonarqube'
+apply plugin: 'checkstyle'
 
 group = 'com.impurityonline'
 version = '0.0.1-SNAPSHOT'
@@ -19,65 +21,85 @@ sourceCompatibility = '12'
 targetCompatibility = '12'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 ext {
-	set('springCloudVersion', "Greenwich.RELEASE")
-	set('swaggerVersion', "2.9.2")
+    set('springCloudVersion', "Greenwich.RELEASE")
+    set('swaggerVersion', "2.9.2")
 }
 
 dependencies {
-	implementation "org.springframework.boot:spring-boot-starter-actuator"
-	implementation "org.springframework.boot:spring-boot-starter-webflux"
-	implementation "org.springframework.boot:spring-boot-starter-web"
-	implementation "io.springfox:springfox-swagger2:${swaggerVersion}"
-	implementation "io.springfox:springfox-swagger-ui:${swaggerVersion}"
-	compileOnly "org.projectlombok:lombok"
-	annotationProcessor "org.projectlombok:lombok"
-	testImplementation "org.springframework.boot:spring-boot-starter-test"
-	testImplementation "org.springframework.security:spring-security-test"
-	testImplementation "org.junit.jupiter:junit-jupiter-api"
-	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-webflux"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "io.springfox:springfox-swagger2:${swaggerVersion}"
+    implementation "io.springfox:springfox-swagger-ui:${swaggerVersion}"
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude group: 'junit', module: 'junit'
+    }
+    testImplementation "org.springframework.security:spring-security-test"
+    testImplementation "org.junit.jupiter:junit-jupiter-api"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
 }
 
 dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 tasks.withType(JavaCompile) {
-	options.compilerArgs << '-Xlint:unchecked'
-	options.deprecation = true
+    options.compilerArgs << '-Xlint:unchecked'
+    options.deprecation = true
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 
-	testLogging {
-		events "Passed", "Skipped", "Failed"
-	}
+    testLogging {
+        events "Passed", "Skipped", "Failed"
+    }
 }
 
 jacoco {
-	toolVersion = "0.8.4"
+    toolVersion = "0.8.4"
 }
 
 sonarqube {
-	properties {
-		property "sonar.language", "java"
-		property "sonar.sources", "src/main"
-		property "sonar.tests", "src/test"
-		property "sonar.sourceEncoding", "UTF-8"
-		property "sonar.java.coveragePlugin", "jacoco"
-		property "sonar.projectName", "impurity-online-osrs-service"
-		property "sonar.projectKey", "tmk2003_impurity-online-osrs-service"
-	}
+    properties {
+        property "sonar.language", "java"
+        property "sonar.sources", "src/main"
+        property "sonar.tests", "src/test"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.projectName", "impurity-online-osrs-service"
+        property "sonar.projectKey", "tmk2003_impurity-online-osrs-service"
+    }
+}
+
+checkstyle {
+    toolVersion '7.8.1'
+    configFile file("config/checkstyle/checkstyle.xml")
+}
+checkstyleMain {
+    source ='src/main/java'
+}
+checkstyleTest {
+    source ='src/test/java'
+}
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled true
+        html.stylesheet resources.text.fromFile('config/xsl/checkstyle-custom.xsl')
+    }
 }
