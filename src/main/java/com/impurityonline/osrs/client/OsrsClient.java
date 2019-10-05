@@ -18,6 +18,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.TEXT_HTML;
 
 /**
+ * Rest client to communicate with the OSRS endpoints.
+ *
  * @author impurity
  */
 @Slf4j
@@ -25,7 +27,7 @@ import static org.springframework.http.MediaType.TEXT_HTML;
 public class OsrsClient extends RestClient {
 
     /**
-     * Create client with supported media types: text/html application/json
+     * Create client with supported media types: text/html application/json.
      */
     public OsrsClient() {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
@@ -34,45 +36,45 @@ public class OsrsClient extends RestClient {
     }
 
     /**
-     * Get a OSRS player based off he player name
+     * Get a OSRS player based off he player name.
      *
-     * @param playerName - Player name
-     * @return - Player hiscores
+     * @param playerName - Name of player to get from OSRS
+     * @return - Player hiscores converted to a response object
      */
     public ApiPlayerResponse getPlayer(@NonNull final String playerName)
-            throws ClientRestException, ServerRestException {
+        throws ClientRestException, ServerRestException {
         ResponseEntity<String> playerEntity = executeRequest(
-                HttpMethod.GET,
-                buildPlayerURL(playerName).toUriString(),
-                new HttpEntity<>(new HttpHeaders()),
-                String.class
+            HttpMethod.GET,
+            buildPlayerURL(playerName).toUriString(),
+            new HttpEntity<>(new HttpHeaders()),
+            String.class
         );
 
         try {
             String hiscores = Optional.ofNullable(playerEntity.getBody())
-                    .orElseThrow(() -> new PlayerNotFoundException("No response body found for playerName=" + playerName));
+                .orElseThrow(() -> new PlayerNotFoundException("No response body found for playerName=" + playerName));
             return new ApiPlayerResponse(hiscores);
-        } catch(ApiPlayerResponseException ex) {
+        } catch (ApiPlayerResponseException ex) {
             log.error("Osrs Client Response Issues: {}", ex.getMessage());
             throw new ClientRestException("Cannot create player", HttpStatus.INTERNAL_SERVER_ERROR, ex);
         }
     }
 
     /**
-     * Get a OSRS item based off he item id
+     * Get a OSRS item based off he item id.
      *
-     * @param itemId - Item id
-     * @return - Player item
+     * @param itemId - Item identifier to get from OSRS endpoint
+     * @return - Item converted to a response object
      */
     public ApiItemResponse getItem(@NonNull final Long itemId)
-            throws ClientRestException, ServerRestException {
+        throws ClientRestException, ServerRestException {
         ResponseEntity<ApiItemResponse> itemEntity = executeRequest(
-                HttpMethod.GET,
-                buildGrandExchangeURL(itemId).toUriString(),
-                new HttpEntity<>(new HttpHeaders()),
-                ApiItemResponse.class
+            HttpMethod.GET,
+            buildGrandExchangeURL(itemId).toUriString(),
+            new HttpEntity<>(new HttpHeaders()),
+            ApiItemResponse.class
         );
         return Optional.ofNullable(itemEntity.getBody())
-                .orElseThrow(() -> new ItemNotFoundException("No response body found for itemId=" + itemId));
+            .orElseThrow(() -> new ItemNotFoundException("No response body found for itemId=" + itemId));
     }
 }
